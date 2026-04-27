@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riflessione — Specchi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  nav {
+    padding: 20px 48px; border-bottom: 1px solid var(--border);
+    background: var(--surface); display: flex; align-items: center; gap: 12px;
+  }
+  nav a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  nav a:hover { color: var(--accent); }
+  nav .sep { color: var(--border); }
+  nav .current { color: var(--text); font-weight: 500; }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
+  .page-header { margin-bottom: 40px; }
+  .label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 12px; }
+  .page-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 600px; }
+
+  .tabs { display: flex; gap: 2px; margin-bottom: 24px; }
+  .tab {
+    padding: 10px 20px; font-size: 13px; font-weight: 500;
+    border: 1px solid var(--border); background: var(--surface);
+    cursor: pointer; color: var(--text-secondary); transition: all 0.15s;
+  }
+  .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab:hover:not(.active) { background: var(--accent-light); color: var(--accent); }
+
+  .layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+
+  .canvas-wrap { background: var(--surface); border: 1px solid var(--border); }
+  canvas { display: block; width: 100%; }
+  .canvas-hint { padding: 10px 16px; font-size: 11px; color: var(--text-secondary); border-top: 1px solid var(--border); }
+
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px; }
+  .control { margin-bottom: 16px; }
+  .control:last-child { margin-bottom: 0; }
+  .control-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .control-value { font-weight: 500; color: var(--accent); font-family: monospace; font-size: 13px; }
+
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 2px;
+    background: var(--border); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--accent); cursor: pointer; transition: transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .result-row:last-child { border-bottom: none; }
+  .result-key { color: var(--text-secondary); }
+  .result-val { font-weight: 500; font-family: monospace; color: var(--accent); }
+  .result-val.virtual { color: #9333ea; }
+  .result-val.real { color: #16a34a; }
+
+  .formula-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; text-align: center; margin-bottom: 0; }
+  .formula { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 4px; }
+  .formula-sub { font-size: 11px; color: var(--text-secondary); }
+
+  .legend { display: flex; flex-direction: column; gap: 8px; }
+  .legend-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-secondary); }
+  .legend-line { width: 28px; height: 2px; flex-shrink: 0; }
+  .legend-line.dashed { background: repeating-linear-gradient(to right, currentColor 0, currentColor 4px, transparent 4px, transparent 8px); }
+
+  .explanation { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-top: 24px; }
+  .explanation h2 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+  .explanation p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .explanation p + p { margin-top: 10px; }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .page { padding: 24px; }
+    nav { padding: 16px 24px; }
+    .info-bar { flex-wrap: wrap; gap: 20px; }
+  }
+
+  .info-bar {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 40px;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+  }
+
+  .info-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+  .info-value a {
+    color: inherit; /* Prende il colore scuro del testo */
+    text-decoration: none; /* Toglie la sottolineatura */
+    transition: color 0.15s;
+  }
+  
+  .info-value a:hover {
+    color: var(--accent); /* Diventa blu quando ci passi sopra col mouse */
+  }  
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">← Tutti i simulatori</a>
+  <span class="sep">/</span>
+  <span class="current">01 — Riflessione</span>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <p class="label">Ottica Geometrica</p>
+    <h1>Riflessione e Specchi</h1>
+    <p class="page-desc">La luce si riflette con lo stesso angolo con cui arriva, misurato rispetto alla normale locale alla superficie.</p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="setMode('piano')">Specchio Piano</div>
+    <div class="tab" onclick="setMode('concavo')">Specchio Concavo</div>
+    <div class="tab" onclick="setMode('convesso')">Specchio Convesso</div>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="640" height="480"></canvas>
+        <div class="canvas-hint" id="hint">Trascina lo slider per cambiare l'angolo di incidenza</div>
+      </div>
+      <div class="explanation">
+        <h2 id="exp-title">Specchio Piano</h2>
+        <p id="exp-p1">La legge di riflessione stabilisce che l'angolo di incidenza è uguale all'angolo di riflessione, entrambi misurati rispetto alla normale alla superficie nel punto di impatto.</p>
+        <p id="exp-p2">Lo specchio piano produce un'immagine virtuale, diritta e delle stesse dimensioni dell'oggetto, posta simmetricamente dall'altro lato della superficie.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <!-- Piano controls -->
+      <div id="panel-piano">
+        <div class="card">
+          <div class="card-title">Angolo di incidenza</div>
+          <div class="control">
+            <div class="control-label">
+              <span>θᵢ</span>
+              <span class="control-value" id="piano-val">45°</span>
+            </div>
+            <input type="range" id="piano-sl" min="1" max="89" value="45">
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Risultati</div>
+          <div class="result-row"><span class="result-key">θᵢ incidenza</span><span class="result-val" id="p-inc">45°</span></div>
+          <div class="result-row"><span class="result-key">θᵣ riflessione</span><span class="result-val" id="p-ref">45°</span></div>
+          <div class="result-row"><span class="result-key">Immagine</span><span class="result-val virtual">Virtuale, diritta</span></div>
+        </div>
+      </div>
+
+      <!-- Spherical controls -->
+      <div id="panel-sph" style="display:none">
+        <div class="card">
+          <div class="card-title">Posizione oggetto</div>
+          <div class="control">
+            <div class="control-label">
+              <span>Distanza p</span>
+              <span class="control-value" id="sph-p-val">250 px</span>
+            </div>
+            <input type="range" id="sph-p-sl" min="40" max="500" value="250">
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Equazione punti coniugati</div>
+          <div class="formula-box">
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          <p>
+            \[
+              \frac{1}{p} + \frac{1}{p'} = \frac{1}{f}
+            \]
+          </p>
+
+        </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Risultati</div>
+          <div class="result-row"><span class="result-key">Distanza focale f</span><span class="result-val" id="r-f">—</span></div>
+          <div class="result-row"><span class="result-key">Oggetto p</span><span class="result-val" id="r-p">—</span></div>
+          <div class="result-row"><span class="result-key">Immagine p′</span><span class="result-val" id="r-pp">—</span></div>
+          <div class="result-row"><span class="result-key">Ingrandimento G</span><span class="result-val" id="r-g">—</span></div>
+          <div class="result-row"><span class="result-key">Tipo</span><span class="result-val" id="r-type">—</span></div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Legenda raggi</div>
+          <div class="legend">
+            <div class="legend-row"><div class="legend-line" style="background:#10b981"></div>Parallelo all'asse → passa per F</div>
+            <div class="legend-row"><div class="legend-line" style="background:#8b5cf6"></div>Passa per F → riflesso parallelo</div>
+            <!-- <div class="legend-row"><div class="legend-line" style="background:#f43f5e"></div>Passa per C → torna su sé stesso</div> -->
+            <div class="legend-row"><div class="legend-line" style="background:#2563eb; opacity:0.5;" class="dashed"></div>Prolunga virtuale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="info-value"><a href="./La_Luce.pdf" >Torna alle slide</a></span>
+      <span class="info-label">Bhuiyan Ejazul Karim 26341A</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = 640, H = 480;
+const CY = H / 2;
+
+// Mirror params
+const MX = 480;       // mirror vertex x
+const R  = 220;       // radius of curvature (px)
+const F  = R / 2;     // focal length
+const OBJ_H = 50;     // object arrow height
+
+let mode = 'piano';
+let pianoAngle = 45;
+let objDist = 250;     // p in px (object distance from mirror vertex)
+let dragging = false;
+
+// ── helpers ──────────────────────────────────────────────────────────────────
+
+function norm(vx, vy) {
+  const l = Math.sqrt(vx*vx + vy*vy);
+  return l < 1e-12 ? [0,0] : [vx/l, vy/l];
+}
+
+// Reflect direction [dx,dy] off surface with outward normal [nx,ny]
+function reflect(dx, dy, nx, ny) {
+  const dot = dx*nx + dy*ny;
+  return [dx - 2*dot*nx, dy - 2*dot*ny];
+}
+
+// Ray-circle intersection: ray origin (ox,oy) dir (dx,dy), circle center (cx,cy) radius r
+// Returns the smallest positive t, or null
+function rayCircle(ox, oy, dx, dy, cx, cy, r) {
+  const ex = ox - cx, ey = oy - cy;
+  const a = dx*dx + dy*dy;
+  const b = 2*(ex*dx + ey*dy);
+  const c = ex*ex + ey*ey - r*r;
+  const disc = b*b - 4*a*c;
+  if (disc < 0) return null;
+  const sq = Math.sqrt(disc);
+  const t1 = (-b - sq) / (2*a);
+  const t2 = (-b + sq) / (2*a);
+  // pick smallest positive
+  if (t1 > 1e-4) return t1;
+  if (t2 > 1e-4) return t2;
+  return null;
+}
+
+// Ray-line intersection: ray (ox,oy)+(t*dx,t*dy), line through (lx,ly) dir (lfx,lfy)
+function rayLine(ox, oy, dx, dy, lx, ly, lfx, lfy) {
+  const denom = dx*lfy - dy*lfx;
+  if (Math.abs(denom) < 1e-9) return null;
+  const t = ((lx-ox)*lfy - (ly-oy)*lfx) / denom;
+  return t > 1e-4 ? t : null;
+}
+
+// Draw arrow at end of segment
+function arrow(x1,y1,x2,y2,color,alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha || 1;
+  ctx.fillStyle = color;
+  const a = Math.atan2(y2-y1, x2-x1);
+  const s = 9;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - s*Math.cos(a-0.38), y2 - s*Math.sin(a-0.38));
+  ctx.lineTo(x2 - s*Math.cos(a+0.38), y2 - s*Math.sin(a+0.38));
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function ray(x1,y1,x2,y2,color,width,dash,alpha) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width || 1.8;
+  ctx.globalAlpha = alpha || 1;
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ── PIANO ────────────────────────────────────────────────────────────────────
+
+function drawPiano() {
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#f8f7f4'; ctx.fillRect(0,0,W,H);
+
+  const MXp = W/2;
+  // Mirror (vertical line)
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(MXp, CY-150); ctx.lineTo(MXp, CY+150); ctx.stroke();
+  // Hatch
+  for (let y = CY-150; y <= CY+150; y += 16) {
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(MXp, y); ctx.lineTo(MXp+12, y+12); ctx.stroke();
+  }
+
+  // Normal
+  ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
+  ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(MXp-160, CY); ctx.lineTo(MXp+160, CY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  const rad = pianoAngle * Math.PI / 180;
+  const L = 170;
+  // Incident
+  const ix = MXp - Math.cos(rad)*L, iy = CY - Math.sin(rad)*L;
+  ray(ix, iy, MXp, CY, '#f59e0b', 2.5);
+  arrow(ix+(MXp-ix)*0.5, iy+(CY-iy)*0.5, MXp, CY, '#f59e0b');
+
+  // Reflected
+  const rx = MXp - Math.cos(rad)*L, ry = CY + Math.sin(rad)*L;
+  ray(MXp, CY, rx, ry, '#2563eb', 2.5);
+  arrow(MXp+(rx-MXp)*0.5, CY+(ry-CY)*0.5, rx, ry, '#2563eb');
+
+  // Virtual (behind mirror)
+  ray(MXp, CY, MXp+Math.cos(rad)*L, CY+Math.sin(rad)*L, '#2563eb', 1, [5,4], 0.3);
+
+  // Arcs
+  ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(MXp, CY, 46, -Math.PI, -(Math.PI-rad)); ctx.stroke();
+  ctx.strokeStyle = '#2563eb';
+  ctx.beginPath(); ctx.arc(MXp, CY, 46, Math.PI, Math.PI+rad); ctx.stroke();
+
+  ctx.font = '12px DM Sans'; ctx.fillStyle = '#b45309';
+  ctx.fillText('θᵢ = '+pianoAngle+'°', MXp-108, CY-12);
+  ctx.fillStyle = '#1d4ed8';
+  ctx.fillText('θᵣ = '+pianoAngle+'°', MXp-112, CY+24);
+
+  // Drag
+  ctx.fillStyle = '#dc2626'; ctx.shadowColor='#dc2626'; ctx.shadowBlur=6;
+  ctx.beginPath(); ctx.arc(ix, iy, 7, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+
+  ctx.font='500 12px DM Sans'; ctx.fillStyle='#b45309';
+  ctx.fillText('raggio incidente', ix+6, iy-8);
+  ctx.fillStyle='#1d4ed8';
+  ctx.fillText('raggio riflesso', rx+6, ry+16);
+
+  document.getElementById('piano-val').textContent = pianoAngle+'°';
+  document.getElementById('p-inc').textContent = pianoAngle+'°';
+  document.getElementById('p-ref').textContent = pianoAngle+'°';
+}
+
+// ── SPHERICAL MIRROR ─────────────────────────────────────────────────────────
+// concave = true  → center of curvature LEFT of mirror vertex (C at MX - R)
+// concave = false → center of curvature RIGHT                (C at MX + R)
+
+function drawSpherico(concave) {
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#f8f7f4'; ctx.fillRect(0,0,W,H);
+
+  // Circle center
+  const CCX = concave ? MX - R : MX + R;
+  const CCY = CY;
+
+  // Optical axis
+  ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
+  ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(0,CY); ctx.lineTo(W,CY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Mirror arc
+  const arcHalf = Math.PI / 3.8;
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 3; 
+  ctx.beginPath();
+  if (concave) {
+    ctx.arc(CCX, CCY, R, -arcHalf, arcHalf);
+  } else {
+    ctx.arc(CCX, CCY, R, Math.PI-arcHalf, Math.PI+arcHalf);
+  }
+  ctx.stroke();
+
+  // Hatch (5 points along arc)
+  for (let i = -2; i <= 2; i++) {
+    const a = (i / 2) * arcHalf * 0.9;
+    const angle = concave ? a : Math.PI + a;
+    const sx = CCX + R * Math.cos(angle);
+    const sy = CCY + R * Math.sin(angle);
+    // outward normal direction at this point
+    let nx = (sx - CCX) / R, ny = (sy - CCY) / R;
+    if (!concave) { nx = -nx; ny = -ny; } // for convex, inward = toward CCX
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(sx + nx*14, sy + ny*14);
+    ctx.stroke();
+  }
+
+  // Focus F and Center C
+  const FX = concave ? MX - F : MX + F;  // focus in front of mirror
+  const CX2 = CCX;
+
+  ctx.fillStyle = '#16a34a';
+  ctx.beginPath(); ctx.arc(FX, CY, 4, 0, Math.PI*2); ctx.fill();
+  ctx.font = '500 12px DM Sans'; ctx.fillStyle = '#166534';
+  ctx.fillText('F', FX-4, CY-10);
+
+  ctx.fillStyle = '#6b7280';
+  ctx.beginPath(); ctx.arc(CX2, CY, 3.5, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#374151';
+  ctx.fillText('C', CX2-4, CY-10);
+
+  // Mirror vertex
+  ctx.fillStyle = '#334155';
+  ctx.beginPath(); ctx.arc(MX, CY, 3, 0, Math.PI*2); ctx.fill();
+
+  // Object arrow
+  const objX = MX - objDist;
+  if (objX < 20) { objDist = MX - 20; }
+
+  ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(objX, CY); ctx.lineTo(objX, CY - OBJ_H); ctx.stroke();
+  ctx.fillStyle = '#f59e0b';
+  ctx.beginPath();
+  ctx.moveTo(objX, CY-OBJ_H);
+  ctx.lineTo(objX-5, CY-OBJ_H+10);
+  ctx.lineTo(objX+5, CY-OBJ_H+10);
+  ctx.closePath(); ctx.fill();
+  ctx.font='500 11px DM Sans'; ctx.fillStyle='#b45309';
+  ctx.fillText('oggetto', objX-24, CY+16);
+
+  // Drag handle
+  ctx.fillStyle = '#dc2626'; ctx.shadowColor='#dc2626'; ctx.shadowBlur=6;
+  ctx.beginPath(); ctx.arc(objX, CY-OBJ_H, 7, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+
+  // ── Draw 3 principal rays with correct spherical geometry ──────────────────
+
+  // Ray tip = top of object arrow
+  const tipX = objX, tipY = CY - OBJ_H;
+
+  // Helper: reflect a ray off the spherical mirror
+  // rayOx, rayOy: ray origin
+  // rayDx, rayDy: ray direction (will be normalized)
+  // Returns { hitX, hitY, refDx, refDy } or null
+  function reflectOnMirror(roX, roY, rdX, rdY) {
+    const [dx, dy] = norm(rdX, rdY);
+    const t = rayCircle(roX, roY, dx, dy, CCX, CCY, R);
+    if (t === null) return null;
+    const hx = roX + t*dx, hy = roY + t*dy;
+
+    // Check hit is within arc span
+    const angle = Math.atan2(hy - CCY, hx - CCX);
+    const refAngle = concave ? 0 : Math.PI;
+    let da = angle - refAngle;
+    while (da >  Math.PI) da -= 2*Math.PI;
+    while (da < -Math.PI) da += 2*Math.PI;
+    if (Math.abs(da) > arcHalf * 1.15) return null;
+
+    // Outward normal at hit point (points away from center)
+    let nx = (hx - CCX) / R, ny = (hy - CCY) / R;
+    // For concave: outward normal points away from CCX (to the right of mirror face)
+    // For convex: outward normal also points away from CCX (but mirror faces left)
+    // We need normal pointing toward the incoming ray side
+    // The reflective side: concave faces left (toward smaller x), convex faces right
+    // Ensure normal points toward incoming ray
+    if (dx*nx + dy*ny > 0) { nx=-nx; ny=-ny; }
+
+    const [rdx2, rdy2] = reflect(dx, dy, nx, ny);
+    return { hx, hy, rdx2, rdy2, nx, ny };
+  }
+
+  // Extend ray until it hits something (screen left edge or right edge)
+  function extendRay(ox, oy, dx, dy, maxLen) {
+    // clamp to canvas
+    let t = maxLen;
+    if (dx > 1e-6) t = Math.min(t, (W - ox)/dx);
+    if (dx < -1e-6) t = Math.min(t, (0 - ox)/dx);
+    if (dy > 1e-6) t = Math.min(t, (H - oy)/dy);
+    if (dy < -1e-6) t = Math.min(t, (0 - oy)/dy);
+    return { ex: ox+t*dx, ey: oy+t*dy };
+  }
+
+  // Helper: draw reflected ray + virtual extension correctly for both mirror types
+  // For concave: reflected ray goes LEFT (toward object side) = real
+  //              if it goes RIGHT = virtual (only when obj inside F)
+  // For convex:  reflected ray ALWAYS goes LEFT (diverges) = real diverging ray
+  //              virtual extension goes RIGHT (behind mirror) = always needed
+  function drawReflectedRay(r, color) {
+    if (!r) return;
+    const {ex, ey} = extendRay(r.hx, r.hy, r.rdx2, r.rdy2, 600);
+
+    if (!concave) {
+      // Convex: reflected ray diverges to the left — draw it as real
+      ray(r.hx, r.hy, ex, ey, color, 2, [], 0.9);
+      arrow(r.hx+(ex-r.hx)*0.5, r.hy+(ey-r.hy)*0.5, ex, ey, color, 0.9);
+      // Always draw virtual extension to the right (behind mirror)
+      const {ex: vx, ey: vy} = extendRay(r.hx, r.hy, -r.rdx2, -r.rdy2, 600);
+      ray(r.hx, r.hy, vx, vy, color, 1.2, [5,4], 0.4);
+    } else {
+      // Concave: ray going left = real; ray going right = virtual (obj inside F)
+      if (r.rdx2 < 0) {
+        ray(r.hx, r.hy, ex, ey, color, 2, [], 0.9);
+        arrow(r.hx+(ex-r.hx)*0.5, r.hy+(ey-r.hy)*0.5, ex, ey, color, 0.9);
+      } else {
+        // Virtual: dashed to the right, real diverging to the left
+        ray(r.hx, r.hy, ex, ey, color, 1.2, [5,4], 0.4);
+        const {ex: ex2, ey: ey2} = extendRay(r.hx, r.hy, -r.rdx2, -r.rdy2, 600);
+        ray(r.hx, r.hy, ex2, ey2, color, 2, [], 0.9);
+        arrow(r.hx+(ex2-r.hx)*0.5, r.hy+(ey2-r.hy)*0.5, ex2, ey2, color, 0.9);
+      }
+    }
+  }
+
+  // --- Ray 1: parallel to axis ---
+  {
+    const r1 = reflectOnMirror(tipX, tipY, 1, 0);
+    if (r1) {
+      ray(tipX, tipY, r1.hx, r1.hy, '#10b981', 2, [], 0.9);
+      arrow(tipX+(r1.hx-tipX)*0.55, tipY, r1.hx, r1.hy, '#10b981', 0.9);
+      drawReflectedRay(r1, '#10b981');
+    }
+  }
+
+  // --- Ray 2: aimed at F ---
+  {
+    const [fdx, fdy] = norm(FX - tipX, CY - tipY);
+    const r2 = reflectOnMirror(tipX, tipY, fdx, fdy);
+    if (r2) {
+      ray(tipX, tipY, r2.hx, r2.hy, '#8b5cf6', 2, [], 0.9);
+      arrow(tipX+(r2.hx-tipX)*0.55, tipY+(r2.hy-tipY)*0.55, r2.hx, r2.hy, '#8b5cf6', 0.9);
+      drawReflectedRay(r2, '#8b5cf6');
+    }
+  }
+
+  // --- Ray 3: aimed at center of curvature C ---
+  /*
+  {
+    const [cdx, cdy] = norm(CX2 - tipX, CCY - tipY);
+    const r3 = reflectOnMirror(tipX, tipY, cdx, cdy);
+    if (r3) {
+      ray(tipX, tipY, r3.hx, r3.hy, '#f43f5e', 2, [], 0.9);
+      arrow(tipX+(r3.hx-tipX)*0.55, tipY+(r3.hy-tipY)*0.55, r3.hx, r3.hy, '#f43f5e', 0.9);
+      drawReflectedRay(r3, '#f43f5e');
+    }
+  }
+  */
+
+  // ── Image via mirror equation ─────────────────────────────────────────────
+  const f  = concave ? F : -F; // focale positiva per concavo, negativa per convesso
+  const p  = objDist; // distanza oggetto dalla superficie
+  let pp, G; 
+
+  if (Math.abs(p - f) < 2) {
+    pp = Infinity; G = Infinity;
+  } else {
+    pp = 1 / (1/f - 1/p); // questa è l'equazione dei punti coniugati risolta per p'
+    G  = -pp / p;  // ingrandimento
+  }
+
+  if (isFinite(pp) && isFinite(G)) {
+    const imgX = MX - pp; // posizione x dell'immagine sul canvas
+    const imgH = G * OBJ_H; // altezza dell'immagine = ingrandimento × altezza oggetto
+
+    const isVirtual = pp < 0;
+    const imgColor = isVirtual ? '#9333ea' : '#2563eb';
+
+    ctx.strokeStyle = imgColor; ctx.lineWidth = 2;
+    ctx.setLineDash(isVirtual ? [5,4] : []);
+    ctx.beginPath(); ctx.moveTo(imgX, CY); ctx.lineTo(imgX, CY - imgH); ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = imgColor;
+    ctx.beginPath();
+    const tipDir = imgH > 0 ? 1 : -1;
+    ctx.moveTo(imgX, CY - imgH);
+    ctx.lineTo(imgX-5, CY - imgH + tipDir*10);
+    ctx.lineTo(imgX+5, CY - imgH + tipDir*10);
+    ctx.closePath(); ctx.fill();
+
+    ctx.font = '500 11px DM Sans'; ctx.fillStyle = imgColor;
+    ctx.fillText(isVirtual ? 'immagine (virtuale)' : 'immagine (reale)', imgX-20, CY+16);
+
+    // Update results
+    const typeStr = (pp > 0 ? 'Reale' : 'Virtuale') + ', ' + (G > 0 ? 'diritta' : 'capovolta');
+    document.getElementById('r-f').textContent  = f.toFixed(0) + ' px';
+    document.getElementById('r-p').textContent  = p.toFixed(0) + ' px';
+    document.getElementById('r-pp').textContent = pp.toFixed(1) + ' px';
+    document.getElementById('r-pp').className   = 'result-val ' + (pp < 0 ? 'virtual' : 'real');
+    document.getElementById('r-g').textContent  = G.toFixed(2) + 'x';
+    document.getElementById('r-type').textContent = typeStr;
+    document.getElementById('r-type').className = 'result-val ' + (pp < 0 ? 'virtual' : 'real');
+  } else {
+    document.getElementById('r-f').textContent  = f.toFixed(0) + ' px';
+    document.getElementById('r-p').textContent  = p.toFixed(0) + ' px';
+    document.getElementById('r-pp').textContent = '∞';
+    document.getElementById('r-g').textContent  = '∞';
+    document.getElementById('r-type').textContent = 'All\'infinito';
+  }
+
+  document.getElementById('sph-p-val').textContent = p.toFixed(0) + ' px';
+}
+
+// ── MODE SWITCH ───────────────────────────────────────────────────────────────
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ['piano','concavo','convesso'][i] === m);
+  });
+  document.getElementById('panel-piano').style.display = m === 'piano' ? '' : 'none';
+  document.getElementById('panel-sph').style.display   = m !== 'piano' ? '' : 'none';
+
+  const hints = {
+    piano:    'Trascina lo slider per cambiare l\'angolo di incidenza',
+    concavo:  'Trascina lo slider (cima oggetto) per spostare l\'oggetto',
+    convesso: 'Trascina lo slider (cima oggetto) per spostare l\'oggetto',
+  };
+  document.getElementById('hint').textContent = hints[m];
+
+  const titles = { piano:'Specchio Piano', concavo:'Specchio Concavo', convesso:'Specchio Convesso' };
+  const p1s = {
+    piano:    'La legge di riflessione stabilisce che θᵢ = θᵣ, entrambi misurati rispetto alla normale alla superficie nel punto di impatto.',
+    concavo:  'Lo specchio concavo converge i raggi: il centro di curvatura C è davanti alla superficie riflettente. La distanza focale vale f = R/2.',
+    convesso: 'Lo specchio convesso diverge i raggi: il centro di curvatura C è dietro la superficie. Il fuoco è virtuale (f < 0).',
+  };
+  const p2s = {
+    piano:    'Lo specchio piano produce un\'immagine virtuale, diritta e di dimensioni uguali all\'oggetto, posta simmetricamente dall\'altro lato della superficie.',
+    concavo:  'A seconda della posizione dell\'oggetto rispetto a F: oltre C → immagine reale rimpicciolita; tra C e F → reale ingrandita; entro F → virtuale ingrandita (specchio per trucco).',
+    convesso: 'L\'immagine è sempre virtuale, diritta e rimpicciolita, qualunque sia la posizione dell\'oggetto. Questo permette un campo visivo molto ampio: retrovisori, specchi stradali.',
+  };
+  document.getElementById('exp-title').textContent = titles[m];
+  document.getElementById('exp-p1').textContent    = p1s[m];
+  document.getElementById('exp-p2').textContent    = p2s[m];
+
+  draw();
+}
+
+function draw() {
+  if (mode === 'piano') drawPiano();
+  else drawSpherico(mode === 'concavo');
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────────
+
+function handlePointer(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (W / rect.width);
+  const my = (e.clientY - rect.top)  * (H / rect.height);
+
+  if (mode === 'piano') {
+    const dx = mx - W/2, dy = H/2 - my;
+    if (dy > 5) {
+      pianoAngle = Math.max(1, Math.min(89, Math.round(Math.atan2(Math.abs(dx), dy) * 180/Math.PI)));
+      document.getElementById('piano-sl').value = pianoAngle;
+    }
+  } else {
+    objDist = Math.max(40, Math.min(500, Math.round(MX - mx)));
+    document.getElementById('sph-p-sl').value = objDist;
+  }
+  draw();
+}
+
+
+document.getElementById('piano-sl').addEventListener('input', e => { pianoAngle=parseInt(e.target.value); draw(); });
+document.getElementById('sph-p-sl').addEventListener('input', e => { objDist=parseInt(e.target.value); draw(); });
+
+// --- LETTURA PARAMETRI URL ---
+const urlParams = new URLSearchParams(window.location.search);
+const modeParam = urlParams.get('mode');
+
+// Verifica se il parametro passato è valido, altrimenti usa 'piano' di default
+if (['piano', 'concavo', 'convesso'].includes(modeParam)) {
+  setMode(modeParam);
+} else {
+  setMode('piano'); 
+}
+
+</script>
+</body>
+</html>
