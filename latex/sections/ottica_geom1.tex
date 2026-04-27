@@ -1,0 +1,149 @@
+%\section[Ottica Geometrica: Riflessione e Specchi]
+    \begin{frame}{L'Ottica Geometrica}
+    \begin{itemize}
+        \item Regime valido quando $\lambda \ll$ dimensioni degli ostacoli
+        \item La luce viene modellata come raggio rettilineo
+        \item Si studiano: riflessione (specchi) e rifrazione (lenti, prismi)
+        \item Convenzione dei segni (da applicare sempre):
+        \begin{itemize}
+            \item Distanze reali (davanti alla superficie): positive
+            \item Distanze virtuali (dietro la superficie): negative
+        \end{itemize}
+        
+    \end{itemize}
+\end{frame}
+
+%========================================================
+
+\begin{frame}{La Legge di Riflessione}
+    \begin{itemize}
+        \item La luce che colpisce una superficie liscia viene riflessa
+        \item Legge di riflessione:
+        $$\theta_i = \theta_r$$
+        \item Entrambi gli angoli si misurano rispetto alla normale alla superficie
+        \item Raggio incidente, normale e raggio riflesso giacciono sullo stesso piano
+        \item Riflessione speculare (superficie liscia) $\neq$ Riflessione diffusa (superficie rugosa)
+    \end{itemize}
+\end{frame}
+
+%========================================================
+
+\begin{frame}{\href{https://bhuiyanek.github.io/Fisica/riflessione.html?mode=piano}{Specchio Piano}}
+    \begin{itemize}
+        \item L'immagine è virtuale: i raggi non convergono fisicamente dietro lo specchio
+        \item L'immagine è diritta e delle stesse dimensioni dell'oggetto
+        \item Distanza immagine = distanza oggetto (simmetria rispetto alla superficie)
+        \item Lateralmente invertita (destra $\leftrightarrow$ sinistra) 
+    \end{itemize}
+\end{frame}
+
+
+%========================================================
+
+\begin{frame}{Specchi Sferici: Grandezze Fondamentali}
+    \begin{itemize}
+        \item Centro di curvatura $C$: centro della sfera di cui lo specchio è parte
+        \item Raggio di curvatura $R$: distanza da $C$ alla superficie
+        \item Asse ottico: retta passante per $C$ perpendicolare allo specchio
+        \item Fuoco $F$: punto in cui convergono i raggi paralleli all'asse ottico
+        \item Distanza focale: $f = \frac{R}{2}$
+        \item Specchio concavo: $f > 0$ — Specchio convesso: $f < 0$
+    \end{itemize}
+\end{frame}
+
+%========================================================
+
+\begin{frame}{\href{https://bhuiyanek.github.io/Fisica/riflessione.html?mode=concavo}{Specchio Concavo}}
+
+    \begin{itemize}
+        \item Superficie riflettente rivolta verso il \textbf{centro di curvatura}
+        \item I raggi paralleli all’asse ottico convergono nel \textbf{fuoco reale $F$}
+        \item La natura dell’immagine dipende dalla posizione dell’oggetto:
+    \end{itemize}
+    
+    \medskip
+    \centering
+    
+    \renewcommand{\arraystretch}{1.3}
+    
+    \begin{tabular}{|l|l|}
+    \hline
+    \rowcolor{maincolor!20}
+    \textbf{Posizione oggetto} & \textbf{Immagine} \\
+    \hline
+    Oltre $C$ & Reale, capovolta, rimpicciolita \\
+    \hline
+    In $C$ & Reale, capovolta, stessa dimensione \\
+    \hline
+    Tra $C$ e $F$ & Reale, capovolta, ingrandita \\
+    \hline
+    In $F$ & Immagine all'infinito \\
+    \hline
+    Entro $F$ & Virtuale, diritta, ingrandita \\
+    \hline
+    \end{tabular}
+    
+    \medskip
+    
+    Applicazioni: telescopi riflettori, specchi per trucco, concentratori solari.
+
+\end{frame}
+
+%========================================================
+
+\begin{frame}{\href{https://bhuiyanek.github.io/Fisica/riflessione.html?mode=convesso}{Specchio Convesso}}
+    \begin{itemize}
+        \item Superficie riflettente rivolta verso l'esterno
+        \item I raggi paralleli divergono dopo la riflessione
+        \item Il fuoco è virtuale (dietro lo specchio), $f < 0$
+        \item L'immagine è sempre: virtuale, diritta, rimpicciolita
+        \item Vantaggio: campo visivo molto ampio
+        \item Applicazioni: retrovisori, specchi stradali, specchi di sorveglianza
+    \end{itemize}
+\end{frame}
+
+%========================================================
+\begin{frame}{Equazione dei punti coniugati}
+
+    \textbf{Relazione fondamentale (specchi sferici):}
+    
+    \medskip
+    
+    \[
+    \frac{1}{p} + \frac{1}{p'} = \frac{1}{f} = \frac{2}{R}
+    \]
+    
+    \medskip
+    
+    \textbf{Convenzioni dei segni:}
+    
+    \begin{itemize}
+        \item $p > 0$: oggetto reale (davanti allo specchio)
+        \item $p' > 0$: immagine reale (davanti allo specchio)
+        \item $p' < 0$: immagine virtuale (dietro lo specchio)
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Ingrandimento lineare}
+
+    \textbf{Definizione:}
+    
+    \medskip
+    
+    \[
+    G = -\frac{p'}{p} = \frac{y'}{y}
+    \]
+    
+    \medskip
+    
+    \textbf{Interpretazione fisica:}
+    
+    \begin{itemize}
+        \item $|G| > 1$ → immagine ingrandita
+        \item $|G| < 1$ → immagine rimpicciolita
+        \item $G > 0$ → immagine diritta (virtuale)
+        \item $G < 0$ → immagine capovolta (reale)
+    \end{itemize}
+
+\end{frame}
