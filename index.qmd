@@ -423,7 +423,7 @@ $$a \sin \theta = m\lambda \quad (m = \pm 1, \pm 2, \dots)$$
 :::
 ::::
 
-## [Interferenza — Esperimento di Young](./simulazioni/dispersione.html) {.smaller #Interferenza}
+## [Interferenza — Esperimento di Young](./simulazioni/interferenza.html) {.smaller #Interferenza}
 
 :::: {.cols}
 ::: {.col-text}
