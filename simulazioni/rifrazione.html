@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifrazione — Legge di Snell</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --red: #dc2626;
+    --green: #16a34a;
+    --yellow: #d97706;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  nav {
+    padding: 20px 48px; border-bottom: 1px solid var(--border);
+    background: var(--surface); display: flex; align-items: center; gap: 12px;
+  }
+  nav a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  nav a:hover { color: var(--accent); }
+  nav .sep { color: var(--border); }
+  nav .current { color: var(--text); font-weight: 500; }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
+  .page-header { margin-bottom: 40px; }
+  .label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 12px; }
+  .page-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 600px; }
+
+  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+
+  .canvas-wrap { background: var(--surface); border: 1px solid var(--border); }
+  canvas { display: block; width: 100%;  }
+  .canvas-hint { padding: 10px 16px; font-size: 11px; color: var(--text-secondary); border-top: 1px solid var(--border); }
+
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px; }
+  .control { margin-bottom: 16px; }
+  .control:last-child { margin-bottom: 0; }
+  .control-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .control-value { font-weight: 500; color: var(--accent); font-family: monospace; font-size: 13px; }
+
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 2px;
+    background: var(--border); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--accent); cursor: pointer; transition: transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+  select {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--border);
+    background: var(--bg); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: var(--text); cursor: pointer; outline: none;
+  }
+  select:focus { border-color: var(--accent); }
+
+  /* Status badge — changes with phase */
+  .status-badge {
+    padding: 11px 14px; font-size: 12px; font-weight: 500;
+    text-align: center; letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid; transition: all 0.25s;
+  }
+  .state-normal    { background: var(--accent-light); color: var(--accent);  border-color: #bfdbfe; }
+  .state-critical  { background: #fef9c3; color: var(--yellow); border-color: #fde68a; }
+  .state-tir       { background: #fee2e2; color: var(--red);    border-color: #fca5a5; }
+
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .result-row:last-child { border-bottom: none; }
+  .result-key { color: var(--text-secondary); }
+  .result-val { font-weight: 500; font-family: monospace; color: var(--accent); }
+  .result-val.warn { color: var(--red); }
+  .result-val.caution { color: var(--yellow); }
+  .result-val.ok { color: var(--green); }
+
+  .formula-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; text-align: center; margin-bottom: 12px; }
+  .formula { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
+  .formula-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Explanation block — text changes with state */
+  .explanation { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-top: 24px; transition: border-color 0.3s; }
+  .explanation h2 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+  .explanation p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .explanation p + p { margin-top: 10px; }
+  .explanation.tir { border-color: #fca5a5; }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .page { padding: 24px; }
+    nav { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">← Tutti i simulatori</a>
+  <span class="sep">/</span>
+  <span class="current">02 — Rifrazione</span>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <p class="label">Ottica Geometrica</p>
+    <h1>Rifrazione e Legge di Snell</h1>
+    <p class="page-desc">Quando la luce cambia mezzo rallenta e devia la traiettoria. Aumentando l'angolo di incidenza si raggiunge un limite oltre il quale la luce non riesce più ad uscire.</p>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="640" height="500"></canvas>
+        <div class="canvas-hint">Trascina il punto rosso — porta l'angolo oltre il critico per vedere la riflessione totale interna</div>
+      </div>
+      <div class="explanation" id="explanation">
+        <h2 id="exp-title">Rifrazione normale</h2>
+        <p id="exp-text">Quando la luce passa da un mezzo con indice n₁ a uno con indice n₂ diverso, cambia velocità. Questo causa una deviazione della traiettoria descritta dalla legge di Snell-Descartes: n₁·sin θ₁ = n₂·sin θ₂. Se n₂ > n₁ il raggio si avvicina alla normale; se n₂ &lt; n₁ si allontana.</p>
+        <p id="exp-text2">Gli angoli si misurano sempre rispetto alla normale alla superficie, non rispetto alla superficie stessa. Il raggio incidente, la normale e il raggio rifratto giacciono sempre sullo stesso piano.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="card">
+        <div class="card-title">Mezzo superiore (n₁)</div>
+        <select id="mat1">
+          <option value="1.00" selected>Aria (n = 1.00)</option>
+          <option value="1.33">Acqua (n = 1.33)</option>
+          <option value="1.52">Vetro crown (n = 1.52)</option>
+          <option value="1.77">Vetro denso (n = 1.77)</option>
+          <option value="2.42">Diamante (n = 2.42)</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Mezzo inferiore (n₂)</div>
+        <select id="mat2">
+          <option value="1.00">Aria (n = 1.00)</option>
+          <option value="1.33" selected>Acqua (n = 1.33)</option>
+          <option value="1.52">Vetro crown (n = 1.52)</option>
+          <option value="1.77">Vetro denso (n = 1.77)</option>
+          <option value="2.42">Diamante (n = 2.42)</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Angolo di incidenza θ₁</div>
+        <div class="control">
+          <div class="control-label">
+            <span>θ₁</span>
+            <span class="control-value" id="angle-display">45°</span>
+          </div>
+          <input type="range" id="angle-slider" min="1" max="89" value="45">
+        </div>
+      </div>
+
+      <!-- Status badge -->
+      <div id="status-badge" class="status-badge state-normal">Rifrazione</div>
+
+      <div class="card">
+        <div class="card-title">Formule</div>
+        <div class="formula-box">
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          <!-- <div class="formula">n₁ · sin θ₁ = n₂ · sin θ₂</div> -->
+          <p>
+            \[
+              n_1 \cdot \sin \theta_1 = n_2 \cdot \sin \theta_2
+            \]
+          </p>
+          <div class="formula-desc">Legge di Snell-Descartes</div>
+        </div>
+        <div class="formula-box">
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          <!-- <div class="formula">sin θ꜀ = n₂ / n₁</div> -->
+          <p>
+            \[
+              \sin \theta_{crit} = \frac{n_2}{n_1}
+            \]
+          </p>
+          <div class="formula-desc">Angolo critico (solo se n₁ > n₂)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Risultati</div>
+        <div class="result-row">
+          <span class="result-key">n₁</span>
+          <span class="result-val" id="res-n1">1.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">n₂</span>
+          <span class="result-val" id="res-n2">1.33</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">Angolo critico θ꜀</span>
+          <span class="result-val" id="res-tc">N/D</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">θ₁ incidenza</span>
+          <span class="result-val" id="res-t1">45.0°</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">θ₂ rifrazione</span>
+          <span class="result-val" id="res-t2">32.1°</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">Raggio riflesso θᵣ</span>
+          <span class="result-val" id="res-tr">45.0°</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = 640, H = 500;
+const CX = W / 2, CY = H / 2;
+
+let angle = 45;
+let n1 = 1.00, n2 = 1.33;
+
+const mat1Sel = document.getElementById('mat1');
+const mat2Sel = document.getElementById('mat2');
+const angleSlider = document.getElementById('angle-slider');
+const angleDisplay = document.getElementById('angle-display');
+
+function getCriticalAngle() {
+  if (n1 <= n2) return null;
+  return Math.asin(n2 / n1) * 180 / Math.PI;
+}
+
+function getState() {
+  const tc = getCriticalAngle();
+  const sinT2 = (n1 * Math.sin(angle * Math.PI / 180)) / n2;
+  const tir = sinT2 >= 1;
+  const nearCritical = tc !== null && Math.abs(angle - tc) < 2;
+  const t2 = tir ? null : Math.asin(sinT2) * 180 / Math.PI;
+  return { tc, tir, nearCritical, t2, sinT2 };
+}
+
+function drawArrow(x1, y1, x2, y2, color) {
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  const s = 10;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - s * Math.cos(a - 0.4), y2 - s * Math.sin(a - 0.4));
+  ctx.lineTo(x2 - s * Math.cos(a + 0.4), y2 - s * Math.sin(a + 0.4));
+  ctx.closePath();
+  ctx.fill();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  const { tc, tir, nearCritical, t2, sinT2 } = getState();
+
+  // Background halves — top medium, bottom medium
+  // When n1 > n2 (TIR possible), flip visually: dense medium on top
+  ctx.fillStyle = '#eef2ff';
+  ctx.fillRect(0, 0, W, CY);
+  ctx.fillStyle = '#e0f2fe';
+  ctx.fillRect(0, CY, W, CY);
+
+  // Medium labels
+  ctx.font = '500 13px DM Sans, sans-serif';
+  ctx.fillStyle = '#475569';
+  const m1 = mat1Sel.options[mat1Sel.selectedIndex].text.split(' (')[0];
+  const m2 = mat2Sel.options[mat2Sel.selectedIndex].text.split(' (')[0];
+  ctx.fillText(m1 + '   n₁ = ' + n1.toFixed(2), 18, 26);
+  ctx.fillText(m2 + '   n₂ = ' + n2.toFixed(2), 18, CY + 24);
+
+  // Interface line
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(0, CY); ctx.lineTo(W, CY); ctx.stroke();
+
+  // Normal line (dashed)
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 4]);
+  ctx.beginPath(); ctx.moveTo(CX, CY - 180); ctx.lineTo(CX, CY + 180); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Critical angle indicator (when applicable)
+  if (tc !== null) {
+    const tcRad = tc * Math.PI / 180;
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 5]);
+    // Show critical angle line from interface
+    const tcX = CX - Math.sin(tcRad) * 160;
+    const tcY = CY - Math.cos(tcRad) * 160;
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(tcX, tcY); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font = '11px DM Sans';
+    ctx.fillStyle = '#92400e';
+    ctx.fillText('θ꜀ = ' + tc.toFixed(1) + '°', tcX - 55, tcY - 6);
+  }
+
+  const rad = angle * Math.PI / 180;
+  const rayLen = 180;
+
+  // ---- Incident ray (from top, going down to interface) ----
+  const ix = CX - Math.sin(rad) * rayLen;
+  const iy = CY - Math.cos(rad) * rayLen;
+
+  const incColor = tir ? '#f97316' : '#f59e0b';
+  ctx.strokeStyle = incColor;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(ix, iy); ctx.lineTo(CX, CY); ctx.stroke();
+  drawArrow(ix + (CX - ix) * 0.5, iy + (CY - iy) * 0.5, CX, CY, incColor);
+
+  // Drag handle
+  ctx.fillStyle = '#dc2626';
+  ctx.shadowColor = '#dc2626'; ctx.shadowBlur = 6;
+  ctx.beginPath(); ctx.arc(ix, iy, 7, 0, Math.PI * 2); ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // ---- Reflected ray (always present, partial or total) ----
+  const reflX = CX + Math.sin(rad) * rayLen;
+  const reflY = CY - Math.cos(rad) * rayLen;
+
+  if (tir) {
+    // TIR: reflected ray is strong (same color as incident)
+    ctx.strokeStyle = '#f97316';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(reflX, reflY); ctx.stroke();
+    drawArrow(CX + (reflX - CX) * 0.5, CY + (reflY - CY) * 0.5, reflX, reflY, '#f97316');
+    ctx.font = '500 12px DM Sans';
+    ctx.fillStyle = '#ea580c';
+    ctx.fillText('raggio riflesso (100%)', reflX + 8, reflY - 6);
+  } else {
+    // Partial reflection (dashed, dim)
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([5, 4]);
+    ctx.globalAlpha = 0.35;
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(reflX, reflY); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.globalAlpha = 1;
+    ctx.font = '11px DM Sans';
+    ctx.fillStyle = '#92400e';
+    ctx.globalAlpha = 0.5;
+    ctx.fillText('riflessione parziale', reflX + 6, reflY - 5);
+    ctx.globalAlpha = 1;
+  }
+
+  // ---- Refracted ray (only when not TIR) ----
+  if (!tir) {
+    const t2rad = t2 * Math.PI / 180;
+    const fx = CX + Math.sin(t2rad) * rayLen;
+    const fy = CY + Math.cos(t2rad) * rayLen;
+
+    // Fade toward blue as t2 approaches 90°
+    const fadeFactor = Math.min(1, t2 / 80);
+    const rCol = nearCritical ? '#f97316' : '#2563eb';
+
+    ctx.strokeStyle = rCol;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(fx, fy); ctx.stroke();
+    drawArrow(CX + (fx - CX) * 0.5, CY + (fy - CY) * 0.5, fx, fy, rCol);
+
+    // θ₂ arc
+    ctx.strokeStyle = '#2563eb';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(CX, CY, 42, Math.PI / 2, Math.PI / 2 + t2rad);
+    ctx.stroke();
+    ctx.font = '12px DM Sans';
+    ctx.fillStyle = '#1d4ed8';
+    ctx.fillText('θ₂ = ' + t2.toFixed(1) + '°', CX + 48, CY + 18);
+
+    ctx.font = '500 12px DM Sans';
+    ctx.fillStyle = '#1d4ed8';
+    ctx.fillText('raggio rifratto', fx + 8, fy + 4);
+
+    // When near critical: show "raggio rasente"
+    if (nearCritical) {
+      ctx.font = '500 11px DM Sans';
+      ctx.fillStyle = '#d97706';
+      ctx.fillText('← raggio rasente (θ₂ ≈ 90°)', fx - 10, fy - 10);
+    }
+  } else {
+    // TIR indicator: show blocked refracted path (faint dashed)
+    const approxT2 = 88;
+    const t2rad = approxT2 * Math.PI / 180;
+    const fx = CX + Math.sin(t2rad) * 80;
+    const fy = CY + Math.cos(t2rad) * 80;
+    ctx.strokeStyle = '#dc2626';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 4]);
+    ctx.globalAlpha = 0.3;
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(fx, fy); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.globalAlpha = 1;
+
+    // X mark
+    ctx.strokeStyle = '#dc2626';
+    ctx.lineWidth = 2.5;
+    ctx.globalAlpha = 0.7;
+    const mx = CX + 40, my = CY + 30;
+    ctx.beginPath();
+    ctx.moveTo(mx - 9, my - 9); ctx.lineTo(mx + 9, my + 9);
+    ctx.moveTo(mx + 9, my - 9); ctx.lineTo(mx - 9, my + 9);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.font = '500 12px DM Sans';
+    ctx.fillStyle = '#dc2626';
+    ctx.fillText('nessun raggio rifratto', CX + 14, CY + 60);
+  }
+
+  // θ₁ arc
+  ctx.strokeStyle = incColor;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(CX, CY, 42, -Math.PI / 2 - rad, -Math.PI / 2);
+  ctx.stroke();
+  ctx.font = '12px DM Sans';
+  ctx.fillStyle = '#b45309';
+  ctx.fillText('θ₁ = ' + angle + '°', CX - 90, CY - 16);
+
+  // Labels
+  ctx.font = '500 12px DM Sans';
+  ctx.fillStyle = incColor;
+  ctx.fillText('raggio incidente', ix + 6, iy - 8);
+}
+
+function updateUI() {
+  const { tc, tir, nearCritical, t2 } = getState();
+
+  // Status badge
+  const badge = document.getElementById('status-badge');
+  if (tir) {
+    badge.textContent = 'Riflessione Totale Interna';
+    badge.className = 'status-badge state-tir';
+  } else if (nearCritical) {
+    badge.textContent = 'Angolo Critico';
+    badge.className = 'status-badge state-critical';
+  } else {
+    badge.textContent = 'Rifrazione';
+    badge.className = 'status-badge state-normal';
+  }
+
+  // Explanation block
+  const expBox = document.getElementById('explanation');
+  const expTitle = document.getElementById('exp-title');
+  const expText = document.getElementById('exp-text');
+  const expText2 = document.getElementById('exp-text2');
+
+  if (tir) {
+    expBox.className = 'explanation tir';
+    expTitle.textContent = 'Riflessione Totale Interna';
+    expText.textContent = 'La legge di Snell non ha soluzione reale: sin(θ₂) supererebbe 1, che è impossibile. Il raggio non riesce ad attraversare l\'interfaccia e viene riflesso completamente all\'interno del mezzo più denso. Il 100% dell\'energia viene riflessa: l\'interfaccia si comporta come uno specchio perfetto.';
+    expText2.textContent = 'Questo è il principio fisico delle fibre ottiche: la luce iniettata in un filamento di vetro rimbalza continuamente sulle pareti per riflessione totale, propagandosi per chilometri senza perdere energia verso l\'esterno.';
+  } else if (nearCritical) {
+    expBox.className = 'explanation';
+    expTitle.textContent = 'Angolo Critico — θ꜀ = ' + (tc ? tc.toFixed(1) : '—') + '°';
+    expText.textContent = 'Il raggio rifratto si sta avvicinando ai 90°: sta quasi rasendo la superficie dell\'interfaccia. Questo è l\'angolo critico θ꜀, il limite oltre il quale la rifrazione diventa impossibile.';
+    expText2.textContent = 'Aumenta ancora l\'angolo per superare il limite e vedere la riflessione totale interna.';
+  } else {
+    expBox.className = 'explanation';
+    expTitle.textContent = 'Rifrazione — Legge di Snell';
+    expText.textContent = 'Quando la luce passa da un mezzo con indice n₁ a uno con indice n₂ diverso, cambia velocità e devia la traiettoria. La legge di Snell-Descartes descrive questo comportamento: n₁·sin θ₁ = n₂·sin θ₂.';
+    expText2.textContent = n1 > n2
+      ? 'Stai passando da un mezzo più denso a uno meno denso (n₁ > n₂): il raggio si allontana dalla normale. Aumenta l\'angolo fino a superare l\'angolo critico θ꜀ = ' + (tc ? tc.toFixed(1) + '°' : '—') + ' per vedere la riflessione totale interna.'
+      : 'Stai passando da un mezzo meno denso a uno più denso (n₂ > n₁): il raggio si avvicina alla normale. In questo caso la riflessione totale interna non è possibile.';
+  }
+
+  // Results
+  document.getElementById('res-n1').textContent = n1.toFixed(2);
+  document.getElementById('res-n2').textContent = n2.toFixed(2);
+  document.getElementById('res-t1').textContent = angle.toFixed(1) + '°';
+  document.getElementById('res-tr').textContent = angle.toFixed(1) + '°';
+
+  const tcEl = document.getElementById('res-tc');
+  if (tc !== null) {
+    tcEl.textContent = tc.toFixed(1) + '°';
+    tcEl.className = angle >= tc ? 'result-val warn' : 'result-val caution';
+  } else {
+    tcEl.textContent = 'N/D (n₁ ≤ n₂)';
+    tcEl.className = 'result-val';
+  }
+
+  const t2El = document.getElementById('res-t2');
+  if (tir) {
+    t2El.textContent = 'impossibile';
+    t2El.className = 'result-val warn';
+  } else {
+    t2El.textContent = t2.toFixed(1) + '°';
+    t2El.className = nearCritical ? 'result-val caution' : 'result-val';
+  }
+}
+
+function getCanvasAngle(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (W / rect.width);
+  const my = (e.clientY - rect.top) * (H / rect.height);
+  const dx = mx - CX, dy = CY - my;
+  if (dy < 5) return null;
+  return Math.max(1, Math.min(89, Math.round(Math.atan2(Math.abs(dx), dy) * 180 / Math.PI)));
+}
+
+angleSlider.addEventListener('input', e => { angle = parseInt(e.target.value); refresh(); });
+mat1Sel.addEventListener('change', () => { n1 = parseFloat(mat1Sel.value); refresh(); });
+mat2Sel.addEventListener('change', () => { n2 = parseFloat(mat2Sel.value); refresh(); });
+
+function refresh() {
+  angleSlider.value = angle;
+  angleDisplay.textContent = angle + '°';
+  draw();
+  updateUI();
+}
+
+refresh();
+</script>
+</body>
+</html>

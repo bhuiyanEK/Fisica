@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interferenza — Doppia Fenditura</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --accent: #2563eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  nav {
+    padding: 20px 48px; border-bottom: 1px solid var(--border);
+    background: var(--surface); display: flex; align-items: center; gap: 12px;
+  }
+  nav a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+  nav a:hover { color: var(--accent); }
+  nav .sep { color: var(--border); }
+  nav .current { color: var(--text); font-weight: 500; }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
+  .page-header { margin-bottom: 40px; }
+  .label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 12px; }
+  .page-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 600px; }
+
+  .layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+
+  .canvas-wrap { background: #000; border: 1px solid var(--border); }
+  canvas { display: block; width: 100%; }
+  .canvas-hint { padding: 10px 16px; font-size: 11px; color: #666; border-top: 1px solid #1a1a1a; background: #000; }
+
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px; }
+  .control { margin-bottom: 16px; }
+  .control:last-child { margin-bottom: 0; }
+  .control-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .control-value { font-weight: 500; color: var(--accent); font-family: monospace; font-size: 13px; }
+
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 2px;
+    background: var(--border); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--accent); cursor: pointer;
+  }
+
+  .wl-bar { height: 8px; border-radius: 2px; margin-top: 8px; background: #aadd00; transition: background 0.2s; }
+
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .result-row:last-child { border-bottom: none; }
+  .result-key { color: var(--text-secondary); }
+  .result-val { font-weight: 500; font-family: monospace; color: var(--accent); }
+
+  .formula-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; text-align: center; }
+  .formula { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
+  .formula-sub { font-size: 11px; color: var(--text-secondary); }
+
+  .explanation { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-top: 24px; }
+  .explanation h2 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+  .explanation p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .explanation p + p { margin-top: 10px; }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .page { padding: 24px; }
+    nav { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">← Tutti i simulatori</a>
+  <span class="sep">/</span>
+  <span class="current">04 — Interferenza</span>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <p class="label">Ottica Fisica</p>
+    <h1>Interferenza — Doppia Fenditura</h1>
+    <p class="page-desc">Esperimento di Young (1801). Due fenditure producono onde coerenti che si sovrappongono: dove si incontrano in fase danno luce intensa, dove si cancellano danno buio.</p>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="660" height="500"></canvas>
+        <div class="canvas-hint">Le onde si espandono da entrambe le fenditure — le zone luminose sono interferenza costruttiva, quelle scure distruttiva</div>
+      </div>
+      <div class="explanation">
+        <h2>Come funziona</h2>
+        <p>Ogni fenditura diventa una sorgente secondaria di onde circolari coerenti. Le due onde si sovrappongono: dove le creste si incontrano (differenza di cammino Δr = mλ) si ha interferenza costruttiva e luce intensa. Dove una cresta incontra una valle (Δr = (m+½)λ) si ha interferenza distruttiva e buio totale.</p>
+        <p>Le zone chiare e scure formano un ventaglio simmetrico che produce sullo schermo le classiche frange alternate. Le frange buie sono impossibili in un modello corpuscolare: due fasci di particelle non possono annullarsi. Young dimostrò così nel 1801 che la luce è un'onda.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="card">
+        <div class="card-title">Lunghezza d'onda λ</div>
+        <div class="control">
+          <div class="control-label">
+            <span>λ</span>
+            <span class="control-value" id="lam-val">550 nm</span>
+          </div>
+          <input type="range" id="lam" min="380" max="750" value="550">
+          <div class="wl-bar" id="wl-bar"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Distanza tra fenditure</div>
+        <div class="control">
+          <div class="control-label">
+            <span>d</span>
+            <span class="control-value" id="d-val">60 px</span>
+          </div>
+          <input type="range" id="d-sl" min="30" max="130" value="60">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Formula frange</div>
+        <div class="formula-box">
+          <div class="formula">Δy = λL / d</div>
+          <div class="formula-sub">distanza tra massimi consecutivi</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Condizioni</div>
+        <div class="result-row">
+          <span class="result-key">Costruttiva</span>
+          <span class="result-val">Δr = mλ</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">Distruttiva</span>
+          <span class="result-val">Δr = (m+½)λ</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">λ corrente</span>
+          <span class="result-val" id="r-lam">550 nm</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">d corrente</span>
+          <span class="result-val" id="r-d">60 px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = 660, H = 500;
+
+let lambda = 550; // nm — controls wave color and spatial frequency
+let slitD = 60;   // slit separation in px
+let t = 0;        // animation time
+
+// Wave speed and spatial frequency derived from lambda
+// We map lambda 380-750 nm to a visual wave number k
+function getWaveParams() {
+  // k: spatial frequency (cycles per pixel) — shorter lambda = tighter rings
+  const k = 0.045 * (700 / lambda);
+  const speed = 1.2;
+  return { k, speed };
+}
+
+function wavelengthToRGB(nm) {
+  let r, g, b;
+  if (nm >= 380 && nm < 440) { r = -(nm-440)/(440-380); g = 0; b = 1; }
+  else if (nm < 490) { r = 0; g = (nm-440)/(490-440); b = 1; }
+  else if (nm < 510) { r = 0; g = 1; b = -(nm-510)/(510-490); }
+  else if (nm < 580) { r = (nm-510)/(580-510); g = 1; b = 0; }
+  else if (nm < 645) { r = 1; g = -(nm-645)/(645-580); b = 0; }
+  else { r = 1; g = 0; b = 0; }
+  return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
+}
+
+// Barrier x position
+const BARRIER_X = 200;
+const SCREEN_X = W - 50;
+
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  const cy = H / 2;
+  const s1y = cy - slitD / 2;
+  const s2y = cy + slitD / 2;
+
+  const { k, speed } = getWaveParams();
+  const omega = speed * k; // angular freq (rad/frame)
+  const [cr, cg, cb] = wavelengthToRGB(lambda);
+
+  // ---- Compute interference field pixel by pixel on the right of barrier ----
+  const imageData = ctx.createImageData(W - BARRIER_X - 5, H);
+  const iW = imageData.width;
+
+  for (let ix = 0; ix < iW; ix++) {
+    const px = BARRIER_X + 5 + ix;
+    for (let iy = 0; iy < H; iy++) {
+      const r1 = Math.sqrt((px - BARRIER_X)**2 + (iy - s1y)**2);
+      const r2 = Math.sqrt((px - BARRIER_X)**2 + (iy - s2y)**2);
+
+      // Amplitude of each wave at this point
+      const amp1 = Math.cos(k * r1 - omega * t) / Math.max(1, Math.sqrt(r1) * 0.12);
+      const amp2 = Math.cos(k * r2 - omega * t) / Math.max(1, Math.sqrt(r2) * 0.12);
+
+      const total = (amp1 + amp2) * 0.5;
+
+      // Map to brightness: positive = bright (constructive), near zero = dark
+      // Use time-averaged intensity: proportional to cos²(Δphase/2)
+      const delta = k * (r1 - r2);
+      const intensity = Math.cos(delta / 2) ** 2; // time-averaged
+
+      // Blend animated wave with intensity envelope
+      const animated = (total + 1) / 2; // 0..1
+      const brightness = intensity * 0.7 + animated * 0.3;
+
+      const idx = (iy * iW + ix) * 4;
+      imageData.data[idx]     = cr * brightness;
+      imageData.data[idx + 1] = cg * brightness;
+      imageData.data[idx + 2] = cb * brightness;
+      imageData.data[idx + 3] = 255;
+    }
+  }
+  ctx.putImageData(imageData, BARRIER_X + 5, 0);
+
+  // ---- Left side: incoming plane wave ----
+  for (let ix = 0; ix < BARRIER_X; ix++) {
+    const phase = Math.cos(k * ix - omega * t);
+    const brightness = (phase + 1) / 2 * 0.6;
+    for (let iy = 0; iy < H; iy++) {
+      // fade near edges
+      const edgeFade = Math.min(1, iy / 30, (H - iy) / 30);
+      const b2 = brightness * edgeFade;
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${b2})`;
+      ctx.fillRect(ix, iy, 1, 1);
+    }
+  }
+
+  // ---- Barrier ----
+  ctx.fillStyle = '#1e293b';
+  ctx.fillRect(BARRIER_X, 0, 8, s1y - 6);
+  ctx.fillRect(BARRIER_X, s1y + 6, 8, s2y - s1y - 12);
+  ctx.fillRect(BARRIER_X, s2y + 6, 8, H - s2y - 6);
+
+  // Slit openings highlight
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  ctx.fillRect(BARRIER_X, s1y - 6, 8, 12);
+  ctx.fillRect(BARRIER_X, s2y - 6, 8, 12);
+
+  // Slit dots
+  ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
+  ctx.shadowColor = `rgb(${cr},${cg},${cb})`; ctx.shadowBlur = 8;
+  ctx.beginPath(); ctx.arc(BARRIER_X + 4, s1y, 3, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(BARRIER_X + 4, s2y, 3, 0, Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // d label
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(BARRIER_X - 16, s1y); ctx.lineTo(BARRIER_X - 16, s2y);
+  ctx.stroke(); ctx.setLineDash([]);
+  ctx.font = '11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.fillText('d', BARRIER_X - 30, cy + 4);
+
+  // ---- Screen ----
+  ctx.fillStyle = '#334155';
+  ctx.fillRect(SCREEN_X, 0, 6, H);
+
+  // Fringe pattern on screen
+  for (let iy = 0; iy < H; iy++) {
+    const r1s = Math.sqrt((SCREEN_X - BARRIER_X)**2 + (iy - s1y)**2);
+    const r2s = Math.sqrt((SCREEN_X - BARRIER_X)**2 + (iy - s2y)**2);
+    const delta = k * (r1s - r2s);
+    const intensity = Math.cos(delta / 2) ** 2;
+    ctx.fillStyle = `rgba(${cr},${cg},${cb},${intensity * 0.95})`;
+    ctx.fillRect(SCREEN_X + 6, iy, 14, 1);
+  }
+
+  // Labels
+  ctx.font = '500 11px DM Sans';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fillText('sorgente', 10, cy);
+  ctx.fillText('→', 90, cy);
+  ctx.fillText('barriera', BARRIER_X - 32, 18);
+  ctx.fillText('schermo', SCREEN_X + 2, 18);
+
+  // Constructive / destructive labels on field
+  // Find angle of first max above center
+  const firstMaxY = cy - (SCREEN_X - BARRIER_X) * (lambda / 700 * 0.045 / k) / (slitD / (SCREEN_X - BARRIER_X));
+  ctx.font = '10px DM Sans';
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.fillText('costruttiva (m=0)', BARRIER_X + 30, cy - 8);
+  ctx.fillText('distruttiva', BARRIER_X + 30, cy + slitD * 0.7);
+
+  t += 1.5;
+  requestAnimationFrame(draw);
+}
+
+document.getElementById('lam').addEventListener('input', e => {
+  lambda = parseInt(e.target.value);
+  document.getElementById('lam-val').textContent = lambda + ' nm';
+  document.getElementById('r-lam').textContent = lambda + ' nm';
+  const [r,g,b] = wavelengthToRGB(lambda);
+  document.getElementById('wl-bar').style.background = `rgb(${r},${g},${b})`;
+});
+
+document.getElementById('d-sl').addEventListener('input', e => {
+  slitD = parseInt(e.target.value);
+  document.getElementById('d-val').textContent = slitD + ' px';
+  document.getElementById('r-d').textContent = slitD + ' px';
+});
+
+// Init
+const [r0,g0,b0] = wavelengthToRGB(lambda);
+document.getElementById('wl-bar').style.background = `rgb(${r0},${g0},${b0})`;
+
+draw();
+</script>
+</body>
+</html>
