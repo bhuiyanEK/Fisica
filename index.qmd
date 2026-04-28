@@ -1,0 +1,476 @@
+---
+title: "Fisica - Ottica"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    transition: slide
+    css: stile.css
+    navigation-mode: linear
+---
+
+# Natura della Luce {#natura-della-luce}
+
+## Cos'è la luce {#cos-e-la-luce}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- La luce è una forma di **energia** che si propaga nello spazio
+- Responsabile della visione, della percezione dei colori e del trasferimento di informazioni
+- Due modelli storici:
+  - modello **corpuscolare** (particelle)
+  - modello **ondulatorio** (onde)
+:::
+::: {.col-img}
+<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" style="opacity:.85">
+  <!-- onda -->
+  <polyline points="10,100 30,60 50,100 70,140 90,100 110,60 130,100 150,140 170,100 190,60 210,100 230,140 250,100"
+    fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- fotone/particella -->
+  <circle cx="60" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"/>
+  <circle cx="110" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"/>
+  <circle cx="160" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"/>
+  <circle cx="210" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"/>
+  <line x1="10" y1="155" x2="250" y2="155" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- labels -->
+  <text x="130" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">onda</text>
+  <text x="130" y="185" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">fotoni</text>
+</svg>
+:::
+::::
+
+## Dualismo onda-particella {#dualismo-onda-particella}
+
+- La luce presenta una **doppia natura**:
+  - si comporta da **particella** (fotone) quando interagisce con la materia
+  - si comporta da **onda** quando si propaga nello spazio
+- Non è una contraddizione: sono due descrizioni complementari dello stesso fenomeno
+
+## L'Onda Elettromagnetica {.smaller #l-onda-elettromagnetica}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- Onda **trasversale**: $\vec{E}$ e $\vec{B}$ oscillano perpendicolarmente alla propagazione
+- Non richiede un mezzo materiale: si propaga **nel vuoto**
+- Relazione fondamentale: $v = \lambda f$
+- $\lambda$ e $f$ sono inversamente proporzionali a velocità fissata
+:::
+::: {.col-img}
+<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- asse propagazione -->
+  <line x1="20" y1="90" x2="240" y2="90" stroke="#e8e5e0" stroke-width="1.5"/>
+  <polygon points="240,86 252,90 240,94" fill="#e8e5e0"/>
+  <!-- campo E (blu, verticale) -->
+  <polyline points="20,90 45,50 70,90 95,130 120,90 145,50 170,90 195,130 220,90"
+    fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- campo B (rosso/terracotta, tratteggiato in profondità — simulato sfasato) -->
+  <polyline points="20,90 45,70 70,90 95,110 120,90 145,70 170,90 195,110 220,90"
+    fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="5 3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- labels -->
+  <text x="28" y="44" font-family="DM Sans,sans-serif" font-size="11" fill="#2563eb" font-weight="500">E⃗</text>
+  <text x="28" y="118" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706" font-weight="500">B⃗</text>
+  <text x="248" y="86" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">v</text>
+</svg>
+:::
+::::
+
+# Lo Spettro Elettromagnetico {#lo-spettro-elettromagnetico}
+
+## Spettro elettromagnetico {#spettro-elettromagnetico}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+Tutte le onde EM condividono la stessa natura, differiscono solo per $\lambda$ e $f$
+
+| **Radiazione**    | **$\lambda$**       | **Uso**              |
+|-------------------|---------------------|----------------------|
+| Onde radio        | da cm a km          | Telecomunicazioni    |
+| Microonde         | mm ÷ cm             | Radar, Wi-Fi         |
+| Infrarosso        | 780 nm ÷ 1 mm       | Termografia          |
+| **Luce visibile** | **380 ÷ 780 nm**    | **Visione**          |
+| Ultravioletto     | 10 ÷ 380 nm         | Sterilizzazione      |
+| Raggi X           | 0.01 ÷ 10 nm        | Diagnostica          |
+| Raggi Gamma       | < 0.01 nm           | Fisica nucleare      |
+:::
+::: {.col-img}
+<svg viewBox="0 0 80 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- barra spettro -->
+  <defs>
+    <linearGradient id="spec" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#9333ea"/>
+      <stop offset="16%"  stop-color="#3b82f6"/>
+      <stop offset="33%"  stop-color="#22d3ee"/>
+      <stop offset="50%"  stop-color="#22c55e"/>
+      <stop offset="66%"  stop-color="#facc15"/>
+      <stop offset="83%"  stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect x="28" y="10" width="22" height="280" fill="url(#spec)" rx="2"/>
+  <!-- tacche lambda -->
+  <text x="24" y="15"  text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">γ</text>
+  <text x="24" y="55"  text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">X</text>
+  <text x="24" y="110" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">UV</text>
+  <text x="24" y="155" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">VIS</text>
+  <text x="24" y="200" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">IR</text>
+  <text x="24" y="250" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">μW</text>
+  <text x="24" y="285" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">RF</text>
+  <!-- highlight visibile -->
+  <rect x="27" y="132" width="24" height="46" fill="none" stroke="white" stroke-width="1.5" rx="1"/>
+</svg>
+:::
+::::
+
+## La percezione del Colore {#la-percezione-del-colore}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- La luce bianca contiene **tutte le lunghezze d'onda** del visibile
+- Gli oggetti **assorbono** alcune $\lambda$ e **riflettono** le rimanenti
+- Il colore percepito = la $\lambda$ riflessa
+- Violetto: $\lambda \approx 380$ nm — Rosso: $\lambda \approx 780$ nm
+- I fotorecettori della retina (coni) rilevano tre bande: rosso, verde, blu
+:::
+::: {.col-img}
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- prisma -->
+  <polygon points="40,130 100,20 160,130" fill="#f8f7f4" stroke="#e8e5e0" stroke-width="1.5"/>
+  <!-- raggio bianco in ingresso -->
+  <line x1="5" y1="75" x2="60" y2="95" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="5" y1="75" x2="60" y2="95" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 2" stroke-linecap="round" opacity=".4"/>
+  <!-- raggi uscenti dispersi -->
+  <line x1="115" y1="82" x2="195" y2="55"  stroke="#9333ea" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="115" y1="85" x2="195" y2="72"  stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="115" y1="88" x2="195" y2="90"  stroke="#22c55e" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="115" y1="92" x2="195" y2="108" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="115" y1="96" x2="195" y2="128" stroke="#f97316" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="115" y1="100" x2="195" y2="148" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- label -->
+  <text x="6" y="68" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">luce bianca</text>
+</svg>
+:::
+::::
+
+# Ottica Geometrica: Riflessione e Specchi {#ottica-geometrica-riflessione-e-specchi}
+
+## La Legge di Riflessione {#la-legge-di-riflessione}
+
+:::: {.cols}
+::: {.col-text}
+- La luce che colpisce una superficie liscia viene riflessa
+- Legge: $\theta_i = \theta_r$
+- Entrambi gli angoli rispetto alla **normale** alla superficie
+- Raggio incidente, normale e raggio riflesso: stesso piano
+- Riflessione **speculare** (liscia) $\neq$ **diffusa** (rugosa)
+:::
+::: {.col-img}
+<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- superficie -->
+  <line x1="10" y1="130" x2="210" y2="130" stroke="#e8e5e0" stroke-width="2"/>
+  <!-- normale -->
+  <line x1="110" y1="130" x2="110" y2="30" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="5 4"/>
+  <!-- raggio incidente -->
+  <line x1="30" y1="50" x2="110" y2="130" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="110,130 98,112 105,115" fill="#2563eb"/>
+  <!-- raggio riflesso -->
+  <line x1="110" y1="130" x2="190" y2="50" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="190,50 178,68 183,63" fill="#d97706"/>
+  <!-- archi angoli -->
+  <path d="M 110,100 A 30,30 0 0,0 86,116" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+  <path d="M 110,100 A 30,30 0 0,1 134,116" fill="none" stroke="#d97706" stroke-width="1.2"/>
+  <!-- labels -->
+  <text x="72" y="105" font-family="DM Sans,sans-serif" font-size="11" fill="#2563eb">θᵢ</text>
+  <text x="136" y="105" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706">θᵣ</text>
+  <text x="104" y="24" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">N</text>
+</svg>
+:::
+::::
+
+## [Specchio Piano](./simulazioni/riflessione.html?mode=piano)
+
+- L'immagine è **virtuale**: i raggi non convergono fisicamente dietro lo specchio
+- L'immagine è diritta e delle stesse dimensioni dell'oggetto
+- Distanza immagine = distanza oggetto (simmetria rispetto alla superficie)
+- Lateralmente invertita (destra $\leftrightarrow$ sinistra)
+
+## Specchi Sferici: Grandezze Fondamentali {.smaller #specchi-sferici-grandezze-fondamentali}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- Centro di curvatura $C$: centro della sfera di cui lo specchio è parte
+- Raggio di curvatura $R$: distanza da $C$ alla superficie
+- Asse ottico: retta per $C$ perpendicolare allo specchio
+- Fuoco $F$: convergenza dei raggi paralleli all'asse ottico
+- Distanza focale: $f = \frac{R}{2}$
+- Concavo: $f > 0$ — Convesso: $f < 0$
+:::
+::: {.col-img}
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- specchio concavo (arco) -->
+  <path d="M 30,20 Q 0,80 30,140" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <!-- asse ottico -->
+  <line x1="30" y1="80" x2="200" y2="80" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="5 4"/>
+  <!-- raggi paralleli -->
+  <line x1="190" y1="40" x2="28" y2="40" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+  <line x1="190" y1="60" x2="28" y2="60" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+  <line x1="190" y1="80" x2="28" y2="80" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+  <line x1="190" y1="100" x2="28" y2="100" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+  <line x1="190" y1="120" x2="28" y2="120" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+  <!-- raggi riflessi verso F -->
+  <line x1="28" y1="40"  x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+  <line x1="28" y1="60"  x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+  <line x1="28" y1="100" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+  <line x1="28" y1="120" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+  <!-- punti C e F -->
+  <circle cx="160" cy="80" r="4" fill="#6b6560"/>
+  <circle cx="110" cy="80" r="4" fill="#d97706"/>
+  <text x="157" y="72" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">C</text>
+  <text x="107" y="72" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706">F</text>
+</svg>
+:::
+::::
+
+## [Specchio Concavo](./simulazioni/riflessione.html?mode=concavo)
+
+- Superficie riflettente rivolta verso il **centro di curvatura**
+- I raggi paralleli all'asse ottico convergono nel **fuoco reale $F$**
+
+| Posizione oggetto         | Immagine                          |
+|---------------------------|-----------------------------------|
+| Oltre $C$                 | Reale, capovolta, rimpicciolita   |
+| In $C$                    | Reale, capovolta, stessa dim.     |
+| Tra $C$ e $F$             | Reale, capovolta, ingrandita      |
+| In $F$                    | Immagine all'infinito             |
+| Entro $F$                 | Virtuale, diritta, ingrandita     |
+
+## [Specchio Convesso](./simulazioni/riflessione.html?mode=convesso)
+
+- Superficie riflettente rivolta verso l'esterno
+- I raggi paralleli **divergono** dopo la riflessione
+- Il fuoco è virtuale (dietro lo specchio), $f < 0$
+- L'immagine è sempre: virtuale, diritta, rimpicciolita
+- Campo visivo molto ampio — applicazioni: retrovisori, specchi stradali
+
+## Equazione dei punti coniugati {#equazione-dei-punti-coniugati}
+
+:::: {.cols}
+::: {.col-text}
+**Convenzioni dei segni:**
+
+- $p > 0$: oggetto reale (davanti allo specchio)
+- $p' > 0$: immagine reale (davanti allo specchio)
+- $p' < 0$: immagine virtuale (dietro lo specchio)
+:::
+::: {.col-formula}
+**Relazione fondamentale:**
+
+$$\frac{1}{p} + \frac{1}{p'} = \frac{1}{f} = \frac{2}{R}$$
+:::
+::::
+
+## Ingrandimento lineare {#ingrandimento-lineare}
+
+:::: {.cols}
+::: {.col-text}
+**Interpretazione fisica:**
+
+- $|G| > 1$ → immagine **ingrandita**
+- $|G| < 1$ → immagine **rimpicciolita**
+- $G > 0$ → immagine **diritta** (virtuale)
+- $G < 0$ → immagine **capovolta** (reale)
+:::
+::: {.col-formula}
+**Definizione:**
+
+$$G = -\frac{p'}{p} = \frac{y'}{y}$$
+:::
+::::
+
+# Ottica Geometrica: Rifrazione {#ottica-geometrica-rifrazione}
+
+## [La Rifrazione](./simulazioni/rifrazione.html)
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- Quando la luce passa tra due mezzi con $n$ diverso, cambia velocità e **devia la traiettoria**
+- Si avvicina alla normale in un mezzo più denso ($n_2 > n_1$)
+- Si allontana dalla normale in un mezzo meno denso ($n_2 < n_1$)
+- Esempio: un oggetto immerso in acqua appare spostato
+:::
+::: {.col-img}
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- interfaccia -->
+  <line x1="0" y1="100" x2="200" y2="100" stroke="#e8e5e0" stroke-width="1.5"/>
+  <!-- etichette mezzi -->
+  <text x="10" y="90" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">n₁</text>
+  <text x="10" y="118" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">n₂ &gt; n₁</text>
+  <!-- normale -->
+  <line x1="100" y1="10" x2="100" y2="190" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- raggio incidente -->
+  <line x1="30" y1="20" x2="100" y2="100" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="100,100 88,82 95,85" fill="#2563eb"/>
+  <!-- raggio rifratto (più vicino alla normale) -->
+  <line x1="100" y1="100" x2="140" y2="190" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="140,190 128,173 135,175" fill="#d97706"/>
+  <!-- angoli -->
+  <path d="M 100,70 A 30,30 0 0,0 78,88" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+  <path d="M 100,130 A 30,30 0 0,1 116,122" fill="none" stroke="#d97706" stroke-width="1.2"/>
+  <text x="60" y="82" font-family="DM Sans,sans-serif" font-size="10" fill="#2563eb">θ₁</text>
+  <text x="118" y="126" font-family="DM Sans,sans-serif" font-size="10" fill="#d97706">θ₂</text>
+</svg>
+:::
+::::
+
+## La Legge di Snell-Descartes {#la-legge-di-snell-descartes}
+
+:::: {.cols}
+::: {.col-text}
+- $n_1$, $n_2$: indici di rifrazione dei due mezzi
+- $\theta_1$: angolo di incidenza (rispetto alla normale)
+- $\theta_2$: angolo di rifrazione (rispetto alla normale)
+- Il prodotto $n \sin\theta$ si **conserva** attraversando l'interfaccia
+- Raggio incidente, normale e raggio rifratto: **stesso piano**
+:::
+::: {.col-formula}
+$$n_1 \sin\theta_1 = n_2 \sin\theta_2$$
+:::
+::::
+
+## [Riflessione Totale Interna](./simulazioni/rifrazione.html?n1=1.52&n2=1.00&angle=50)
+
+:::: {.cols}
+::: {.col-text}
+- Si verifica quando la luce passa da un mezzo **più denso** a uno **meno denso** ($n_1 > n_2$)
+- Per $\theta_i > \theta_c$: tutta la luce viene riflessa, nessuna trasmessa
+- L'interfaccia diventa uno specchio perfetto
+:::
+::: {.col-formula}
+Angolo critico:
+
+$$\sin\theta_c = \frac{n_2}{n_1}$$
+:::
+::::
+
+# Ottica Fisica {#ottica-fisica-1}
+
+## Ottica Fisica {#ottica-fisica}
+
+- L'ottica geometrica fallisce quando $\lambda$ è **comparabile** alle dimensioni degli ostacoli
+- Emergono fenomeni che richiedono di trattare la luce come onda:
+  - **Dispersione**: scomposizione della luce bianca
+  - **Diffrazione**: la luce aggira gli ostacoli
+  - **Interferenza**: le onde si sommano o si annullano
+  - **Polarizzazione**: selezione della direzione di oscillazione
+
+## [Dispersione cromatica](./simulazioni/dispersione.html) {.smaller #dispersione-cromatica}
+
+:::: {.cols .cols-6040}
+::: {.col-text}
+- L'indice di rifrazione $n$ non è costante: dipende da $\lambda$ → $n = n(\lambda)$
+- Poiché $v = \frac{c}{n}$, i diversi colori viaggiano a velocità differenti nel prisma
+- Dalla legge di Snell: angoli diversi → scomposizione della luce bianca
+- Il violetto viene deviato più del rosso ($n$ cresce al diminuire di $\lambda$)
+:::
+::: {.col-img}
+<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="50,130 110,20 170,130" fill="#f8f7f4" stroke="#e8e5e0" stroke-width="1.5"/>
+  <line x1="5" y1="72" x2="68" y2="92" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="5" y1="72" x2="68" y2="92" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 2" opacity=".35"/>
+  <line x1="126" y1="78" x2="215" y2="48"  stroke="#9333ea" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="126" y1="81" x2="215" y2="67"  stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="126" y1="85" x2="215" y2="86"  stroke="#22c55e" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="126" y1="89" x2="215" y2="105" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="126" y1="93" x2="215" y2="124" stroke="#f97316" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="126" y1="97" x2="215" y2="145" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="6" y="65" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">luce bianca</text>
+</svg>
+:::
+::::
+
+# Ottica Fisica: Diffrazione e Interferenza {#ottica-fisica-diffrazione-e-interferenza}
+
+## Diffrazione
+
+:::: {.cols}
+::: {.col-text}
+- **Principio di Huygens**: ogni punto di un fronte d'onda è sorgente di onde sferiche secondarie
+- Rilevante quando l'apertura $a \approx \lambda$
+- Le ombre non sono mai perfettamente nette
+
+**Fenditura singola:**
+
+$$a \sin \theta = m\lambda \quad (m = \pm 1, \pm 2, \dots)$$
+:::
+::: {.col-img}
+<svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- diaframma -->
+  <rect x="85" y="0"  width="12" height="70"  fill="#e8e5e0"/>
+  <rect x="85" y="110" width="12" height="70" fill="#e8e5e0"/>
+  <!-- fronti d'onda incidenti -->
+  <line x1="0" y1="30" x2="85" y2="30" stroke="#2563eb" stroke-width="1" opacity=".4"/>
+  <line x1="0" y1="60" x2="85" y2="60" stroke="#2563eb" stroke-width="1" opacity=".4"/>
+  <line x1="0" y1="90" x2="85" y2="90" stroke="#2563eb" stroke-width="1" opacity=".4"/>
+  <!-- onde sferiche uscenti (archi) -->
+  <path d="M 91,90 A 30,30 0 0,1 91,50" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".7"/>
+  <path d="M 91,90 A 55,55 0 0,1 91,40" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".5"/>
+  <path d="M 91,90 A 80,80 0 0,1 91,32" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".3"/>
+  <path d="M 91,90 A 30,30 0 0,0 91,130" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".7"/>
+  <path d="M 91,90 A 55,55 0 0,0 91,140" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".5"/>
+  <path d="M 91,90 A 80,80 0 0,0 91,148" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".3"/>
+  <!-- label -->
+  <text x="92" y="96" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">a</text>
+</svg>
+:::
+::::
+
+## [Interferenza — Esperimento di Young](./simulazioni/dispersione.html) {.smaller #Interferenza}
+
+:::: {.cols}
+::: {.col-text}
+- Due sorgenti coerenti distanza $d$ → frange luminose e scure
+- Differenza di cammino: $\Delta r = d \sin \theta$
+- **Costruttiva** (luce): $\Delta r = m\lambda$
+- **Distruttiva** (buio): $\Delta r = (m + \tfrac{1}{2})\lambda$
+- Interfrangia: $\Delta y = \frac{\lambda L}{d}$
+:::
+::: {.col-img}
+<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+  <!-- diaframma doppia fenditura -->
+  <rect x="80" y="0"  width="10" height="70"  fill="#e8e5e0"/>
+  <rect x="80" y="85" width="10" height="25"  fill="#e8e5e0"/>
+  <rect x="80" y="125" width="10" height="55" fill="#e8e5e0"/>
+  <!-- schermo -->
+  <line x1="190" y1="0" x2="190" y2="180" stroke="#e8e5e0" stroke-width="2"/>
+  <!-- frange (bande) -->
+  <rect x="189" y="10"  width="8" height="14" fill="#facc15" opacity=".9"/>
+  <rect x="189" y="42"  width="8" height="14" fill="#facc15" opacity=".7"/>
+  <rect x="189" y="74"  width="8" height="14" fill="#facc15" opacity=".9"/>
+  <rect x="189" y="106" width="8" height="14" fill="#facc15" opacity=".7"/>
+  <rect x="189" y="138" width="8" height="14" fill="#facc15" opacity=".9"/>
+  <rect x="189" y="162" width="8" height="14" fill="#facc15" opacity=".5"/>
+  <!-- raggi dalle due fenditure -->
+  <line x1="90" y1="75"  x2="190" y2="81"  stroke="#2563eb" stroke-width="1" opacity=".5"/>
+  <line x1="90" y1="110" x2="190" y2="81"  stroke="#2563eb" stroke-width="1" opacity=".5"/>
+  <line x1="90" y1="75"  x2="190" y2="113" stroke="#2563eb" stroke-width="1" opacity=".3"/>
+  <line x1="90" y1="110" x2="190" y2="113" stroke="#2563eb" stroke-width="1" opacity=".3"/>
+  <!-- label d -->
+  <line x1="75" y1="75" x2="75" y2="110" stroke="#6b6560" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="60" y="96" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">d</text>
+</svg>
+:::
+::::
+
+## [Polarizzazione](./simulazioni/polarizzazione.html) {.smaller #polarizzazione}
+
+:::: {.cols}
+::: {.col-text}
+- **Natura trasversale:** $\vec{E}$ oscilla perpendicolarmente alla propagazione
+- **Filtro polarizzatore:** seleziona un'unica direzione di oscillazione
+- **Applicazioni:** occhiali da sole polarizzati, schermi LCD, fotografia
+:::
+::: {.col-formula}
+**Legge di Malus:**
+
+$$I = I_0 \cos^2 \theta$$
+:::
+::::

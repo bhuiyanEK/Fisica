@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
+
+  <title>Fisica - Ottica</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="stile.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Fisica - Ottica</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="natura-della-luce" class="title-slide slide level1 center">
+<h1>Natura della Luce</h1>
+
+</section>
+<section id="cos-e-la-luce" class="slide level2">
+<h2>Cos’è la luce</h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>La luce è una forma di <strong>energia</strong> che si propaga nello spazio</li>
+<li>Responsabile della visione, della percezione dei colori e del trasferimento di informazioni</li>
+<li>Due modelli storici:
+<ul>
+<li>modello <strong>corpuscolare</strong> (particelle)</li>
+<li>modello <strong>ondulatorio</strong> (onde)</li>
+</ul></li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" style="opacity:.85">
+<!-- onda -->
+<polyline points="10,100 30,60 50,100 70,140 90,100 110,60 130,100 150,140 170,100 190,60 210,100 230,140 250,100" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline> <!-- fotone/particella --> <circle cx="60" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"></circle> <circle cx="110" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"></circle> <circle cx="160" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"></circle> <circle cx="210" cy="155" r="6" fill="#e8e5e0" stroke="#6b6560" stroke-width="1.5"></circle> <line x1="10" y1="155" x2="250" y2="155" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="4 4"></line> <!-- labels --> <text x="130" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">onda</text> <text x="130" y="185" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">fotoni</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="dualismo-onda-particella" class="slide level2">
+<h2>Dualismo onda-particella</h2>
+<ul>
+<li>La luce presenta una <strong>doppia natura</strong>:
+<ul>
+<li>si comporta da <strong>particella</strong> (fotone) quando interagisce con la materia</li>
+<li>si comporta da <strong>onda</strong> quando si propaga nello spazio</li>
+</ul></li>
+<li>Non è una contraddizione: sono due descrizioni complementari dello stesso fenomeno</li>
+</ul>
+</section>
+<section id="l-onda-elettromagnetica" class="slide level2 smaller">
+<h2>L’Onda Elettromagnetica</h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>Onda <strong>trasversale</strong>: <span class="math inline">\(\vec{E}\)</span> e <span class="math inline">\(\vec{B}\)</span> oscillano perpendicolarmente alla propagazione</li>
+<li>Non richiede un mezzo materiale: si propaga <strong>nel vuoto</strong></li>
+<li>Relazione fondamentale: <span class="math inline">\(v = \lambda f\)</span></li>
+<li><span class="math inline">\(\lambda\)</span> e <span class="math inline">\(f\)</span> sono inversamente proporzionali a velocità fissata</li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+<!-- asse propagazione -->
+<line x1="20" y1="90" x2="240" y2="90" stroke="#e8e5e0" stroke-width="1.5"></line> <polygon points="240,86 252,90 240,94" fill="#e8e5e0"></polygon> <!-- campo E (blu, verticale) --> <polyline points="20,90 45,50 70,90 95,130 120,90 145,50 170,90 195,130 220,90" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline> <!-- campo B (rosso/terracotta, tratteggiato in profondità — simulato sfasato) --> <polyline points="20,90 45,70 70,90 95,110 120,90 145,70 170,90 195,110 220,90" fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="5 3" stroke-linecap="round" stroke-linejoin="round"></polyline> <!-- labels --> <text x="28" y="44" font-family="DM Sans,sans-serif" font-size="11" fill="#2563eb" font-weight="500">E⃗</text> <text x="28" y="118" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706" font-weight="500">B⃗</text> <text x="248" y="86" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">v</text>
+</svg>
+</div>
+</div>
+</section></section>
+<section>
+<section id="lo-spettro-elettromagnetico" class="title-slide slide level1 center">
+<h1>Lo Spettro Elettromagnetico</h1>
+
+</section>
+<section id="spettro-elettromagnetico" class="slide level2">
+<h2>Spettro elettromagnetico</h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<p>Tutte le onde EM condividono la stessa natura, differiscono solo per <span class="math inline">\(\lambda\)</span> e <span class="math inline">\(f\)</span></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>Radiazione</strong></th>
+<th><strong><span class="math inline">\(\lambda\)</span></strong></th>
+<th><strong>Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Onde radio</td>
+<td>da cm a km</td>
+<td>Telecomunicazioni</td>
+</tr>
+<tr class="even">
+<td>Microonde</td>
+<td>mm ÷ cm</td>
+<td>Radar, Wi-Fi</td>
+</tr>
+<tr class="odd">
+<td>Infrarosso</td>
+<td>780 nm ÷ 1 mm</td>
+<td>Termografia</td>
+</tr>
+<tr class="even">
+<td><strong>Luce visibile</strong></td>
+<td><strong>380 ÷ 780 nm</strong></td>
+<td><strong>Visione</strong></td>
+</tr>
+<tr class="odd">
+<td>Ultravioletto</td>
+<td>10 ÷ 380 nm</td>
+<td>Sterilizzazione</td>
+</tr>
+<tr class="even">
+<td>Raggi X</td>
+<td>0.01 ÷ 10 nm</td>
+<td>Diagnostica</td>
+</tr>
+<tr class="odd">
+<td>Raggi Gamma</td>
+<td>&lt; 0.01 nm</td>
+<td>Fisica nucleare</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 80 300" xmlns="http://www.w3.org/2000/svg">
+<!-- barra spettro -->
+<defs> <lineargradient id="spec" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-color="#9333ea"></stop> <stop offset="16%" stop-color="#3b82f6"></stop> <stop offset="33%" stop-color="#22d3ee"></stop> <stop offset="50%" stop-color="#22c55e"></stop> <stop offset="66%" stop-color="#facc15"></stop> <stop offset="83%" stop-color="#f97316"></stop> <stop offset="100%" stop-color="#ef4444"></stop> </lineargradient> </defs> <rect x="28" y="10" width="22" height="280" fill="url(#spec)" rx="2"></rect> <!-- tacche lambda --> <text x="24" y="15" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">γ</text> <text x="24" y="55" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">X</text> <text x="24" y="110" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">UV</text> <text x="24" y="155" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">VIS</text> <text x="24" y="200" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">IR</text> <text x="24" y="250" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">μW</text> <text x="24" y="285" text-anchor="end" font-family="DM Sans,sans-serif" font-size="8" fill="#6b6560">RF</text> <!-- highlight visibile --> <rect x="27" y="132" width="24" height="46" fill="none" stroke="white" stroke-width="1.5" rx="1"></rect>
+</svg>
+</div>
+</div>
+</section>
+<section id="la-percezione-del-colore" class="slide level2">
+<h2>La percezione del Colore</h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>La luce bianca contiene <strong>tutte le lunghezze d’onda</strong> del visibile</li>
+<li>Gli oggetti <strong>assorbono</strong> alcune <span class="math inline">\(\lambda\)</span> e <strong>riflettono</strong> le rimanenti</li>
+<li>Il colore percepito = la <span class="math inline">\(\lambda\)</span> riflessa</li>
+<li>Violetto: <span class="math inline">\(\lambda \approx 380\)</span> nm — Rosso: <span class="math inline">\(\lambda \approx 780\)</span> nm</li>
+<li>I fotorecettori della retina (coni) rilevano tre bande: rosso, verde, blu</li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+<!-- prisma -->
+<polygon points="40,130 100,20 160,130" fill="#f8f7f4" stroke="#e8e5e0" stroke-width="1.5"></polygon> <!-- raggio bianco in ingresso --> <line x1="5" y1="75" x2="60" y2="95" stroke="white" stroke-width="3" stroke-linecap="round"></line> <line x1="5" y1="75" x2="60" y2="95" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 2" stroke-linecap="round" opacity=".4"></line> <!-- raggi uscenti dispersi --> <line x1="115" y1="82" x2="195" y2="55" stroke="#9333ea" stroke-width="1.8" stroke-linecap="round"></line> <line x1="115" y1="85" x2="195" y2="72" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"></line> <line x1="115" y1="88" x2="195" y2="90" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round"></line> <line x1="115" y1="92" x2="195" y2="108" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"></line> <line x1="115" y1="96" x2="195" y2="128" stroke="#f97316" stroke-width="1.8" stroke-linecap="round"></line> <line x1="115" y1="100" x2="195" y2="148" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"></line> <!-- label --> <text x="6" y="68" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">luce bianca</text>
+</svg>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ottica-geometrica-riflessione-e-specchi" class="title-slide slide level1 center">
+<h1>Ottica Geometrica: Riflessione e Specchi</h1>
+
+</section>
+<section id="la-legge-di-riflessione" class="slide level2">
+<h2>La Legge di Riflessione</h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li>La luce che colpisce una superficie liscia viene riflessa</li>
+<li>Legge: <span class="math inline">\(\theta_i = \theta_r\)</span></li>
+<li>Entrambi gli angoli rispetto alla <strong>normale</strong> alla superficie</li>
+<li>Raggio incidente, normale e raggio riflesso: stesso piano</li>
+<li>Riflessione <strong>speculare</strong> (liscia) <span class="math inline">\(\neq\)</span> <strong>diffusa</strong> (rugosa)</li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+<!-- superficie -->
+<line x1="10" y1="130" x2="210" y2="130" stroke="#e8e5e0" stroke-width="2"></line> <!-- normale --> <line x1="110" y1="130" x2="110" y2="30" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="5 4"></line> <!-- raggio incidente --> <line x1="30" y1="50" x2="110" y2="130" stroke="#2563eb" stroke-width="2" stroke-linecap="round"></line> <polygon points="110,130 98,112 105,115" fill="#2563eb"></polygon> <!-- raggio riflesso --> <line x1="110" y1="130" x2="190" y2="50" stroke="#d97706" stroke-width="2" stroke-linecap="round"></line> <polygon points="190,50 178,68 183,63" fill="#d97706"></polygon> <!-- archi angoli --> <path d="M 110,100 A 30,30 0 0,0 86,116" fill="none" stroke="#2563eb" stroke-width="1.2"></path> <path d="M 110,100 A 30,30 0 0,1 134,116" fill="none" stroke="#d97706" stroke-width="1.2"></path> <!-- labels --> <text x="72" y="105" font-family="DM Sans,sans-serif" font-size="11" fill="#2563eb">θᵢ</text> <text x="136" y="105" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706">θᵣ</text> <text x="104" y="24" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">N</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="specchio-piano" class="slide level2">
+<h2><a href="./simulazioni/riflessione.html?mode=piano">Specchio Piano</a></h2>
+<ul>
+<li>L’immagine è <strong>virtuale</strong>: i raggi non convergono fisicamente dietro lo specchio</li>
+<li>L’immagine è diritta e delle stesse dimensioni dell’oggetto</li>
+<li>Distanza immagine = distanza oggetto (simmetria rispetto alla superficie)</li>
+<li>Lateralmente invertita (destra <span class="math inline">\(\leftrightarrow\)</span> sinistra)</li>
+</ul>
+</section>
+<section id="specchi-sferici-grandezze-fondamentali" class="slide level2 smaller">
+<h2>Specchi Sferici: Grandezze Fondamentali</h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>Centro di curvatura <span class="math inline">\(C\)</span>: centro della sfera di cui lo specchio è parte</li>
+<li>Raggio di curvatura <span class="math inline">\(R\)</span>: distanza da <span class="math inline">\(C\)</span> alla superficie</li>
+<li>Asse ottico: retta per <span class="math inline">\(C\)</span> perpendicolare allo specchio</li>
+<li>Fuoco <span class="math inline">\(F\)</span>: convergenza dei raggi paralleli all’asse ottico</li>
+<li>Distanza focale: <span class="math inline">\(f = \frac{R}{2}\)</span></li>
+<li>Concavo: <span class="math inline">\(f &gt; 0\)</span> — Convesso: <span class="math inline">\(f &lt; 0\)</span></li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+<!-- specchio concavo (arco) -->
+<path d="M 30,20 Q 0,80 30,140" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"></path> <!-- asse ottico --> <line x1="30" y1="80" x2="200" y2="80" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="5 4"></line> <!-- raggi paralleli --> <line x1="190" y1="40" x2="28" y2="40" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"></line> <line x1="190" y1="60" x2="28" y2="60" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"></line> <line x1="190" y1="80" x2="28" y2="80" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"></line> <line x1="190" y1="100" x2="28" y2="100" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"></line> <line x1="190" y1="120" x2="28" y2="120" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" opacity=".7"></line> <!-- raggi riflessi verso F --> <line x1="28" y1="40" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"></line> <line x1="28" y1="60" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"></line> <line x1="28" y1="100" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"></line> <line x1="28" y1="120" x2="110" y2="80" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" opacity=".8"></line> <!-- punti C e F --> <circle cx="160" cy="80" r="4" fill="#6b6560"></circle> <circle cx="110" cy="80" r="4" fill="#d97706"></circle> <text x="157" y="72" font-family="DM Sans,sans-serif" font-size="11" fill="#6b6560">C</text> <text x="107" y="72" font-family="DM Sans,sans-serif" font-size="11" fill="#d97706">F</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="specchio-concavo" class="slide level2">
+<h2><a href="./simulazioni/riflessione.html?mode=concavo">Specchio Concavo</a></h2>
+<ul>
+<li>Superficie riflettente rivolta verso il <strong>centro di curvatura</strong></li>
+<li>I raggi paralleli all’asse ottico convergono nel <strong>fuoco reale <span class="math inline">\(F\)</span></strong></li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Posizione oggetto</th>
+<th>Immagine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Oltre <span class="math inline">\(C\)</span></td>
+<td>Reale, capovolta, rimpicciolita</td>
+</tr>
+<tr class="even">
+<td>In <span class="math inline">\(C\)</span></td>
+<td>Reale, capovolta, stessa dim.</td>
+</tr>
+<tr class="odd">
+<td>Tra <span class="math inline">\(C\)</span> e <span class="math inline">\(F\)</span></td>
+<td>Reale, capovolta, ingrandita</td>
+</tr>
+<tr class="even">
+<td>In <span class="math inline">\(F\)</span></td>
+<td>Immagine all’infinito</td>
+</tr>
+<tr class="odd">
+<td>Entro <span class="math inline">\(F\)</span></td>
+<td>Virtuale, diritta, ingrandita</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="specchio-convesso" class="slide level2">
+<h2><a href="./simulazioni/riflessione.html?mode=convesso">Specchio Convesso</a></h2>
+<ul>
+<li>Superficie riflettente rivolta verso l’esterno</li>
+<li>I raggi paralleli <strong>divergono</strong> dopo la riflessione</li>
+<li>Il fuoco è virtuale (dietro lo specchio), <span class="math inline">\(f &lt; 0\)</span></li>
+<li>L’immagine è sempre: virtuale, diritta, rimpicciolita</li>
+<li>Campo visivo molto ampio — applicazioni: retrovisori, specchi stradali</li>
+</ul>
+</section>
+<section id="equazione-dei-punti-coniugati" class="slide level2">
+<h2>Equazione dei punti coniugati</h2>
+<div class="cols">
+<div class="col-text">
+<p><strong>Convenzioni dei segni:</strong></p>
+<ul>
+<li><span class="math inline">\(p &gt; 0\)</span>: oggetto reale (davanti allo specchio)</li>
+<li><span class="math inline">\(p' &gt; 0\)</span>: immagine reale (davanti allo specchio)</li>
+<li><span class="math inline">\(p' &lt; 0\)</span>: immagine virtuale (dietro lo specchio)</li>
+</ul>
+</div>
+<div class="col-formula">
+<p><strong>Relazione fondamentale:</strong></p>
+<p><span class="math display">\[\frac{1}{p} + \frac{1}{p'} = \frac{1}{f} = \frac{2}{R}\]</span></p>
+</div>
+</div>
+</section>
+<section id="ingrandimento-lineare" class="slide level2">
+<h2>Ingrandimento lineare</h2>
+<div class="cols">
+<div class="col-text">
+<p><strong>Interpretazione fisica:</strong></p>
+<ul>
+<li><span class="math inline">\(|G| &gt; 1\)</span> → immagine <strong>ingrandita</strong></li>
+<li><span class="math inline">\(|G| &lt; 1\)</span> → immagine <strong>rimpicciolita</strong></li>
+<li><span class="math inline">\(G &gt; 0\)</span> → immagine <strong>diritta</strong> (virtuale)</li>
+<li><span class="math inline">\(G &lt; 0\)</span> → immagine <strong>capovolta</strong> (reale)</li>
+</ul>
+</div>
+<div class="col-formula">
+<p><strong>Definizione:</strong></p>
+<p><span class="math display">\[G = -\frac{p'}{p} = \frac{y'}{y}\]</span></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ottica-geometrica-rifrazione" class="title-slide slide level1 center">
+<h1>Ottica Geometrica: Rifrazione</h1>
+
+</section>
+<section id="la-rifrazione" class="slide level2">
+<h2><a href="./simulazioni/rifrazione.html">La Rifrazione</a></h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>Quando la luce passa tra due mezzi con <span class="math inline">\(n\)</span> diverso, cambia velocità e <strong>devia la traiettoria</strong></li>
+<li>Si avvicina alla normale in un mezzo più denso (<span class="math inline">\(n_2 &gt; n_1\)</span>)</li>
+<li>Si allontana dalla normale in un mezzo meno denso (<span class="math inline">\(n_2 &lt; n_1\)</span>)</li>
+<li>Esempio: un oggetto immerso in acqua appare spostato</li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<!-- interfaccia -->
+<line x1="0" y1="100" x2="200" y2="100" stroke="#e8e5e0" stroke-width="1.5"></line> <!-- etichette mezzi --> <text x="10" y="90" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">n₁</text> <text x="10" y="118" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">n₂ &gt; n₁</text> <!-- normale --> <line x1="100" y1="10" x2="100" y2="190" stroke="#e8e5e0" stroke-width="1" stroke-dasharray="4 4"></line> <!-- raggio incidente --> <line x1="30" y1="20" x2="100" y2="100" stroke="#2563eb" stroke-width="2" stroke-linecap="round"></line> <polygon points="100,100 88,82 95,85" fill="#2563eb"></polygon> <!-- raggio rifratto (più vicino alla normale) --> <line x1="100" y1="100" x2="140" y2="190" stroke="#d97706" stroke-width="2" stroke-linecap="round"></line> <polygon points="140,190 128,173 135,175" fill="#d97706"></polygon> <!-- angoli --> <path d="M 100,70 A 30,30 0 0,0 78,88" fill="none" stroke="#2563eb" stroke-width="1.2"></path> <path d="M 100,130 A 30,30 0 0,1 116,122" fill="none" stroke="#d97706" stroke-width="1.2"></path> <text x="60" y="82" font-family="DM Sans,sans-serif" font-size="10" fill="#2563eb">θ₁</text> <text x="118" y="126" font-family="DM Sans,sans-serif" font-size="10" fill="#d97706">θ₂</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="la-legge-di-snell-descartes" class="slide level2">
+<h2>La Legge di Snell-Descartes</h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li><span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>: indici di rifrazione dei due mezzi</li>
+<li><span class="math inline">\(\theta_1\)</span>: angolo di incidenza (rispetto alla normale)</li>
+<li><span class="math inline">\(\theta_2\)</span>: angolo di rifrazione (rispetto alla normale)</li>
+<li>Il prodotto <span class="math inline">\(n \sin\theta\)</span> si <strong>conserva</strong> attraversando l’interfaccia</li>
+<li>Raggio incidente, normale e raggio rifratto: <strong>stesso piano</strong></li>
+</ul>
+</div>
+<div class="col-formula">
+<p><span class="math display">\[n_1 \sin\theta_1 = n_2 \sin\theta_2\]</span></p>
+</div>
+</div>
+</section>
+<section id="riflessione-totale-interna" class="slide level2">
+<h2><a href="./simulazioni/rifrazione.html?n1=1.52&amp;n2=1.00&amp;angle=50">Riflessione Totale Interna</a></h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li>Si verifica quando la luce passa da un mezzo <strong>più denso</strong> a uno <strong>meno denso</strong> (<span class="math inline">\(n_1 &gt; n_2\)</span>)</li>
+<li>Per <span class="math inline">\(\theta_i &gt; \theta_c\)</span>: tutta la luce viene riflessa, nessuna trasmessa</li>
+<li>L’interfaccia diventa uno specchio perfetto</li>
+</ul>
+</div>
+<div class="col-formula">
+<p>Angolo critico:</p>
+<p><span class="math display">\[\sin\theta_c = \frac{n_2}{n_1}\]</span></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ottica-fisica-1" class="title-slide slide level1 center">
+<h1>Ottica Fisica</h1>
+
+</section>
+<section id="ottica-fisica" class="slide level2">
+<h2>Ottica Fisica</h2>
+<ul>
+<li>L’ottica geometrica fallisce quando <span class="math inline">\(\lambda\)</span> è <strong>comparabile</strong> alle dimensioni degli ostacoli</li>
+<li>Emergono fenomeni che richiedono di trattare la luce come onda:
+<ul>
+<li><strong>Dispersione</strong>: scomposizione della luce bianca</li>
+<li><strong>Diffrazione</strong>: la luce aggira gli ostacoli</li>
+<li><strong>Interferenza</strong>: le onde si sommano o si annullano</li>
+<li><strong>Polarizzazione</strong>: selezione della direzione di oscillazione</li>
+</ul></li>
+</ul>
+</section>
+<section id="dispersione-cromatica" class="slide level2 smaller">
+<h2><a href="./simulazioni/dispersione.html">Dispersione cromatica</a></h2>
+<div class="cols cols-6040">
+<div class="col-text">
+<ul>
+<li>L’indice di rifrazione <span class="math inline">\(n\)</span> non è costante: dipende da <span class="math inline">\(\lambda\)</span> → <span class="math inline">\(n = n(\lambda)\)</span></li>
+<li>Poiché <span class="math inline">\(v = \frac{c}{n}\)</span>, i diversi colori viaggiano a velocità differenti nel prisma</li>
+<li>Dalla legge di Snell: angoli diversi → scomposizione della luce bianca</li>
+<li>Il violetto viene deviato più del rosso (<span class="math inline">\(n\)</span> cresce al diminuire di <span class="math inline">\(\lambda\)</span>)</li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+<polygon points="50,130 110,20 170,130" fill="#f8f7f4" stroke="#e8e5e0" stroke-width="1.5"></polygon> <line x1="5" y1="72" x2="68" y2="92" stroke="white" stroke-width="3" stroke-linecap="round"></line> <line x1="5" y1="72" x2="68" y2="92" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 2" opacity=".35"></line> <line x1="126" y1="78" x2="215" y2="48" stroke="#9333ea" stroke-width="1.8" stroke-linecap="round"></line> <line x1="126" y1="81" x2="215" y2="67" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"></line> <line x1="126" y1="85" x2="215" y2="86" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round"></line> <line x1="126" y1="89" x2="215" y2="105" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"></line> <line x1="126" y1="93" x2="215" y2="124" stroke="#f97316" stroke-width="1.8" stroke-linecap="round"></line> <line x1="126" y1="97" x2="215" y2="145" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"></line> <text x="6" y="65" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">luce bianca</text>
+</svg>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ottica-fisica-diffrazione-e-interferenza" class="title-slide slide level1 center">
+<h1>Ottica Fisica: Diffrazione e Interferenza</h1>
+
+</section>
+<section id="diffrazione" class="slide level2">
+<h2>Diffrazione</h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li><strong>Principio di Huygens</strong>: ogni punto di un fronte d’onda è sorgente di onde sferiche secondarie</li>
+<li>Rilevante quando l’apertura <span class="math inline">\(a \approx \lambda\)</span></li>
+<li>Le ombre non sono mai perfettamente nette</li>
+</ul>
+<p><strong>Fenditura singola:</strong></p>
+<p><span class="math display">\[a \sin \theta = m\lambda \quad (m = \pm 1, \pm 2, \dots)\]</span></p>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+<!-- diaframma -->
+<rect x="85" y="0" width="12" height="70" fill="#e8e5e0"></rect> <rect x="85" y="110" width="12" height="70" fill="#e8e5e0"></rect> <!-- fronti d'onda incidenti --> <line x1="0" y1="30" x2="85" y2="30" stroke="#2563eb" stroke-width="1" opacity=".4"></line> <line x1="0" y1="60" x2="85" y2="60" stroke="#2563eb" stroke-width="1" opacity=".4"></line> <line x1="0" y1="90" x2="85" y2="90" stroke="#2563eb" stroke-width="1" opacity=".4"></line> <!-- onde sferiche uscenti (archi) --> <path d="M 91,90 A 30,30 0 0,1 91,50" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".7"></path> <path d="M 91,90 A 55,55 0 0,1 91,40" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".5"></path> <path d="M 91,90 A 80,80 0 0,1 91,32" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".3"></path> <path d="M 91,90 A 30,30 0 0,0 91,130" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".7"></path> <path d="M 91,90 A 55,55 0 0,0 91,140" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".5"></path> <path d="M 91,90 A 80,80 0 0,0 91,148" fill="none" stroke="#d97706" stroke-width="1.2" opacity=".3"></path> <!-- label --> <text x="92" y="96" font-family="DM Sans,sans-serif" font-size="9" fill="#6b6560">a</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="Interferenza" class="slide level2 smaller">
+<h2><a href="./simulazioni/dispersione.html">Interferenza — Esperimento di Young</a></h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li>Due sorgenti coerenti distanza <span class="math inline">\(d\)</span> → frange luminose e scure</li>
+<li>Differenza di cammino: <span class="math inline">\(\Delta r = d \sin \theta\)</span></li>
+<li><strong>Costruttiva</strong> (luce): <span class="math inline">\(\Delta r = m\lambda\)</span></li>
+<li><strong>Distruttiva</strong> (buio): <span class="math inline">\(\Delta r = (m + \tfrac{1}{2})\lambda\)</span></li>
+<li>Interfrangia: <span class="math inline">\(\Delta y = \frac{\lambda L}{d}\)</span></li>
+</ul>
+</div>
+<div class="col-img">
+<svg viewbox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+<!-- diaframma doppia fenditura -->
+<rect x="80" y="0" width="10" height="70" fill="#e8e5e0"></rect> <rect x="80" y="85" width="10" height="25" fill="#e8e5e0"></rect> <rect x="80" y="125" width="10" height="55" fill="#e8e5e0"></rect> <!-- schermo --> <line x1="190" y1="0" x2="190" y2="180" stroke="#e8e5e0" stroke-width="2"></line> <!-- frange (bande) --> <rect x="189" y="10" width="8" height="14" fill="#facc15" opacity=".9"></rect> <rect x="189" y="42" width="8" height="14" fill="#facc15" opacity=".7"></rect> <rect x="189" y="74" width="8" height="14" fill="#facc15" opacity=".9"></rect> <rect x="189" y="106" width="8" height="14" fill="#facc15" opacity=".7"></rect> <rect x="189" y="138" width="8" height="14" fill="#facc15" opacity=".9"></rect> <rect x="189" y="162" width="8" height="14" fill="#facc15" opacity=".5"></rect> <!-- raggi dalle due fenditure --> <line x1="90" y1="75" x2="190" y2="81" stroke="#2563eb" stroke-width="1" opacity=".5"></line> <line x1="90" y1="110" x2="190" y2="81" stroke="#2563eb" stroke-width="1" opacity=".5"></line> <line x1="90" y1="75" x2="190" y2="113" stroke="#2563eb" stroke-width="1" opacity=".3"></line> <line x1="90" y1="110" x2="190" y2="113" stroke="#2563eb" stroke-width="1" opacity=".3"></line> <!-- label d --> <line x1="75" y1="75" x2="75" y2="110" stroke="#6b6560" stroke-width="1" marker-end="url(#arr)"></line> <text x="60" y="96" font-family="DM Sans,sans-serif" font-size="10" fill="#6b6560">d</text>
+</svg>
+</div>
+</div>
+</section>
+<section id="polarizzazione" class="slide level2 smaller">
+<h2><a href="./simulazioni/polarizzazione.html">Polarizzazione</a></h2>
+<div class="cols">
+<div class="col-text">
+<ul>
+<li><strong>Natura trasversale:</strong> <span class="math inline">\(\vec{E}\)</span> oscilla perpendicolarmente alla propagazione</li>
+<li><strong>Filtro polarizzatore:</strong> seleziona un’unica direzione di oscillazione</li>
+<li><strong>Applicazioni:</strong> occhiali da sole polarizzati, schermi LCD, fotografia</li>
+</ul>
+</div>
+<div class="col-formula">
+<p><strong>Legge di Malus:</strong></p>
+<p><span class="math display">\[I = I_0 \cos^2 \theta\]</span></p>
+</div>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/bhuiyanEK\.github\.io\/Fisica\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

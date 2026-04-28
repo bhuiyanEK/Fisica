@@ -1,17 +1,18 @@
 project:
   type: website
+  resources:
+    - "simulazioni/"
 
 website:
-  title: "La mia presentazione"
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - href: simulazione.qmd
-        text: Simulazione
+        text: Teoria
+      - href: about.qmd
+        text: Info
 
 format:
-  html:
-    theme: cosmo
-    css: styles.css
-    toc: true
+  revealjs:
+    theme: default
+    css: stile.css
+    slide-number: true
