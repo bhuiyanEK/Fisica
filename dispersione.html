@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispersione — Prisma</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --accent: #2563eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  nav {
+    padding: 20px 48px; border-bottom: 1px solid var(--border);
+    background: var(--surface); display: flex; align-items: center; gap: 12px;
+  }
+  nav a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+  nav a:hover { color: var(--accent); }
+  nav .sep { color: var(--border); }
+  nav .current { color: var(--text); font-weight: 500; }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
+  .page-header { margin-bottom: 40px; }
+  .label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 12px; }
+  .page-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 600px; }
+
+  .layout { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start; }
+
+  .canvas-wrap { background: #000; border: 1px solid #222; }
+  canvas { display: block; width: 100%; }
+  .canvas-hint { padding: 10px 16px; font-size: 11px; color: #555; border-top: 1px solid #1a1a1a; background: #000; }
+
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px; }
+  .control { margin-bottom: 16px; }
+  .control:last-child { margin-bottom: 0; }
+  .control-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .control-value { font-weight: 500; color: var(--accent); font-family: monospace; font-size: 13px; }
+
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 2px;
+    background: var(--border); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--accent); cursor: pointer;
+  }
+
+  .color-rows { display: flex; flex-direction: column; gap: 5px; }
+  .color-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+  .color-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .color-name { flex: 1; color: var(--text); }
+  .color-n { font-family: monospace; color: var(--accent); }
+
+  .explanation { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-top: 24px; }
+  .explanation h2 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+  .explanation p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .explanation p + p { margin-top: 10px; }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .page { padding: 24px; }
+    nav { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">← Tutti i simulatori</a>
+  <span class="sep">/</span>
+  <span class="current">03 — Dispersione</span>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <p class="label">Ottica Fisica</p>
+    <h1>Dispersione Cromatica</h1>
+    <p class="page-desc">L'indice di rifrazione dipende dalla lunghezza d'onda. Frequenze diverse vengono rifratte con angoli diversi, scomponendo la luce bianca nello spettro visibile.</p>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="660" height="440"></canvas>
+        <div class="canvas-hint">Modifica angolo del prisma o di incidenza dal pannello</div>
+      </div>
+      <div class="explanation">
+        <h2>Perché succede</h2>
+        <p>L'indice di rifrazione di un materiale non è costante: dipende dalla frequenza della luce. Le frequenze più alte (violetto) vengono rallentate di più rispetto alle frequenze basse (rosso), producendo un indice n leggermente maggiore.</p>
+        <p>Quando la luce bianca entra nel prisma, ogni componente cromatica viene rifratta con un angolo diverso. Il violetto è deviato di più, il rosso di meno. All'uscita i colori si separano: è lo spettro visibile. L'arcobaleno nasce dallo stesso fenomeno, prodotto dalle gocce d'acqua in atmosfera.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="card">
+        <div class="card-title">Angolo del prisma</div>
+        <div class="control">
+          <div class="control-label">
+            <span>Apice</span>
+            <span class="control-value" id="pa-val">50°</span>
+          </div>
+          <input type="range" id="pa" min="25" max="65" value="50">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Angolo di incidenza</div>
+        <div class="control">
+          <div class="control-label">
+            <span>θ₁</span>
+            <span class="control-value" id="ia-val">30°</span>
+          </div>
+          <input type="range" id="ia" min="5" max="60" value="30">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Raggi spettrali (vetro crown)</div>
+        <div class="color-rows" id="color-rows"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = 660, H = 440;
+
+let prismApex = 50;
+let incAngle = 30;
+
+const rays = [
+  { nm: 380, color: '#9400ff', name: 'Violetto', n: 1.5380 },
+  { nm: 430, color: '#4400ee', name: 'Indaco',   n: 1.5310 },
+  { nm: 470, color: '#0044ff', name: 'Blu',      n: 1.5260 },
+  { nm: 510, color: '#00bb33', name: 'Verde',    n: 1.5200 },
+  { nm: 560, color: '#ccee00', name: 'Giallo',   n: 1.5165 },
+  { nm: 600, color: '#ff9900', name: 'Arancio',  n: 1.5130 },
+  { nm: 650, color: '#ff2200', name: 'Rosso',    n: 1.5100 },
+];
+
+// Build color rows
+const crEl = document.getElementById('color-rows');
+rays.forEach(r => {
+  const row = document.createElement('div');
+  row.className = 'color-row';
+  row.innerHTML = `<div class="color-dot" style="background:${r.color}"></div><span class="color-name">${r.name} ${r.nm}nm</span><span class="color-n">n=${r.n.toFixed(3)}</span>`;
+  crEl.appendChild(row);
+});
+
+const toRad = d => d * Math.PI / 180;
+const toDeg = r => r * 180 / Math.PI;
+
+function norm(vx, vy) {
+  const l = Math.sqrt(vx*vx+vy*vy);
+  return [vx/l, vy/l];
+}
+
+// Snell refraction of direction vector [dx,dy] hitting surface with outward normal [nx,ny]
+// n1 -> n2. Returns [dx2, dy2] or null for TIR
+function refractVec(dx, dy, nx, ny, n1, n2) {
+  // flip normal if it points same way as ray
+  let dot = dx*nx + dy*ny;
+  if (dot > 0) { nx=-nx; ny=-ny; dot=-dot; }
+  const cosI = -dot;
+  const sinI2 = 1 - cosI*cosI;
+  const sinT2 = (n1*n1/n2/n2) * sinI2;
+  if (sinT2 > 1) return null;
+  const cosT = Math.sqrt(1 - sinT2);
+  const rx = (n1/n2)*dx + (n1/n2*cosI - cosT)*nx;
+  const ry = (n1/n2)*dy + (n1/n2*cosI - cosT)*ny;
+  return norm(rx, ry);
+}
+
+// Ray-segment intersection. Ray: (ox,oy) + t*(dx,dy), segment: (x1,y1)-(x2,y2)
+// Returns {x,y,t,u} or null
+function raySegIsect(ox, oy, dx, dy, x1, y1, x2, y2) {
+  const ex = x2-x1, ey = y2-y1;
+  const denom = dx*ey - dy*ex;
+  if (Math.abs(denom) < 1e-9) return null;
+  const t = ((x1-ox)*ey - (y1-oy)*ex) / denom;
+  const u = ((x1-ox)*dy - (y1-oy)*dx) / denom;
+  if (t < 1e-6 || u < 0 || u > 1) return null;
+  return { x: ox+t*dx, y: oy+t*dy, t, u };
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  // ---- Prism: apex at top, pointing right, base on left ----
+  // Centered roughly in canvas
+  const apexX = W * 0.50, apexY = H * 0.18;
+  const halfA = toRad(prismApex / 2);
+  const side = 200;
+  const h = side * Math.cos(halfA);
+  const hb = side * Math.sin(halfA);
+
+  // Apex top, left-bottom, right-bottom — standard upward triangle
+  const Ax = apexX,      Ay = apexY;
+  const Bx = apexX-hb,   By = apexY+h;   // bottom-left
+  const Cx = apexX+hb,   Cy = apexY+h;   // bottom-right
+
+  const centX = (Ax+Bx+Cx)/3;
+  const centY = (Ay+By+Cy)/3;
+
+  // Draw prism fill
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(Ax,Ay); ctx.lineTo(Bx,By); ctx.lineTo(Cx,Cy); ctx.closePath();
+  const g = ctx.createLinearGradient(Bx, Ay, Cx, Cy);
+  g.addColorStop(0, 'rgba(160,200,255,0.14)');
+  g.addColorStop(1, 'rgba(160,200,255,0.06)');
+  ctx.fillStyle = g;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(160,210,255,0.55)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
+
+  // ---- Face normals (outward) ----
+  function outwardNormal(ax, ay, bx, by) {
+    const [fx, fy] = norm(bx-ax, by-ay);
+    let nx = -fy, ny = fx; // perpendicular
+    // ensure pointing away from centroid
+    const mx = (ax+bx)/2, my = (ay+by)/2;
+    if ((centX-mx)*nx + (centY-my)*ny > 0) { nx=-nx; ny=-ny; }
+    return [nx, ny];
+  }
+
+  const [lnx, lny] = outwardNormal(Ax, Ay, Bx, By); // left face A->B
+  const [rnx, rny] = outwardNormal(Ax, Ay, Cx, Cy); // right face A->C (reversed: C->A outward)
+  // right face is Cx,Cy -> Ax,Ay
+  const [rnx2, rny2] = outwardNormal(Cx, Cy, Ax, Ay);
+
+  // ---- Entry point: fixed at 40% down left face ----
+  const eu = 0.42;
+  const entX = Ax + eu*(Bx-Ax);
+  const entY = Ay + eu*(By-Ay);
+
+  // ---- Incident direction: comes from left, hits left face at incAngle from normal ----
+  // Rotate outward left normal by incAngle -> then flip for incoming
+  const incRad = toRad(incAngle);
+  // incoming direction = -(normal rotated by incAngle)
+  const incDx = -(lnx*Math.cos(incRad) + lny*Math.sin(incRad));  // note: using CCW rotation
+  const incDy = -(-lnx*Math.sin(incRad) + lny*Math.cos(incRad));
+  const [indx, indy] = norm(incDx, incDy);
+
+  // Draw white incoming beam
+  const bLen = 160;
+  ctx.save();
+  ctx.shadowColor = 'rgba(255,255,255,0.8)'; ctx.shadowBlur = 14;
+  ctx.strokeStyle = 'rgba(255,255,255,0.92)'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(entX - indx*bLen, entY - indy*bLen);
+  ctx.lineTo(entX, entY);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.font = '12px DM Sans, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.fillText('luce bianca', entX - indx*bLen - 14, entY - indy*bLen - 10);
+
+  // Entry dot
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.beginPath(); ctx.arc(entX, entY, 3, 0, Math.PI*2); ctx.fill();
+
+  // ---- For each spectral ray ----
+  rays.forEach((ray, i) => {
+    // Refract at entry: air(1.0) -> glass(ray.n), left face outward normal lnx,lny
+    const r1 = refractVec(indx, indy, lnx, lny, 1.0, ray.n);
+    if (!r1) return;
+
+    // Find exit: try right face (A->C, then C->A)
+    // right face vertices: Cx,Cy to Ax,Ay
+    let exit = raySegIsect(entX, entY, r1[0], r1[1], Cx, Cy, Ax, Ay);
+    let exitNx = rnx2, exitNy = rny2;
+
+    // fallback: bottom face B->C
+    if (!exit) {
+      exit = raySegIsect(entX, entY, r1[0], r1[1], Bx, By, Cx, Cy);
+      if (exit) {
+        const [bn, bnn] = outwardNormal(Bx, By, Cx, Cy);
+        exitNx = bn; exitNy = bnn;
+      }
+    }
+    if (!exit) return;
+
+    // Draw ray inside prism
+    ctx.save();
+    ctx.globalAlpha = 0.18;
+    ctx.strokeStyle = ray.color; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(entX, entY); ctx.lineTo(exit.x, exit.y); ctx.stroke();
+    ctx.restore();
+
+    // Refract at exit: glass -> air
+    const r2 = refractVec(r1[0], r1[1], exitNx, exitNy, ray.n, 1.0);
+    if (!r2) return;
+
+    // Draw exit ray with glow
+    const eLen = 210;
+    const ex2 = exit.x + r2[0]*eLen;
+    const ey2 = exit.y + r2[1]*eLen;
+
+    ctx.save();
+    ctx.shadowColor = ray.color; ctx.shadowBlur = 16;
+    ctx.strokeStyle = ray.color; ctx.lineWidth = 2.2; ctx.globalAlpha = 0.95;
+    ctx.beginPath(); ctx.moveTo(exit.x, exit.y); ctx.lineTo(ex2, ey2); ctx.stroke();
+    ctx.restore();
+
+    // Labels at ends
+    if (i === 0) {
+      ctx.save(); ctx.globalAlpha = 0.8;
+      ctx.font = '11px DM Sans, sans-serif'; ctx.fillStyle = ray.color;
+      ctx.fillText('violetto  ' + ray.nm + ' nm', ex2 + 5, ey2 + 3);
+      ctx.restore();
+    }
+    if (i === rays.length - 1) {
+      ctx.save(); ctx.globalAlpha = 0.8;
+      ctx.font = '11px DM Sans, sans-serif'; ctx.fillStyle = ray.color;
+      ctx.fillText('rosso  ' + ray.nm + ' nm', ex2 + 5, ey2 + 3);
+      ctx.restore();
+    }
+  });
+
+  // Prism label
+  ctx.font = '500 11px DM Sans, sans-serif';
+  ctx.fillStyle = 'rgba(160,210,255,0.4)';
+  ctx.fillText('prisma · apice ' + prismApex + '°', centX - 36, centY + 28);
+}
+
+document.getElementById('pa').addEventListener('input', e => {
+  prismApex = parseInt(e.target.value);
+  document.getElementById('pa-val').textContent = prismApex + '°';
+  draw();
+});
+document.getElementById('ia').addEventListener('input', e => {
+  incAngle = parseInt(e.target.value);
+  document.getElementById('ia-val').textContent = incAngle + '°';
+  draw();
+});
+
+draw();
+</script>
+</body>
+</html>

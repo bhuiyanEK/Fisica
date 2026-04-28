@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ottica — Simulatori Interattivi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 64px 48px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 48px 80px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--surface);
+    padding: 32px 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    background: var(--accent-light);
+  }
+
+  .card:hover .card-number {
+    color: var(--accent);
+  }
+
+  .card:hover .card-arrow {
+    transform: translateX(4px);
+  }
+
+  .card-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    transition: color 0.15s;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .card-arrow {
+    font-size: 1rem;
+    color: var(--accent);
+    transition: transform 0.15s;
+  }
+
+  .info-bar {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 40px;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+  }
+
+  .info-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 600px) {
+    header, main { padding-left: 24px; padding-right: 24px; }
+    .info-bar { flex-wrap: wrap; gap: 20px; }
+    .grid { grid-template-columns: 1fr; ;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="label">Fisica — Ottica</p>
+  <h1>Simulatori di<br><em>Ottica Interattiva</em></h1>
+  <p class="subtitle">Quattro fenomeni</p>
+</header>
+
+<main>
+  <p class="section-label">Scegli un fenomeno</p>
+
+  <div class="grid">
+
+    <a class="card" href="riflessione.html">
+      <span class="card-number">01</span>
+      <span class="card-title">Riflessione</span>
+      <p class="card-desc">Legge di riflessione sugli specchi piani e sferici. Trascina il raggio e osserva come cambia l'angolo riflesso.</p>
+      <div class="card-footer">
+        <span class="card-tag">Interattivo</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card" href="rifrazione.html">
+      <span class="card-number">02</span>
+      <span class="card-title">Rifrazione</span>
+      <p class="card-desc">Legge di Snell-Descartes. Cambia i materiali e l'angolo di incidenza per vedere come il raggio devia la traiettoria.</p>
+      <div class="card-footer">
+        <span class="card-tag">Interattivo</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card" href="dispersione.html">
+      <span class="card-number">03</span>
+      <span class="card-title">Dispersione</span>
+      <p class="card-desc">Un prisma scompone la luce bianca nei colori dello spettro. Animazione della dispersione cromatica.</p>
+      <div class="card-footer">
+        <span class="card-tag">Animazione</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card" href="interferenza.html">
+      <span class="card-number">04</span>
+      <span class="card-title">Interferenza</span>
+      <p class="card-desc">Esperimento della doppia fenditura di Young. Modifica la distanza tra le fenditure e la lunghezza d'onda per vedere le frange.</p>
+      <div class="card-footer">
+        <span class="card-tag">Interattivo</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="info-value"><a href="./La_Luce.pdf" >Torna alle slide</a></span>
+      <span class="info-label">Bhuiyan Ejazul Karim 26341A</span>
+    </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
