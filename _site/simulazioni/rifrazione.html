@@ -96,10 +96,18 @@
   .explanation p + p { margin-top: 10px; }
   .explanation.tir { border-color: #fca5a5; }
 
+  .info-bar { margin-top: 40px; padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); display: flex; gap: 40px; }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
+  .info-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-value a { color: inherit; text-decoration: none; transition: color 0.15s; }
+  .info-value a:hover { color: var(--accent); }
+
   @media (max-width: 720px) {
     .layout { grid-template-columns: 1fr; }
     .page { padding: 24px; }
     nav { padding: 16px 24px; }
+    .info-bar { flex-wrap: wrap; gap: 20px; }
   }
 </style>
 </head>
@@ -219,6 +227,13 @@
           <span class="result-val" id="res-tr">45.0°</span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="info-value"><a href="https://bhuiyanek.github.io/Fisica/#/la-rifrazione">Torna alla presentazione</a></span>
+      <span class="info-label">Bhuiyan Ejazul Karim 26341A</span>
     </div>
   </div>
 </div>

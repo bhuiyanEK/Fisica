@@ -9,7 +9,8 @@ format:
     navigation-mode: linear
 ---
 
-# Natura della Luce {#natura-della-luce}
+# [Natura della Luce](./simulazioni/index.html) {#natura-della-luce} 
+
 
 ## Cos'è la luce {#cos-e-la-luce}
 
