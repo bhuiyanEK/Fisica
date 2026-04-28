@@ -1,0 +1,17 @@
+project:
+  type: website
+
+website:
+  title: "La mia presentazione"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: simulazione.qmd
+        text: Simulazione
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true

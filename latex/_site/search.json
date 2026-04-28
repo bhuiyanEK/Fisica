@@ -1,0 +1,170 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fisica - Ottica",
+    "section": "",
+    "text": "La luce è una forma di energia che si propaga nello spazio\nÈ responsabile della visione e della percezione dei colori e permette il trasferimento di energia e informazioni\nPer secoli si è discusso sulla natura della luce e si presentano due modelli:\n\nmodello corpuscolare (particelle)\nmodello ondulatorio (onde)\n\n\n\n\n\n\nLa luce presenta una doppia natura:\n\nsi comporta da particella (fotone) quando interagisce con la materia\nsi comporta da onda quando si propaga nello spazio\n\nNon è una contraddizione: sono due descrizioni complementari dello stesso fenomeno\n\n\n\n\n\nLa luce può essere descritta come un’onda, precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\)\ndove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
+  },
+  {
+    "objectID": "index.html#cos-e-la-luce",
+    "href": "index.html#cos-e-la-luce",
+    "title": "Fisica - Ottica",
+    "section": "Cos’è la luce",
+    "text": "Cos’è la luce\n\nLa luce è una forma di energia che si propaga nello spazio\nÈ responsabile della visione e della percezione dei colori e permette il trasferimento di energia e informazioni\nPer secoli si è discusso sulla natura della luce e si presentano due modelli:\n\nmodello corpuscolare (particelle)\nmodello ondulatorio (onde)"
+  },
+  {
+    "objectID": "index.html#dualismo-onda-particella",
+    "href": "index.html#dualismo-onda-particella",
+    "title": "Fisica - Ottica",
+    "section": "Dualismo onda-particella",
+    "text": "Dualismo onda-particella\n\nLa luce presenta una doppia natura:\n\nsi comporta da particella (fotone) quando interagisce con la materia\nsi comporta da onda quando si propaga nello spazio\n\nNon è una contraddizione: sono due descrizioni complementari dello stesso fenomeno"
+  },
+  {
+    "objectID": "index.html#l-onda-elettromagnetica",
+    "href": "index.html#l-onda-elettromagnetica",
+    "title": "Fisica - Ottica",
+    "section": "L’Onda Elettromagnetica",
+    "text": "L’Onda Elettromagnetica\n\nLa luce può essere descritta come un’onda, precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\)\ndove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
+  },
+  {
+    "objectID": "index.html#spettro-elettromagnetico",
+    "href": "index.html#spettro-elettromagnetico",
+    "title": "Fisica - Ottica",
+    "section": "Spettro elettromagnetico",
+    "text": "Spettro elettromagnetico\nTutte le onde EM condividono la stessa natura, differiscono solo per \\(\\lambda\\) e \\(f\\)\n\n\n\n\n\n\n\n\nRadiazione\n\\(\\lambda\\) tipica\nApplicazione\n\n\n\n\nOnde radio\nda cm a km\nTelecomunicazioni\n\n\nMicroonde\nmm ÷ cm\nRadar, Wi-Fi, forni\n\n\nInfrarosso\n780 nm ÷ 1 mm\nTermografia, telecomandi\n\n\nLuce visibile\n380 ÷ 780 nm\nVisione\n\n\nUltravioletto\n10 ÷ 380 nm\nSterilizzazione, abbronzatura\n\n\nRaggi X\n0.01 ÷ 10 nm\nDiagnostica medica\n\n\nRaggi Gamma\n&lt; 0.01 nm\nFisica nucleare"
+  },
+  {
+    "objectID": "index.html#la-percezione-del-colore",
+    "href": "index.html#la-percezione-del-colore",
+    "title": "Fisica - Ottica",
+    "section": "La percezione del Colore",
+    "text": "La percezione del Colore\n\nLa luce bianca contiene tutte le lunghezze d’onda del visibile\nGli oggetti assorbono alcune \\(\\lambda\\) e riflettono le rimanenti\nIl colore percepito = la \\(\\lambda\\) riflessa\nVioletto: \\(\\lambda \\approx 380\\) nm — Rosso: \\(\\lambda \\approx 780\\) nm\nI fotorecettori della retina (coni) rilevano tre bande: rosso, verde, blu"
+  },
+  {
+    "objectID": "index.html#l-ottica-geometrica",
+    "href": "index.html#l-ottica-geometrica",
+    "title": "Fisica - Ottica",
+    "section": "L’Ottica Geometrica",
+    "text": "L’Ottica Geometrica\n\nRegime valido quando \\(\\lambda \\ll\\) dimensioni degli ostacoli\nLa luce viene modellata come raggio rettilineo\nSi studiano: riflessione (specchi) e rifrazione (lenti, prismi)\nConvenzione dei segni (da applicare sempre):\n\nDistanze reali (davanti alla superficie): positive\nDistanze virtuali (dietro la superficie): negative"
+  },
+  {
+    "objectID": "index.html#la-legge-di-riflessione",
+    "href": "index.html#la-legge-di-riflessione",
+    "title": "Fisica - Ottica",
+    "section": "La Legge di Riflessione",
+    "text": "La Legge di Riflessione\n\nLa luce che colpisce una superficie liscia viene riflessa\nLegge di riflessione: \\(\\theta_i = \\theta_r\\)\nEntrambi gli angoli si misurano rispetto alla normale alla superficie\nRaggio incidente, normale e raggio riflesso giacciono sullo stesso piano\nRiflessione speculare (superficie liscia) \\(\\neq\\) Riflessione diffusa (superficie rugosa)"
+  },
+  {
+    "objectID": "index.html#specchio-piano",
+    "href": "index.html#specchio-piano",
+    "title": "Fisica - Ottica",
+    "section": "Specchio Piano",
+    "text": "Specchio Piano\nSimulazione specchio piano\n\nL’immagine è virtuale: i raggi non convergono fisicamente dietro lo specchio\nL’immagine è diritta e delle stesse dimensioni dell’oggetto\nDistanza immagine = distanza oggetto (simmetria rispetto alla superficie)\nLateralmente invertita (destra \\(\\leftrightarrow\\) sinistra)"
+  },
+  {
+    "objectID": "index.html#specchi-sferici-grandezze-fondamentali",
+    "href": "index.html#specchi-sferici-grandezze-fondamentali",
+    "title": "Fisica - Ottica",
+    "section": "Specchi Sferici: Grandezze Fondamentali",
+    "text": "Specchi Sferici: Grandezze Fondamentali\n\nCentro di curvatura \\(C\\): centro della sfera di cui lo specchio è parte\nRaggio di curvatura \\(R\\): distanza da \\(C\\) alla superficie\nAsse ottico: retta passante per \\(C\\) perpendicolare allo specchio\nFuoco \\(F\\): punto in cui convergono i raggi paralleli all’asse ottico\nDistanza focale: \\(f = \\frac{R}{2}\\)\nSpecchio concavo: \\(f &gt; 0\\) — Specchio convesso: \\(f &lt; 0\\)"
+  },
+  {
+    "objectID": "index.html#specchio-concavo",
+    "href": "index.html#specchio-concavo",
+    "title": "Fisica - Ottica",
+    "section": "Specchio Concavo",
+    "text": "Specchio Concavo\nSimulazione specchio concavo\n\nSuperficie riflettente rivolta verso il centro di curvatura\nI raggi paralleli all’asse ottico convergono nel fuoco reale \\(F\\)\nLa natura dell’immagine dipende dalla posizione dell’oggetto:\n\n\n\n\n\n\n\n\nPosizione oggetto\nImmagine\n\n\n\n\nOltre \\(C\\)\nReale, capovolta, rimpicciolita\n\n\nIn \\(C\\)\nReale, capovolta, stessa dimensione\n\n\nTra \\(C\\) e \\(F\\)\nReale, capovolta, ingrandita\n\n\nIn \\(F\\)\nImmagine all’infinito\n\n\nEntro \\(F\\)\nVirtuale, diritta, ingrandita\n\n\n\nApplicazioni: telescopi riflettori, specchi per trucco, concentratori solari."
+  },
+  {
+    "objectID": "index.html#specchio-convesso",
+    "href": "index.html#specchio-convesso",
+    "title": "Fisica - Ottica",
+    "section": "Specchio Convesso",
+    "text": "Specchio Convesso\nSimulazione specchio convesso\n\nSuperficie riflettente rivolta verso l’esterno\nI raggi paralleli divergono dopo la riflessione\nIl fuoco è virtuale (dietro lo specchio), \\(f &lt; 0\\)\nL’immagine è sempre: virtuale, diritta, rimpicciolita\nVantaggio: campo visivo molto ampio\nApplicazioni: retrovisori, specchi stradali, specchi di sorveglianza"
+  },
+  {
+    "objectID": "index.html#equazione-dei-punti-coniugati",
+    "href": "index.html#equazione-dei-punti-coniugati",
+    "title": "Fisica - Ottica",
+    "section": "Equazione dei punti coniugati",
+    "text": "Equazione dei punti coniugati\nRelazione fondamentale (specchi sferici):\n\\[\\frac{1}{p} + \\frac{1}{p'} = \\frac{1}{f} = \\frac{2}{R}\\]\nConvenzioni dei segni:\n\n\\(p &gt; 0\\): oggetto reale (davanti allo specchio)\n\\(p' &gt; 0\\): immagine reale (davanti allo specchio)\n\\(p' &lt; 0\\): immagine virtuale (dietro lo specchio)"
+  },
+  {
+    "objectID": "index.html#ingrandimento-lineare",
+    "href": "index.html#ingrandimento-lineare",
+    "title": "Fisica - Ottica",
+    "section": "Ingrandimento lineare",
+    "text": "Ingrandimento lineare\nDefinizione:\n\\[G = -\\frac{p'}{p} = \\frac{y'}{y}\\]\nInterpretazione fisica:\n\n\\(|G| &gt; 1\\) → immagine ingrandita\n\\(|G| &lt; 1\\) → immagine rimpicciolita\n\\(G &gt; 0\\) → immagine diritta (virtuale)\n\\(G &lt; 0\\) → immagine capovolta (reale)"
+  },
+  {
+    "objectID": "index.html#la-rifrazione",
+    "href": "index.html#la-rifrazione",
+    "title": "Fisica - Ottica",
+    "section": "La Rifrazione",
+    "text": "La Rifrazione\n\nQuando la luce passa tra due mezzi con \\(n\\) diverso, cambia velocità e devia la traiettoria\nIl raggio si avvicina alla normale entrando in un mezzo più denso (\\(n_2 &gt; n_1\\))\nIl raggio si allontana dalla normale entrando in un mezzo meno denso (\\(n_2 &lt; n_1\\))\nEsempio immediato: un oggetto immerso in acqua appare spezzato o spostato"
+  },
+  {
+    "objectID": "index.html#la-legge-di-snell-descartes",
+    "href": "index.html#la-legge-di-snell-descartes",
+    "title": "Fisica - Ottica",
+    "section": "La Legge di Snell-Descartes",
+    "text": "La Legge di Snell-Descartes\n\\[n_1 \\sin\\theta_1 = n_2 \\sin\\theta_2\\]\n\n\\(n_1\\), \\(n_2\\): indici di rifrazione dei due mezzi\n\\(\\theta_1\\): angolo di incidenza (rispetto alla normale)\n\\(\\theta_2\\): angolo di rifrazione (rispetto alla normale)\nIl prodotto \\(n \\sin\\theta\\) si conserva attraversando l’interfaccia\nRaggio incidente, normale e raggio rifratto: stesso piano"
+  },
+  {
+    "objectID": "index.html#riflessione-totale-interna",
+    "href": "index.html#riflessione-totale-interna",
+    "title": "Fisica - Ottica",
+    "section": "Riflessione Totale Interna",
+    "text": "Riflessione Totale Interna\n\nSi verifica quando la luce passa da un mezzo più denso a uno meno denso (\\(n_1 &gt; n_2\\))\nEsiste un angolo critico \\(\\theta_c\\) oltre il quale la rifrazione è impossibile: \\[\\sin\\theta_c = \\frac{n_2}{n_1}\\]\nPer \\(\\theta_i &gt; \\theta_c\\): tutta la luce viene riflessa, nessuna trasmessa\nL’interfaccia diventa uno specchio perfetto"
+  },
+  {
+    "objectID": "index.html#ottica-fisica",
+    "href": "index.html#ottica-fisica",
+    "title": "Fisica - Ottica",
+    "section": "Ottica Fisica",
+    "text": "Ottica Fisica\n\nL’ottica geometrica fallisce quando \\(\\lambda\\) è comparabile alle dimensioni degli ostacoli\nEmergono fenomeni che richiedono di trattare la luce come onda:\n\nDispersione: scomposizione della luce bianca\nDiffrazione: la luce aggira gli ostacoli\nInterferenza: le onde si sommano o si annullano\nPolarizzazione: selezione della direzione di oscillazione"
+  },
+  {
+    "objectID": "index.html#dispersione-cromatica",
+    "href": "index.html#dispersione-cromatica",
+    "title": "Fisica - Ottica",
+    "section": "Dispersione cromatica",
+    "text": "Dispersione cromatica\n\nL’indice di rifrazione \\(n\\) non è una costante assoluta, ma dipende dalla lunghezza d’onda \\(\\lambda\\) della luce che attraversa il mezzo (\\(n = n(\\lambda)\\))\nPoiché \\(v=\\frac{c}{n}\\), le diverse frequenze (colori) viaggiano a velocità differenti all’interno del prisma.\nPer la Legge di Snell (\\(n_1\\sin\\theta_1 = n_2\\sin\\theta_2\\)), angoli di rifrazione diversi portano alla scomposizione della luce bianca nello spettro visibile.\nIn genere, per i materiali trasparenti, l’indice \\(n\\) aumenta al diminuire di \\(\\lambda\\) (il violetto viene deviato più del rosso)"
+  },
+  {
+    "objectID": "index.html#diffrazione",
+    "href": "index.html#diffrazione",
+    "title": "Fisica - Ottica",
+    "section": "Diffrazione",
+    "text": "Diffrazione\n\nPrincipio di Huygens: ogni punto di un fronte d’onda si comporta come una sorgente di onde sferiche secondarie\nIl fenomeno è rilevante quando la dimensione dell’apertura \\(a\\) è paragonabile alla lunghezza d’onda \\(\\lambda\\)\n(Fenditura singola): \\[a \\sin \\theta = m\\lambda \\quad (m = \\pm 1, \\pm 2, \\dots)\\]\nLe ombre non sono mai perfettamente nette; la luce invade la zona d’ombra geometrica"
+  },
+  {
+    "objectID": "index.html#interferenza-l-esperimento-di-young",
+    "href": "index.html#interferenza-l-esperimento-di-young",
+    "title": "Fisica - Ottica",
+    "section": "Interferenza (L’Esperimento di Young)",
+    "text": "Interferenza (L’Esperimento di Young)\n\nDue sorgenti coerenti separate da una distanza \\(d\\) producono frange luminose e scure sullo schermo\nDifferenza di cammino ottico: \\(\\Delta r = d \\sin \\theta\\).\nCondizioni matematiche:\n\nCostruttiva (Luce): \\(\\Delta r = m\\lambda\\)\nDistruttiva (Buio): \\(\\Delta r = (m + \\frac{1}{2})\\lambda\\)\n\nInterfrangia: La distanza tra due massimi consecutivi è \\(\\Delta y = \\frac{\\lambda L}{d}\\)"
+  },
+  {
+    "objectID": "index.html#polarizzazione",
+    "href": "index.html#polarizzazione",
+    "title": "Fisica - Ottica",
+    "section": "Polarizzazione",
+    "text": "Polarizzazione\n\nNatura trasversale: Il campo elettrico \\(\\vec{E}\\) della luce oscilla perpendicolarmente alla direzione di propagazione\nFiltro Polarizzatore: Seleziona un’unica direzione di oscillazione, assorbendo le altre\nLegge di Malus: Descrive l’intensità della luce \\(I\\) che attraversa un secondo polarizzatore (analizzatore) inclinato di un angolo \\(\\theta\\): \\[I = I_0 \\cos^2 \\theta\\]\nApplicazioni: Occhiali da sole polarizzati, schermi LCD e fotografia"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html#londa-elettromagnetica-l-onda-elettromagnetica",
+    "href": "index.html#londa-elettromagnetica-l-onda-elettromagnetica",
+    "title": "Fisica - Ottica",
+    "section": "L’Onda Elettromagnetica {#l-onda-elettromagnetica}",
+    "text": "L’Onda Elettromagnetica {#l-onda-elettromagnetica}\n\nLa luce può essere descritta come un’onda, precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\)\ndove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
+  }
+]
