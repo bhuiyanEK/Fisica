@@ -183,10 +183,49 @@
     letter-spacing: 0.08em;
   }
 
-  @media (max-width: 600px) {
-    header, main { padding-left: 24px; padding-right: 24px; }
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .page { padding: 24px; }
+    nav { padding: 16px 24px; }
     .info-bar { flex-wrap: wrap; gap: 20px; }
-    .grid { grid-template-columns: 1fr; ;}
+  }
+
+  .info-bar {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 40px;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+  }
+
+  .info-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  
+  .info-value a {
+    color: inherit; /* Prende il colore scuro del testo */
+    text-decoration: none; /* Toglie la sottolineatura */
+    transition: color 0.15s;
+  }
+  
+  .info-value a:hover {
+    color: var(--accent); /* Diventa blu quando ci passi sopra col mouse */
+  
   }
   
   .card.featured {
@@ -200,7 +239,7 @@
 <header>
   <p class="label">Fisica — Ottica</p>
   <h1>Simulatori di<br><em>Ottica Interattiva</em></h1>
-  <p class="subtitle">Quattro fenomeni</p>
+  <p class="subtitle">Cinque modelli per esplorare il comportamento della luce.</p>
 </header>
 
 <main>
