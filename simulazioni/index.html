@@ -188,6 +188,11 @@
     .info-bar { flex-wrap: wrap; gap: 20px; }
     .grid { grid-template-columns: 1fr; ;}
   }
+  
+  .card.featured {
+    grid-column: 1 / -1;
+  }
+
 </style>
 </head>
 <body>
@@ -203,7 +208,7 @@
 
   <div class="grid">
 
-    <a class="card" href="riflessione.html">
+    <a class="card featured" href="riflessione.html">
       <span class="card-number">01</span>
       <span class="card-title">Riflessione</span>
       <p class="card-desc">Legge di riflessione sugli specchi piani e sferici. Trascina il raggio e osserva come cambia l'angolo riflesso.</p>
@@ -242,11 +247,23 @@
         <span class="card-arrow">→</span>
       </div>
     </a>
+
+    <a class="card" href="polarizzazione.html">
+      <span class="card-number">05</span>
+      <span class="card-title">Polarizzazione</span>
+      <p class="card-desc">Legge di Malus. Ruota l'analizzatore per vedere come varia l'intensità della luce polarizzata.</p>
+      <div class="card-footer">
+        <span class="card-tag">Interattivo</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+
   </div>
 
   <div class="info-bar">
     <div class="info-item">
-      <span class="info-value"><a href="./La_Luce.pdf" >Torna alle slide</a></span>
+      <span class="info-value"><a href="https://bhuiyanek.github.io/Fisica/#/title-slide" >Torna alla presentazione</a></span>
       <span class="info-label">Bhuiyan Ejazul Karim 26341A</span>
     </div>
     </div>
