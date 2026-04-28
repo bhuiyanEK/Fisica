@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Fisica - Ottica",
-    "section": "",
-    "text": "La luce è una forma di energia che si propaga nello spazio\nÈ responsabile della visione e della percezione dei colori e permette il trasferimento di energia e informazioni\nPer secoli si è discusso sulla natura della luce e si presentano due modelli:\n\nmodello corpuscolare (particelle)\nmodello ondulatorio (onde)\n\n\n\n\n\n\nLa luce presenta una doppia natura:\n\nsi comporta da particella (fotone) quando interagisce con la materia\nsi comporta da onda quando si propaga nello spazio\n\nNon è una contraddizione: sono due descrizioni complementari dello stesso fenomeno\n\n\n\n\n\nLa luce può essere descritta come un’onda, precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\)\ndove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
-  },
-  {
     "objectID": "index.html#cos-e-la-luce",
     "href": "index.html#cos-e-la-luce",
     "title": "Fisica - Ottica",
@@ -159,12 +152,5 @@
     "title": "About",
     "section": "",
     "text": "About this site"
-  },
-  {
-    "objectID": "index.html#londa-elettromagnetica-l-onda-elettromagnetica",
-    "href": "index.html#londa-elettromagnetica-l-onda-elettromagnetica",
-    "title": "Fisica - Ottica",
-    "section": "L’Onda Elettromagnetica {#l-onda-elettromagnetica}",
-    "text": "L’Onda Elettromagnetica {#l-onda-elettromagnetica}\n\nLa luce può essere descritta come un’onda, precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\)\ndove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
   }
 ]
