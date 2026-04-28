@@ -1,75 +1,322 @@
-/* Importazione dei font da Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
-/* Sovrascrittura delle variabili di Reveal.js per farle combaciare con l'HTML */
+/* ── Tokens ─────────────────────────────────── */
 :root {
   --r-background-color: #f8f7f4;
-  --r-main-font: 'DM Sans', sans-serif;
+  --r-main-font:    'DM Sans', sans-serif;
   --r-heading-font: 'DM Serif Display', serif;
-  --r-main-color: #6b6560; /* Testo secondario per paragrafi ed elenchi */
+  --r-main-color:    #6b6560;
   --r-heading-color: #1a1a1a;
-  --r-link-color: #2563eb;
+  --r-link-color:      #2563eb;
   --r-link-color-hover: #1d4ed8;
   --r-selection-background-color: #eff6ff;
   --r-selection-color: #1a1a1a;
+  --r-main-font-size: 28px;
+  --r-block-margin: 16px;
+  --_border:    #e8e5e0;
+  --_surface:   #ffffff;
+  --_muted:     #6b6560;
+  --_accent:    #2563eb;
+  --_accent-bg: #eff6ff;
 }
 
-/* Stili generali */
-.reveal {
-  font-weight: 300;
-  line-height: 1.6;
+/* ── Base ───────────────────────────────────── */
+.reveal { font-weight: 300; line-height: 1.65; }
+
+.reveal .slides section {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  height: 100%;
+  padding: 5vmin 7vmin;
+  box-sizing: border-box;
 }
 
-/* Titoli */
-.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+/* ── Headings ───────────────────────────────── */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
   text-transform: none;
   letter-spacing: normal;
   font-weight: 400;
   line-height: 1.1;
+  color: var(--r-heading-color);
+  margin: 0 0 0.55em;
 }
 
-.reveal h1 {
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  margin-bottom: 20px;
-}
-
-.reveal strong {
-  color: #1a1a1a;
-  font-weight: 500;
-}
-
-/* Stile per l'etichetta della sezione (ispirato a .label / .section-label) */
-.reveal .section-label {
+/* h1 in italic for elegance on section-divider slides */
+.reveal h1 { font-size: clamp(2rem, 5.5vw, 3.8rem); font-style: italic; }
+.reveal h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); }
+.reveal h3 {
+  font-size: clamp(1rem, 2vw, 1.3rem);
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.5em;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6b6560;
-  margin-bottom: 20px;
-  display: block;
 }
 
-/* Personalizzazione delle tabelle per renderle pulite come la griglia HTML */
-/* Rende le tabelle più compatte per evitare che escano dalla slide */
+/* ── Section label ──────────────────────────── */
+.reveal .section-label {
+  font-size: 0.42em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--_muted);
+  margin-bottom: 12px;
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Body text ──────────────────────────────── */
+.reveal p {
+  color: var(--_muted);
+  font-size: 0.82em;
+  line-height: 1.75;
+  margin-bottom: 0.4em;
+}
+
+/* ── Lists ──────────────────────────────────── */
+.reveal ul,
+.reveal ol { display: block; margin: 0; padding: 0; list-style: none; }
+
+.reveal ul li,
+.reveal ol li {
+  position: relative;
+  padding-left: 1.2em;
+  font-size: 0.8em;
+  color: var(--_muted);
+  font-weight: 300;
+  line-height: 1.65;
+  margin-bottom: 0.35em;
+}
+
+.reveal ul > li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--_border);
+}
+
+.reveal ol { counter-reset: slide-ol; }
+.reveal ol > li::before {
+  counter-increment: slide-ol;
+  content: counter(slide-ol) '.';
+  position: absolute;
+  left: 0;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--_accent);
+}
+
+.reveal li li { font-size: 0.9em; margin-top: 0.15em; opacity: 0.82; }
+.reveal li li::before { content: '\00B7'; color: var(--_border); }
+
+.reveal strong { color: #1a1a1a; font-weight: 500; }
+.reveal em { font-style: italic; color: var(--r-heading-color); }
+
+/* ── Math ───────────────────────────────────── */
+.reveal .MathJax,
+.reveal mjx-container { color: #1a1a1a !important; }
+
+.reveal mjx-container[display="true"],
+.reveal .math.display {
+  display: table;
+  background: var(--_surface);
+  border: 1px solid var(--_border);
+  border-left: 3px solid var(--_accent);
+  border-radius: 0;
+  padding: 12px 28px 12px 20px;
+  margin: 14px auto;
+  font-size: 1.05em !important;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* ── Tables ─────────────────────────────────── */
 .reveal table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 0.65em; /* Ridotto per fare spazio */
-  margin-top: 15px;
+  font-size: 0.6em;
+  margin-top: 12px;
+  background: var(--_surface);
 }
 
-.reveal th, .reveal td {
-  border-bottom: 1px solid #e8e5e0;
-  padding: 8px 16px; /* Padding ridotto per recuperare spazio */
+.reveal th,
+.reveal td {
+  border-bottom: 1px solid var(--_border);
+  padding: 8px 16px;
+  text-align: left;
+  color: var(--_muted);
+  font-weight: 300;
 }
 
 .reveal th {
   font-weight: 500;
   color: #1a1a1a;
-  text-align: left;
+  border-bottom: 2px solid var(--_border);
+  background: var(--_accent-bg);
+  font-size: 0.95em;
 }
 
-.reveal tr:hover {
-  background-color: #eff6ff;
+.reveal tr:hover td { background: var(--_accent-bg); }
+
+/* ── Links ──────────────────────────────────── */
+.reveal a {
+  color: var(--_accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s, color .15s;
+}
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  border-bottom-color: currentColor;
+}
+
+/* ── Code ───────────────────────────────────── */
+.reveal code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: #f0ede8;
+  color: #1a1a1a;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 0.82em;
+}
+
+.reveal pre {
+  background: #0e0e14;
+  border: 1px solid var(--_border);
+  border-radius: 2px;
+  font-size: 0.6em;
+  box-shadow: none;
+  margin: 12px 0;
+  overflow: auto;
+}
+
+.reveal pre code {
+  background: transparent;
+  color: #e2e8f0;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* ── Progress bar ───────────────────────────── */
+.reveal .progress { height: 2px; background: rgba(37,99,235,.12); }
+.reveal .progress span { background: var(--_accent); transition: width .4s ease; }
+
+/* ── Slide number ───────────────────────────── */
+.reveal .slide-number {
+  background: transparent;
+  color: var(--_border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  bottom: 14px;
+  right: 18px;
+}
+
+/* ── Controls ───────────────────────────────── */
+.reveal .controls button { color: var(--_accent) !important; opacity: .4; }
+.reveal .controls button:hover { opacity: 1; }
+
+/* ── .smaller utility ───────────────────────── */
+.reveal .smaller li,
+.reveal .smaller p  { font-size: 0.72em; line-height: 1.6; }
+.reveal .smaller table { font-size: 0.55em; }
+.reveal .smaller mjx-container[display="true"] { font-size: 0.95em !important; padding: 10px 20px 10px 14px; }
+
+/* Section-divider slides (h1 only, no h2): accent left border */
+.reveal .slides section.level1 {
+  justify-content: flex-end;
+  padding-bottom: 8vmin;
+  border-left: 3px solid var(--_accent);
+  padding-left: calc(7vmin - 3px);
+}
+
+/* ── Two-column layout ──────────────────────── */
+/* Usage in .qmd:
+   :::: {.cols}
+   ::: {.col-text}   ← lista / testo
+   :::
+   ::: {.col-formula} ← formula / SVG
+   :::
+   ::::
+*/
+.reveal .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vmin;
+  align-items: center;
+  width: 100%;
+}
+
+.reveal .cols-6040 {
+  grid-template-columns: 3fr 2fr;
+}
+
+.reveal .col-text,
+.reveal .col-formula,
+.reveal .col-img { width: 100%; }
+
+/* Formula column: center the math box */
+.reveal .col-formula {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal .col-formula mjx-container[display="true"],
+.reveal .col-formula .math.display {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+/* SVG diagrams */
+.reveal .col-img svg,
+.reveal .slide-img svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.reveal .slide-img {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Caption under SVG */
+.reveal figcaption,
+.reveal .img-caption {
+  font-size: 0.55em;
+  color: var(--_muted);
+  text-align: center;
+  margin-top: 6px;
+  letter-spacing: 0.06em;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 900px) {
+  .reveal .slides section { padding: 5vmin 6vmin; }
+  .reveal h1 { font-size: clamp(1.7rem, 6vw, 2.8rem); }
+  .reveal h2 { font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
+}
+
+@media (max-width: 600px) {
+  .reveal .slides section { padding: 6vmin 5vmin; }
+  .reveal h1 { font-size: clamp(1.4rem, 7.5vw, 2.2rem); }
+  .reveal h2 { font-size: clamp(1.1rem, 5.5vw, 1.5rem); }
+  .reveal ul li,
+  .reveal ol li  { font-size: 0.72em; }
+  .reveal table  { font-size: 0.52em; }
+  .reveal th, .reveal td { padding: 6px 10px; }
+  .reveal mjx-container[display="true"] { font-size: 0.9em !important; padding: 10px 12px; }
+  .reveal .cols,
+  .reveal .cols-6040 { grid-template-columns: 1fr; gap: 2vmin; }
+}
+
+@media (max-width: 400px) {
+  .reveal .slides section { padding: 5vmin 4vmin; }
+  .reveal h1 { font-size: clamp(1.2rem, 8vw, 1.8rem); }
 }
