@@ -1,2 +1,0 @@
-# Fisica
-Approfondimento (La Luce)
