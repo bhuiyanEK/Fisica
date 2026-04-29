@@ -542,6 +542,22 @@ function refresh() {
   updateUI();
 }
 
+// Aggiungi questo blocco all'inizio del <script> o prima di refresh()
+const params = new URLSearchParams(window.location.search);
+
+if (params.has('n1')) {
+  n1 = parseFloat(params.get('n1'));
+  mat1Sel.value = n1.toFixed(2); // Aggiorna il menu a tendina
+}
+if (params.has('n2')) {
+  n2 = parseFloat(params.get('n2'));
+  mat2Sel.value = n2.toFixed(2);
+}
+if (params.has('angle')) {
+  angle = parseInt(params.get('angle'));
+  angleSlider.value = angle; // Aggiorna lo slider
+}
+
 refresh();
 </script>
 </body>
