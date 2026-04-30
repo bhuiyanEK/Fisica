@@ -95,7 +95,7 @@
     "href": "index.html#la-rifrazione",
     "title": "Fisica - Ottica",
     "section": "La Rifrazione",
-    "text": "La Rifrazione\n\n\n\nQuando la luce passa tra due mezzi con \\(n\\) diverso, cambia velocità e devia la traiettoria\nIl raggio si avvicina alla normale entrando in un mezzo più denso (\\(n_2 &gt; n_1\\))\nIl raggio si allontana dalla normale entrando in un mezzo meno denso (\\(n_2 &lt; n_1\\))\nEsempio immediato: un oggetto immerso in acqua appare spezzato o spostato"
+    "text": "La Rifrazione\n\n\n\nIndice di rifrazione (\\(n\\)): rapporto tra la velocità della luce nel vuoto (\\(c\\)) e nel mezzo considerato (\\(v\\)).  \\(n = \\frac{c}{v}\\) (è adimensionale e \\(n \\ge 1\\))\nQuando la luce passa tra due mezzi con \\(n\\) diverso, cambia velocità e devia la traiettoria\nIl raggio si avvicina alla normale entrando in un mezzo più denso (\\(n_2 &gt; n_1\\))\nIl raggio si allontana dalla normale entrando in un mezzo meno denso (\\(n_2 &lt; n_1\\))\nEsempio immediato: un oggetto immerso in acqua appare spezzato o spostato"
   },
   {
     "objectID": "index.html#la-legge-di-snell-descartes",
