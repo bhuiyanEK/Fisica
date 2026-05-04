@@ -18,7 +18,7 @@
     "href": "index.html#l-onda-elettromagnetica",
     "title": "Fisica - Ottica",
     "section": "L’Onda Elettromagnetica",
-    "text": "L’Onda Elettromagnetica\n\n\n\n\nLa luce può essere descritta come un’onda precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\) dove \\(\\lambda\\) = lunghezza d’onda, \\(f\\) = frequenza, \\(v\\) = velocità di propagazione\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
+    "text": "L’Onda Elettromagnetica\n\n\n\n\nLa luce può essere descritta come un’onda precisamente come un’onda elettromagnetica\nOnda trasversale: campo elettrico \\(\\vec{E}\\) e campo magnetico \\(\\vec{B}\\) oscillano perpendicolarmente alla direzione di propagazione\nNon richiede un mezzo materiale: si propaga nel vuoto\nRelazione fondamentale: \\(v = \\lambda f\\) dove \\(\\lambda\\) = lunghezza d’onda [m, o nm nel visibile], \\(f\\) = frequenza [Hz], \\(v\\) = velocità di propagazione [m/s]\n\\(\\lambda\\) e \\(f\\) sono inversamente proporzionali a velocità fissata"
   },
   {
     "objectID": "index.html#spettro-elettromagnetico",
@@ -60,7 +60,7 @@
     "href": "index.html#specchi-sferici-grandezze-fondamentali",
     "title": "Fisica - Ottica",
     "section": "Specchi Sferici: Grandezze Fondamentali",
-    "text": "Specchi Sferici: Grandezze Fondamentali\n\n\n\n\nCentro di curvatura \\(C\\): centro della sfera\nRaggio di curvatura \\(R\\): distanza da \\(C\\) allo specchio\nFuoco \\(F\\): punto di convergenza dei raggi paralleli\nDistanza focale: \\(f = \\frac{R}{2}\\)\nConcavo: \\(f &gt; 0\\) — Convesso: \\(f &lt; 0\\)"
+    "text": "Specchi Sferici: Grandezze Fondamentali\n\n\n\n\nCentro di curvatura \\(C\\): centro della sfera\nRaggio di curvatura \\(R\\): distanza da \\(C\\) allo specchio [m o cm]\nFuoco \\(F\\): punto di convergenza dei raggi paralleli\nDistanza focale: \\(f = \\frac{R}{2}\\) [m o cm]\nConcavo: \\(f &gt; 0\\) — Convesso: \\(f &lt; 0\\)"
   },
   {
     "objectID": "index.html#specchio-concavo",
@@ -81,21 +81,21 @@
     "href": "index.html#equazione-dei-punti-coniugati",
     "title": "Fisica - Ottica",
     "section": "Equazione dei punti coniugati",
-    "text": "Equazione dei punti coniugati\n\n\nConvenzioni dei segni:\n\n\\(p &gt; 0\\): oggetto reale (davanti allo specchio)\n\\(p' &gt; 0\\): immagine reale (davanti allo specchio)\n\\(p' &lt; 0\\): immagine virtuale (dietro allo specchio)\n\n\n\nRelazione fondamentale:\n\\[\\frac{1}{p} + \\frac{1}{p'} = \\frac{1}{f} = \\frac{2}{R}\\]"
+    "text": "Equazione dei punti coniugati\n\n\nConvenzioni dei segni:\n\n\\(p &gt; 0\\): distanza oggetto reale (davanti allo specchio)\n\\(p' &gt; 0\\): distanza immagine reale (davanti allo specchio)\n\\(p' &lt; 0\\): distanza immagine virtuale (dietro allo specchio)\n\n\n\n\nRelazione fondamentale:\n\\[\\frac{1}{p} + \\frac{1}{p'} = \\frac{1}{f} = \\frac{2}{R}\\]"
   },
   {
     "objectID": "index.html#ingrandimento-lineare",
     "href": "index.html#ingrandimento-lineare",
     "title": "Fisica - Ottica",
     "section": "Ingrandimento lineare",
-    "text": "Ingrandimento lineare\n\n\nInterpretazione fisica:\n\n\\(|G| &gt; 1\\) → immagine ingrandita\n\\(|G| &lt; 1\\) → immagine rimpicciolita\n\\(G &gt; 0\\) → immagine diritta (virtuale)\n\\(G &lt; 0\\) → immagine capovolta (reale)\n\n\n\nDefinizione:\n\\[G = -\\frac{p'}{p} = \\frac{y'}{y}\\]"
+    "text": "Ingrandimento lineare\n\n\nInterpretazione fisica:\n\n\\(|G| &gt; 1\\) → immagine ingrandita\n\\(|G| &lt; 1\\) → immagine rimpicciolita\n\\(G &gt; 0\\) → immagine diritta (virtuale)\n\\(G &lt; 0\\) → immagine capovolta (reale)\n\n\n\nDefinizione:\n\\[G = -\\frac{p'}{p} = \\frac{y'}{y}\\]\n\n\n(Dove \\(y\\) e \\(y'\\) indicano le altezze in m o cm; \\(G\\) è un numero puro e adimensionale)"
   },
   {
     "objectID": "index.html#la-rifrazione",
     "href": "index.html#la-rifrazione",
     "title": "Fisica - Ottica",
     "section": "La Rifrazione",
-    "text": "La Rifrazione\n\n\n\nIndice di rifrazione (\\(n\\)): rapporto tra la velocità della luce nel vuoto (\\(c\\)) e nel mezzo considerato (\\(v\\)).  \\(n = \\frac{c}{v}\\) (è adimensionale e \\(n \\ge 1\\))\nQuando la luce passa tra due mezzi con \\(n\\) diverso, cambia velocità e devia la traiettoria\nIl raggio si avvicina alla normale entrando in un mezzo più denso (\\(n_2 &gt; n_1\\))\nIl raggio si allontana dalla normale entrando in un mezzo meno denso (\\(n_2 &lt; n_1\\))\nEsempio immediato: un oggetto immerso in acqua appare spezzato o spostato"
+    "text": "La Rifrazione\n\n\n\nIndice di rifrazione (\\(n\\)): rapporto tra  la velocità della luce nel vuoto (\\(c\\) [m/s]) e  nel mezzo considerato (\\(v\\) [m/s]).  \\(n = \\frac{c}{v}\\) (è adimensionale e \\(n \\ge 1\\))\nQuando la luce passa tra due mezzi con \\(n\\) diverso, cambia velocità e devia la traiettoria\nIl raggio si avvicina alla normale entrando in un mezzo più denso (\\(n_2 &gt; n_1\\))\nIl raggio si allontana dalla normale entrando in un mezzo meno denso (\\(n_2 &lt; n_1\\))\nEsempio immediato: un oggetto immerso in acqua appare spezzato o spostato"
   },
   {
     "objectID": "index.html#la-legge-di-snell-descartes",
@@ -130,20 +130,20 @@
     "href": "index.html#diffrazione-slide",
     "title": "Fisica - Ottica",
     "section": "Diffrazione",
-    "text": "Diffrazione\n\n\n\nPrincipio di Huygens: ogni punto di un fronte d’onda si comporta come una sorgente di onde sferiche secondarie\nIl fenomeno è rilevante quando la dimensione dell’apertura \\(a\\) è paragonabile alla lunghezza d’onda \\(\\lambda\\)\n(Fenditura singola): \\(a \\sin \\theta = m\\lambda \\quad (m = \\pm 1, \\pm 2, \\dots)\\)\nLe ombre non sono mai perfettamente nette; la luce invade la zona d’ombra geometrica"
+    "text": "Diffrazione\n\n\n\nPrincipio di Huygens: ogni punto di un fronte d’onda si comporta come una sorgente di onde sferiche secondarie\nIl fenomeno è rilevante quando la dimensione dell’apertura \\(a\\) è paragonabile alla lunghezza d’onda \\(\\lambda\\)\n(Fenditura singola): \\(a \\sin \\theta = m\\lambda \\quad (m = \\pm 1, \\pm 2, \\dots)\\)  (Dove \\(a\\) e \\(\\lambda\\) si misurano in metri; \\(m\\) è un intero adimensionale)\nLe ombre non sono mai perfettamente nette; la luce invade la zona d’ombra geometrica"
   },
   {
     "objectID": "index.html#Interferenza",
     "href": "index.html#Interferenza",
     "title": "Fisica - Ottica",
     "section": "Interferenza — Esperimento di Young",
-    "text": "Interferenza — Esperimento di Young\n\n\n\n\nDue sorgenti coerenti separate da una distanza \\(d\\) producono frange luminose e scure sullo schermo\nDifferenza di cammino ottico: \\(\\Delta r = d \\sin \\theta\\).\nCondizioni matematiche:\n\nCostruttiva (Luce): \\(\\Delta r = m\\lambda\\)\nDistruttiva (Buio): \\(\\Delta r = (m + \\frac{1}{2})\\lambda\\)\n\nInterfrangia: La distanza tra due massimi consecutivi è \\(\\Delta y = \\frac{\\lambda L}{d}\\)"
+    "text": "Interferenza — Esperimento di Young\n\n\n\n\nDue sorgenti coerenti separate da una distanza \\(d\\) producono frange luminose e scure sullo schermo\nDifferenza di cammino ottico: \\(\\Delta r = d \\sin \\theta\\).\nCondizioni matematiche:\n\nCostruttiva (Luce): \\(\\Delta r = m\\lambda\\)\nDistruttiva (Buio): \\(\\Delta r = (m + \\frac{1}{2})\\lambda\\)\n\nInterfrangia: La distanza tra due massimi consecutivi è \\(\\Delta y = \\frac{\\lambda L}{d}\\)\n\n (Tutte le grandezze spaziali \\(d, \\Delta r, \\lambda, L, \\Delta y\\) si misurano in metri; \\(m\\) è adimensionale)"
   },
   {
     "objectID": "index.html#polarizzazione",
     "href": "index.html#polarizzazione",
     "title": "Fisica - Ottica",
     "section": "Polarizzazione",
-    "text": "Polarizzazione\n\n\nNatura trasversale: Il campo elettrico \\(\\vec{E}\\) della luce oscilla perpendicolarmente alla direzione di propagazione\nFiltro Polarizzatore: Seleziona un’unica direzione di oscillazione, assorbendo le altre\nLegge di Malus: Descrive l’intensità della luce \\(I\\) che attraversa un secondo polarizzatore (analizzatore) inclinato di un angolo \\(\\theta\\): \\[I = I_0 \\cos^2 \\theta\\]\nApplicazioni: Occhiali da sole polarizzati, schermi LCD e fotografia"
+    "text": "Polarizzazione\n\n\nNatura trasversale: Il campo elettrico \\(\\vec{E}\\) della luce oscilla perpendicolarmente alla direzione di propagazione\nFiltro Polarizzatore: Seleziona un’unica direzione di oscillazione, assorbendo le altre\nLegge di Malus: Descrive l’intensità della luce \\(I\\) [W/m²] che attraversa un secondo polarizzatore (analizzatore) inclinato di un angolo \\(\\theta\\): \\[I = I_0 \\cos^2 \\theta\\]\nApplicazioni: Occhiali da sole polarizzati, schermi LCD e fotografia"
   }
 ]

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interferenza — Doppia Fenditura</title>
+<title>Diffrazione e Interferenza</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -13,6 +13,7 @@
     --text: #1a1a1a;
     --text-secondary: #6b6560;
     --accent: #2563eb;
+    --accent-light: #eff6ff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
@@ -27,10 +28,19 @@
   nav .current { color: var(--text); font-weight: 500; }
 
   .page { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
-  .page-header { margin-bottom: 40px; }
+  .page-header { margin-bottom: 32px; }
   .label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
   h1 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; font-weight: 400; margin-bottom: 12px; }
   .page-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; max-width: 600px; }
+
+  .tabs { display: flex; gap: 2px; margin-bottom: 24px; }
+  .tab {
+    padding: 10px 24px; font-size: 13px; font-weight: 500;
+    border: 1px solid var(--border); background: var(--surface);
+    cursor: pointer; color: var(--text-secondary); transition: all 0.15s;
+  }
+  .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab:hover:not(.active) { background: var(--accent-light); color: var(--accent); }
 
   .layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
 
@@ -38,13 +48,14 @@
   canvas { display: block; width: 100%; }
   .canvas-hint { padding: 10px 16px; font-size: 11px; color: #666; border-top: 1px solid #1a1a1a; background: #000; }
 
-  .panel { display: flex; flex-direction: column; gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
-  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 16px; }
-  .control { margin-bottom: 16px; }
+  .panel { display: flex; flex-direction: column; gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 22px; }
+  .card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; }
+  .control { margin-bottom: 12px; }
   .control:last-child { margin-bottom: 0; }
   .control-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
   .control-value { font-weight: 500; color: var(--accent); font-family: monospace; font-size: 13px; }
+  .control-hint { font-size: 11px; color: var(--text-secondary); margin-top: 5px; font-style: italic; }
 
   input[type=range] {
     width: 100%; -webkit-appearance: none; height: 2px;
@@ -55,34 +66,36 @@
     border-radius: 50%; background: var(--accent); cursor: pointer;
   }
 
-  .wl-bar { height: 8px; border-radius: 2px; margin-top: 8px; background: #aadd00; transition: background 0.2s; }
+  .wl-bar { height: 7px; border-radius: 2px; margin-top: 7px; transition: background 0.2s; }
 
-  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
   .result-row:last-child { border-bottom: none; }
   .result-key { color: var(--text-secondary); }
   .result-val { font-weight: 500; font-family: monospace; color: var(--accent); }
+  .result-val.hi { color: #16a34a; }
 
-  .formula-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; text-align: center; }
-  .formula { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
-  .formula-sub { font-size: 11px; color: var(--text-secondary); }
+  .formula-box { background: var(--bg); border: 1px solid var(--border); padding: 12px; text-align: center; margin-bottom: 8px; }
+  .formula-box:last-child { margin-bottom: 0; }
+  .formula { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 3px; }
+  .formula-sub { font-size: 10px; color: var(--text-secondary); line-height: 1.5; }
+
+  .physics-note {
+    background: var(--accent-light); border: 1px solid #bfdbfe;
+    padding: 11px 14px; font-size: 11px; color: #1e40af; line-height: 1.6;
+  }
 
   .explanation { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-top: 24px; }
   .explanation h2 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
   .explanation p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
   .explanation p + p { margin-top: 10px; }
 
-  .info-bar { margin-top: 40px; padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); display: flex; gap: 40px; }
-  .info-item { display: flex; flex-direction: column; gap: 4px; }
-  .info-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
-  .info-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
-  .info-value a { color: inherit; text-decoration: none; transition: color 0.15s; }
-  .info-value a:hover { color: var(--accent); }
+  /* hide/show panels per mode */
+  .only-two { display: none; }
 
   @media (max-width: 720px) {
     .layout { grid-template-columns: 1fr; }
     .page { padding: 24px; }
     nav { padding: 16px 24px; }
-    .info-bar { flex-wrap: wrap; gap: 20px; }
   }
 </style>
 </head>
@@ -91,30 +104,38 @@
 <nav>
   <a href="index.html">← Tutti i simulatori</a>
   <span class="sep">/</span>
-  <span class="current">04 — Interferenza</span>
+  <span class="current">04 — Diffrazione e Interferenza</span>
 </nav>
 
 <div class="page">
   <div class="page-header">
     <p class="label">Ottica Fisica</p>
-    <h1>Interferenza — Doppia Fenditura</h1>
-    <p class="page-desc">Esperimento di Young (1801). Due fenditure producono onde coerenti che si sovrappongono: dove si incontrano in fase danno luce intensa, dove si cancellano danno buio.</p>
+    <h1>Diffrazione e Interferenza</h1>
+    <p class="page-desc">Una fenditura mostra la diffrazione pura. Due fenditure mostrano l'interferenza di Young, modulata dall'inviluppo di diffrazione.</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="tabs">
+    <div class="tab active" onclick="setMode(1)">1 Fenditura — Diffrazione</div>
+    <div class="tab" onclick="setMode(2)">2 Fenditure — Interferenza</div>
   </div>
 
   <div class="layout">
     <div>
       <div class="canvas-wrap">
         <canvas id="canvas" width="660" height="500"></canvas>
-        <div class="canvas-hint">Le onde si espandono da entrambe le fenditure — le zone luminose sono interferenza costruttiva, quelle scure distruttiva</div>
+        <div class="canvas-hint" id="hint">Fenditura singola: il pattern mostra i minimi a a·sinθ = mλ</div>
       </div>
       <div class="explanation">
-        <h2>Come funziona</h2>
-        <p>Ogni fenditura diventa una sorgente secondaria di onde circolari coerenti. Le due onde si sovrappongono: dove le creste si incontrano (differenza di cammino Δr = mλ) si ha interferenza costruttiva e luce intensa. Dove una cresta incontra una valle (Δr = (m+½)λ) si ha interferenza distruttiva e buio totale.</p>
-        <p>Le zone chiare e scure formano un ventaglio simmetrico che produce sullo schermo le classiche frange alternate. Le frange buie sono impossibili in un modello corpuscolare: due fasci di particelle non possono annullarsi. Young dimostrò così nel 1801 che la luce è un'onda.</p>
+        <h2 id="exp-title">Diffrazione — Singola Fenditura</h2>
+        <p id="exp-p1">Se la luce fosse fatta di particelle, attraverso una fenditura produrrebbe una striscia luminosa netta. Invece si allarga: questo è possibile solo per le onde. Ogni punto della fenditura diventa una sorgente secondaria (principio di Huygens), e le onde emesse interferiscono tra loro.</p>
+        <p id="exp-p2">Il risultato è un picco centrale largo e massimi laterali via via più deboli, con minimi precisi dove a·sinθ = mλ. Più la fenditura è stretta rispetto a λ, più il pattern si allarga: a e θ sono inversamente proporzionali.</p>
       </div>
     </div>
 
     <div class="panel">
+
+      <!-- λ slider (always visible) -->
       <div class="card">
         <div class="card-title">Lunghezza d'onda λ</div>
         <div class="control">
@@ -124,54 +145,80 @@
           </div>
           <input type="range" id="lam" min="380" max="750" value="550">
           <div class="wl-bar" id="wl-bar"></div>
+          <div class="control-hint" id="lam-hint">λ maggiore → pattern più allargato</div>
         </div>
       </div>
 
+      <!-- Slit width a (always visible) -->
       <div class="card">
-        <div class="card-title">Distanza tra fenditure</div>
+        <div class="card-title">Larghezza fenditura a</div>
+        <div class="control">
+          <div class="control-label">
+            <span>a</span>
+            <span class="control-value" id="a-val">40 px</span>
+          </div>
+          <input type="range" id="a-sl" min="8" max="100" value="40">
+          <div class="control-hint" id="a-hint">a minore → diffrazione più pronunciata</div>
+        </div>
+      </div>
+
+      <!-- Slit separation d (only 2-slit mode) -->
+      <div class="card only-two">
+        <div class="card-title">Distanza tra fenditure d</div>
         <div class="control">
           <div class="control-label">
             <span>d</span>
-            <span class="control-value" id="d-val">60 px</span>
+            <span class="control-value" id="d-val">80 px</span>
           </div>
-          <input type="range" id="d-sl" min="30" max="130" value="60">
+          <input type="range" id="d-sl" min="30" max="160" value="80">
+          <div class="control-hint" id="d-hint">d maggiore → frange di interferenza più strette</div>
         </div>
       </div>
 
+      <!-- Formulas -->
+      <div class="card" id="formula-card">
+        <div class="card-title" id="formula-title">Formula — Diffrazione</div>
+        <div id="formulas-one">
+          <div class="formula-box">
+            <div class="formula">a · sinθ = mλ</div>
+            <div class="formula-sub">minimi di diffrazione<br>m = ±1, ±2, ±3</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula">I ∝ sinc²(β/2)</div>
+            <div class="formula-sub">β = 2πa·sinθ/λ — intensità per ogni punto</div>
+          </div>
+        </div>
+        <div id="formulas-two" style="display:none">
+          <div class="formula-box">
+            <div class="formula">i = λL / d</div>
+            <div class="formula-sub">interfrangia — distanza tra massimi di Young</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula">I ∝ cos²(δ/2) · sinc²(β/2)</div>
+            <div class="formula-sub">interferenza × inviluppo di diffrazione</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula">a · sinθ = mλ</div>
+            <div class="formula-sub">minimi dell'inviluppo (frange mancanti)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
       <div class="card">
-        <div class="card-title">Formula frange</div>
-        <div class="formula-box">
-          <div class="formula">Δy = λL / d</div>
-          <div class="formula-sub">distanza tra massimi consecutivi</div>
-        </div>
+        <div class="card-title">Risultati</div>
+        <div class="result-row"><span class="result-key">λ</span><span class="result-val" id="r-lam">550 nm</span></div>
+        <div class="result-row"><span class="result-key">a (fenditura)</span><span class="result-val" id="r-a">40 px</span></div>
+        <div class="result-row only-two" id="row-d"><span class="result-key">d (separazione)</span><span class="result-val" id="r-d">80 px</span></div>
+        <div class="result-row only-two" id="row-i"><span class="result-key">Interfrangia i</span><span class="result-val hi" id="r-i">—</span></div>
+        <div class="result-row"><span class="result-key">θ primo minimo</span><span class="result-val" id="r-theta">—</span></div>
+        <div class="result-row"><span class="result-key">λ/a</span><span class="result-val" id="r-ratio">—</span></div>
       </div>
 
-      <div class="card">
-        <div class="card-title">Condizioni</div>
-        <div class="result-row">
-          <span class="result-key">Costruttiva</span>
-          <span class="result-val">Δr = mλ</span>
-        </div>
-        <div class="result-row">
-          <span class="result-key">Distruttiva</span>
-          <span class="result-val">Δr = (m+½)λ</span>
-        </div>
-        <div class="result-row">
-          <span class="result-key">λ corrente</span>
-          <span class="result-val" id="r-lam">550 nm</span>
-        </div>
-        <div class="result-row">
-          <span class="result-key">d corrente</span>
-          <span class="result-val" id="r-d">60 px</span>
-        </div>
+      <div class="physics-note" id="physics-note">
+        Diffrazione apprezzabile quando λ ≈ a
       </div>
-    </div>
-  </div>
 
-  <div class="info-bar">
-    <div class="info-item">
-      <span class="info-value"><a href="https://bhuiyanek.github.io/Fisica/#/interferenza-l-esperimento-di-young">Torna alla presentazione</a></span>
-      <span class="info-label">Bhuiyan Ejazul Karim 26341A</span>
     </div>
   </div>
 </div>
@@ -181,17 +228,26 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const W = 660, H = 500;
 
-let lambda = 550; // nm — controls wave color and spatial frequency
-let slitD = 60;   // slit separation in px
-let t = 0;        // animation time
+let mode = 1;       // 1 or 2 slits
+let lambda = 550;
+let slitA = 40;     // slit width px
+let slitD = 80;     // slit separation px (2-slit only)
+let t = 0;
 
-// Wave speed and spatial frequency derived from lambda
-// We map lambda 380-750 nm to a visual wave number k
+const BARRIER_X = 180;
+const SCREEN_X = W - 55;
+const L_px = SCREEN_X - BARRIER_X;
+
+// ── helpers ──────────────────────────────────────────────────────────────────
+
 function getWaveParams() {
-  // k: spatial frequency (cycles per pixel) — shorter lambda = tighter rings
   const k = 0.045 * (700 / lambda);
-  const speed = 1.2;
-  return { k, speed };
+  return { k, speed: 1.5 };
+}
+
+function getLambdaPx() {
+  const { k } = getWaveParams();
+  return (2 * Math.PI) / k;
 }
 
 function wavelengthToRGB(nm) {
@@ -205,149 +261,335 @@ function wavelengthToRGB(nm) {
   return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
 }
 
-// Barrier x position
-const BARRIER_X = 200;
-const SCREEN_X = W - 50;
+// Sinc² envelope for single slit
+function diffEnvelope(yRel) {
+  const lam_px = getLambdaPx();
+  const sinT = yRel / Math.sqrt(yRel*yRel + L_px*L_px);
+  const beta = (2 * Math.PI * slitA * sinT) / lam_px;
+  if (Math.abs(beta) < 1e-9) return 1.0;
+  const s = Math.sin(beta/2) / (beta/2);
+  return s * s;
+}
+
+// Two-slit intensity: cos²(δ/2) × sinc²(β/2)
+function twoSlitIntensity(yRel) {
+  const lam_px = getLambdaPx();
+  const sinT = yRel / Math.sqrt(yRel*yRel + L_px*L_px);
+  // interference term
+  const delta = (2 * Math.PI * slitD * sinT) / lam_px;
+  const interf = Math.cos(delta/2) ** 2;
+  // diffraction envelope
+  const beta = (2 * Math.PI * slitA * sinT) / lam_px;
+  let env = 1.0;
+  if (Math.abs(beta) > 1e-9) {
+    const s = Math.sin(beta/2) / (beta/2);
+    env = s * s;
+  }
+  return interf * env;
+}
+
+function getIntensity(yRel) {
+  return mode === 1 ? diffEnvelope(yRel) : twoSlitIntensity(yRel);
+}
+
+// ── draw ─────────────────────────────────────────────────────────────────────
 
 function draw() {
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
 
   const cy = H / 2;
-  const s1y = cy - slitD / 2;
-  const s2y = cy + slitD / 2;
-
   const { k, speed } = getWaveParams();
-  const omega = speed * k; // angular freq (rad/frame)
+  const omega = speed * k;
   const [cr, cg, cb] = wavelengthToRGB(lambda);
 
-  // ---- Compute interference field pixel by pixel on the right of barrier ----
+  // Slit positions
+  const slits = mode === 1
+    ? [cy]
+    : [cy - slitD/2, cy + slitD/2];
+
+  // ---- Incoming plane wave ----
+  // Draw as vertical stripes instead of pixel by pixel
+  for (let ix = 0; ix < BARRIER_X; ix += 2) {
+    const phase = Math.cos(k * ix - omega * t);
+    const bright = (phase + 1) / 2 * 0.55;
+    ctx.fillStyle = `rgba(${cr},${cg},${cb},${bright})`;
+    ctx.fillRect(ix, 0, 2, H);
+  }
+
+  // ---- Wave field (right of barrier) ----
+  const N_HUY = 4; // keep low for performance
   const imageData = ctx.createImageData(W - BARRIER_X - 5, H);
   const iW = imageData.width;
 
+  // Precompute slit source positions
+  const sources = [];
+  slits.forEach(sy => {
+    for (let s = 0; s < N_HUY; s++) {
+      sources.push(sy - slitA/2 + (s + 0.5) * slitA / N_HUY);
+    }
+  });
+  const nSrc = sources.length;
+
   for (let ix = 0; ix < iW; ix++) {
     const px = BARRIER_X + 5 + ix;
+    const dx = px - BARRIER_X;
     for (let iy = 0; iy < H; iy++) {
-      const r1 = Math.sqrt((px - BARRIER_X)**2 + (iy - s1y)**2);
-      const r2 = Math.sqrt((px - BARRIER_X)**2 + (iy - s2y)**2);
+      const yRel = iy - cy;
 
-      // Amplitude of each wave at this point
-      const amp1 = Math.cos(k * r1 - omega * t) / Math.max(1, Math.sqrt(r1) * 0.12);
-      const amp2 = Math.cos(k * r2 - omega * t) / Math.max(1, Math.sqrt(r2) * 0.12);
+      // time-averaged intensity (analytical — for stable envelope)
+      const intensity = getIntensity(yRel);
 
-      const total = (amp1 + amp2) * 0.5;
+      // animated wave: sum Huygens sources
+      let ampSum = 0;
+      for (let s = 0; s < nSrc; s++) {
+        const dy = iy - sources[s];
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        ampSum += Math.cos(k * dist - omega * t);
+      }
+      const animated = (ampSum / nSrc + 1) / 2;
 
-      // Map to brightness: positive = bright (constructive), near zero = dark
-      // Use time-averaged intensity: proportional to cos²(Δphase/2)
-      const delta = k * (r1 - r2);
-      const intensity = Math.cos(delta / 2) ** 2; // time-averaged
-
-      // Blend animated wave with intensity envelope
-      const animated = (total + 1) / 2; // 0..1
-      const brightness = intensity * 0.7 + animated * 0.3;
+      // blend: envelope gives structure, animation gives motion
+      const brightness = intensity * 0.65 + animated * 0.35;
 
       const idx = (iy * iW + ix) * 4;
-      imageData.data[idx]     = cr * brightness;
-      imageData.data[idx + 1] = cg * brightness;
-      imageData.data[idx + 2] = cb * brightness;
-      imageData.data[idx + 3] = 255;
+      imageData.data[idx]   = cr * brightness;
+      imageData.data[idx+1] = cg * brightness;
+      imageData.data[idx+2] = cb * brightness;
+      imageData.data[idx+3] = 255;
     }
   }
   ctx.putImageData(imageData, BARRIER_X + 5, 0);
 
-  // ---- Left side: incoming plane wave ----
-  for (let ix = 0; ix < BARRIER_X; ix++) {
-    const phase = Math.cos(k * ix - omega * t);
-    const brightness = (phase + 1) / 2 * 0.6;
-    for (let iy = 0; iy < H; iy++) {
-      // fade near edges
-      const edgeFade = Math.min(1, iy / 30, (H - iy) / 30);
-      const b2 = brightness * edgeFade;
-      ctx.fillStyle = `rgba(${cr},${cg},${cb},${b2})`;
-      ctx.fillRect(ix, iy, 1, 1);
-    }
-  }
-
   // ---- Barrier ----
-  ctx.fillStyle = '#1e293b';
-  ctx.fillRect(BARRIER_X, 0, 8, s1y - 6);
-  ctx.fillRect(BARRIER_X, s1y + 6, 8, s2y - s1y - 12);
-  ctx.fillRect(BARRIER_X, s2y + 6, 8, H - s2y - 6);
+  if (mode === 1) {
+    const st = cy - slitA/2, sb = cy + slitA/2;
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(BARRIER_X, 0, 8, st);
+    ctx.fillRect(BARRIER_X, sb, 8, H - sb);
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fillRect(BARRIER_X, st, 8, slitA);
 
-  // Slit openings highlight
-  ctx.fillStyle = 'rgba(255,255,255,0.15)';
-  ctx.fillRect(BARRIER_X, s1y - 6, 8, 12);
-  ctx.fillRect(BARRIER_X, s2y - 6, 8, 12);
+    // a label
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(BARRIER_X-16, st); ctx.lineTo(BARRIER_X-16, sb); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font = '11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('a', BARRIER_X-28, cy+4);
 
-  // Slit dots
-  ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
-  ctx.shadowColor = `rgb(${cr},${cg},${cb})`; ctx.shadowBlur = 8;
-  ctx.beginPath(); ctx.arc(BARRIER_X + 4, s1y, 3, 0, Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(BARRIER_X + 4, s2y, 3, 0, Math.PI*2); ctx.fill();
-  ctx.shadowBlur = 0;
+  } else {
+    const s1t = cy - slitD/2 - slitA/2, s1b = cy - slitD/2 + slitA/2;
+    const s2t = cy + slitD/2 - slitA/2, s2b = cy + slitD/2 + slitA/2;
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(BARRIER_X, 0, 8, s1t);
+    ctx.fillRect(BARRIER_X, s1b, 8, s2t - s1b);
+    ctx.fillRect(BARRIER_X, s2b, 8, H - s2b);
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fillRect(BARRIER_X, s1t, 8, slitA);
+    ctx.fillRect(BARRIER_X, s2t, 8, slitA);
 
-  // d label
-  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([3, 3]);
-  ctx.beginPath();
-  ctx.moveTo(BARRIER_X - 16, s1y); ctx.lineTo(BARRIER_X - 16, s2y);
-  ctx.stroke(); ctx.setLineDash([]);
-  ctx.font = '11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  ctx.fillText('d', BARRIER_X - 30, cy + 4);
+    // d label
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.moveTo(BARRIER_X-16, cy - slitD/2);
+    ctx.lineTo(BARRIER_X-16, cy + slitD/2);
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = '11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('d', BARRIER_X-28, cy+4);
+  }
 
   // ---- Screen ----
   ctx.fillStyle = '#334155';
   ctx.fillRect(SCREEN_X, 0, 6, H);
 
-  // Fringe pattern on screen
   for (let iy = 0; iy < H; iy++) {
-    const r1s = Math.sqrt((SCREEN_X - BARRIER_X)**2 + (iy - s1y)**2);
-    const r2s = Math.sqrt((SCREEN_X - BARRIER_X)**2 + (iy - s2y)**2);
-    const delta = k * (r1s - r2s);
-    const intensity = Math.cos(delta / 2) ** 2;
+    const yRel = iy - cy;
+    const intensity = getIntensity(yRel);
     ctx.fillStyle = `rgba(${cr},${cg},${cb},${intensity * 0.95})`;
     ctx.fillRect(SCREEN_X + 6, iy, 14, 1);
   }
 
-  // Labels
-  ctx.font = '500 11px DM Sans';
-  ctx.fillStyle = 'rgba(255,255,255,0.4)';
-  ctx.fillText('sorgente', 10, cy);
-  ctx.fillText('→', 90, cy);
-  ctx.fillText('barriera', BARRIER_X - 32, 18);
-  ctx.fillText('schermo', SCREEN_X + 2, 18);
+  // ---- Markers on screen ----
+  const lam_px = getLambdaPx();
 
-  // Constructive / destructive labels on field
-  // Find angle of first max above center
-  const firstMaxY = cy - (SCREEN_X - BARRIER_X) * (lambda / 700 * 0.045 / k) / (slitD / (SCREEN_X - BARRIER_X));
-  ctx.font = '10px DM Sans';
-  ctx.fillStyle = 'rgba(255,255,255,0.35)';
-  ctx.fillText('costruttiva (m=0)', BARRIER_X + 30, cy - 8);
-  ctx.fillText('distruttiva', BARRIER_X + 30, cy + slitD * 0.7);
+  if (mode === 1) {
+    // Diffraction minima: a·sinθ = mλ
+    for (let m = 1; m <= 3; m++) {
+      const sinT = m * lam_px / slitA;
+      if (sinT > 0.95) continue;
+      const yMin = L_px * sinT / Math.sqrt(1 - sinT*sinT);
+      [cy + yMin, cy - yMin].forEach((yp, si) => {
+        if (yp < 5 || yp > H-5) return;
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(SCREEN_X+6, yp); ctx.lineTo(SCREEN_X+22, yp); ctx.stroke();
+        if (si === 0) {
+          ctx.font = '10px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.45)';
+          ctx.fillText('m='+m, SCREEN_X+24, yp+4);
+        }
+      });
+    }
+    ctx.font = '10px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.fillText('max centrale', SCREEN_X+24, cy+4);
 
-  t += 1.5;
+  } else {
+    // Two-slit: show fringe spacing i and diffraction envelope minima
+    const i_px = lam_px * L_px / slitD;
+
+    // Fringe spacing arrow (m=0 to m=1)
+    const y0 = cy, y1 = cy - i_px;
+    if (y1 > 10 && y1 < H-10) {
+      const ax = SCREEN_X + 22;
+      ctx.strokeStyle = 'rgba(255,255,255,0.8)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(ax, y0); ctx.lineTo(ax, y1); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.beginPath(); ctx.moveTo(ax, y1); ctx.lineTo(ax-4, y1+7); ctx.lineTo(ax+4, y1+7); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(ax, y0); ctx.lineTo(ax-4, y0-7); ctx.lineTo(ax+4, y0-7); ctx.closePath(); ctx.fill();
+      ctx.font = '500 11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fillText('i', ax+5, (y0+y1)/2+4);
+      // tick marks
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(SCREEN_X+6, y0); ctx.lineTo(SCREEN_X+20, y0); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(SCREEN_X+6, y1); ctx.lineTo(SCREEN_X+20, y1); ctx.stroke();
+      ctx.font = '10px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillText('m=0', SCREEN_X+24, y0+4);
+      ctx.fillText('m=1', SCREEN_X+24, y1+4);
+    }
+
+    // Diffraction envelope minima (missing fringes)
+    for (let m = 1; m <= 2; m++) {
+      const sinT = m * lam_px / slitA;
+      if (sinT > 0.95) continue;
+      const yEnv = L_px * sinT / Math.sqrt(1 - sinT*sinT);
+      [cy + yEnv, cy - yEnv].forEach(yp => {
+        if (yp < 5 || yp > H-5) return;
+        ctx.strokeStyle = 'rgba(255,100,100,0.6)'; ctx.lineWidth = 1;
+        ctx.setLineDash([3,3]);
+        ctx.beginPath(); ctx.moveTo(SCREEN_X+6, yp); ctx.lineTo(SCREEN_X+20, yp); ctx.stroke();
+        ctx.setLineDash([]);
+      });
+    }
+  }
+
+  // L label
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 1;
+  ctx.setLineDash([3,4]);
+  ctx.beginPath(); ctx.moveTo(BARRIER_X+8, H-18); ctx.lineTo(SCREEN_X, H-18); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.font = '11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fillText('L', (BARRIER_X+SCREEN_X)/2-4, H-6);
+
+  // General labels
+  ctx.font = '500 11px DM Sans'; ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.fillText('onda piana', 10, cy);
+  ctx.fillText('barriera', BARRIER_X-32, 18);
+  ctx.fillText('schermo', SCREEN_X+2, 18);
+
+  t += 0.5;
   requestAnimationFrame(draw);
 }
 
+// ── mode switch ───────────────────────────────────────────────────────────────
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.tab').forEach((tab, i) => {
+    tab.classList.toggle('active', i+1 === m);
+  });
+  document.querySelectorAll('.only-two').forEach(el => {
+    el.style.display = m === 2 ? '' : 'none';
+  });
+
+  document.getElementById('formulas-one').style.display = m === 1 ? '' : 'none';
+  document.getElementById('formulas-two').style.display = m === 2 ? '' : 'none';
+  document.getElementById('formula-title').textContent = m === 1
+    ? 'Formula — Diffrazione'
+    : 'Formule — Interferenza + Diffrazione';
+
+  if (m === 1) {
+    document.getElementById('exp-title').textContent = 'Diffrazione — Singola Fenditura';
+    document.getElementById('exp-p1').textContent = 'Se la luce fosse fatta di particelle, attraverso una fenditura produrrebbe una striscia luminosa netta. Invece si allarga: questo è possibile solo per le onde. Ogni punto della fenditura diventa una sorgente secondaria (principio di Huygens), e le onde emesse interferiscono tra loro.';
+    document.getElementById('exp-p2').textContent = 'Il risultato è un picco centrale largo e massimi laterali via via più deboli, con minimi precisi dove a·sinθ = mλ. Più la fenditura è stretta rispetto a λ, più il pattern si allarga: a e θ sono inversamente proporzionali.';
+    document.getElementById('hint').textContent = 'Fenditura singola: il pattern mostra i minimi a a·sinθ = mλ';
+  } else {
+    document.getElementById('exp-title').textContent = 'Interferenza + Diffrazione — Due Fenditure';
+    document.getElementById('exp-p1').textContent = 'Con due fenditure si ottengono entrambi i fenomeni simultaneamente. Le frange di Young (interferenza) nascono dalla sovrapposizione delle onde delle due fenditure e hanno passo i = λL/d. Ma l\'intensità complessiva non è uniforme: è modulata dall\'inviluppo di diffrazione della singola fenditura.';
+    document.getElementById('exp-p2').textContent = 'Le linee rosse tratteggiate sullo schermo indicano i minimi dell\'inviluppo di diffrazione (a·sinθ = mλ): in quei punti la franga di interferenza è "cancellata". Si parla di frange mancanti. L\'intensità totale vale I ∝ cos²(δ/2) · sinc²(β/2): il prodotto dei due contributi.';
+    document.getElementById('hint').textContent = 'Due fenditure: frange di Young modulate dall\'inviluppo di diffrazione — linee rosse = frange mancanti';
+  }
+
+  updateResults();
+}
+
+// ── results ───────────────────────────────────────────────────────────────────
+
+function updateResults() {
+  const lam_px = getLambdaPx();
+  const ratio = lam_px / slitA;
+  const sinT1 = lam_px / slitA;
+  const theta1 = sinT1 <= 1 ? (Math.asin(sinT1)*180/Math.PI).toFixed(1)+'°' : '—';
+
+  document.getElementById('r-lam').textContent = lambda + ' nm';
+  document.getElementById('r-a').textContent = slitA + ' px';
+  document.getElementById('r-theta').textContent = theta1;
+  document.getElementById('r-ratio').textContent = ratio.toFixed(3);
+
+  if (mode === 2) {
+    const i_px = lam_px * L_px / slitD;
+    document.getElementById('r-d').textContent = slitD + ' px';
+    document.getElementById('r-i').textContent = i_px.toFixed(1) + ' px';
+  }
+
+  const note = document.getElementById('physics-note');
+  if (mode === 1) {
+    if (ratio > 0.5)       note.textContent = 'λ/a = '+ratio.toFixed(2)+' — diffrazione molto pronunciata: λ ≈ a';
+    else if (ratio > 0.15) note.textContent = 'λ/a = '+ratio.toFixed(2)+' — diffrazione apprezzabile';
+    else                   note.textContent = 'λ/a = '+ratio.toFixed(2)+' — λ ≪ a: quasi ombra geometrica';
+  } else {
+    const i_px = lam_px * L_px / slitD;
+    note.textContent = 'i = λL/d = '+i_px.toFixed(1)+' px  |  inviluppo: a·sinθ=λ ogni '+Math.round(slitD/slitA)+' frange';
+  }
+}
+
+// ── events ────────────────────────────────────────────────────────────────────
+
 document.getElementById('lam').addEventListener('input', e => {
+  const prev = lambda;
   lambda = parseInt(e.target.value);
   document.getElementById('lam-val').textContent = lambda + ' nm';
-  document.getElementById('r-lam').textContent = lambda + ' nm';
+  document.getElementById('lam-hint').textContent = lambda > prev
+    ? '↑ λ maggiore → pattern più allargato'
+    : '↓ λ minore → pattern più stretto';
   const [r,g,b] = wavelengthToRGB(lambda);
   document.getElementById('wl-bar').style.background = `rgb(${r},${g},${b})`;
+  updateResults();
+});
+
+document.getElementById('a-sl').addEventListener('input', e => {
+  const prev = slitA;
+  slitA = parseInt(e.target.value);
+  document.getElementById('a-val').textContent = slitA + ' px';
+  document.getElementById('a-hint').textContent = slitA > prev
+    ? '↑ a maggiore → diffrazione meno pronunciata'
+    : '↓ a minore → diffrazione più pronunciata';
+  updateResults();
 });
 
 document.getElementById('d-sl').addEventListener('input', e => {
+  const prev = slitD;
   slitD = parseInt(e.target.value);
   document.getElementById('d-val').textContent = slitD + ' px';
-  document.getElementById('r-d').textContent = slitD + ' px';
+  document.getElementById('d-hint').textContent = slitD > prev
+    ? '↑ d maggiore → frange più strette (i = λL/d)'
+    : '↓ d minore → frange più distanti (i = λL/d)';
+  updateResults();
 });
 
-// Init
+// init
 const [r0,g0,b0] = wavelengthToRGB(lambda);
 document.getElementById('wl-bar').style.background = `rgb(${r0},${g0},${b0})`;
-
+updateResults();
 draw();
 </script>
 </body>
