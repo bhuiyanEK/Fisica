@@ -111,7 +111,7 @@
   <div class="page-header">
     <p class="label">Ottica Fisica</p>
     <h1>Diffrazione e Interferenza</h1>
-    <p class="page-desc">Una fenditura mostra la diffrazione pura. Due fenditure mostrano l'interferenza di Young, modulata dall'inviluppo di diffrazione.</p>
+    <p class="page-desc">Una fenditura mostra la diffrazione pura. Due fenditure mostrano l'interferenza di Young</p>
   </div>
 
   <!-- Mode tabs -->
@@ -183,10 +183,6 @@
             <div class="formula">a · sinθ = mλ</div>
             <div class="formula-sub">minimi di diffrazione<br>m = ±1, ±2, ±3</div>
           </div>
-          <div class="formula-box">
-            <div class="formula">I ∝ sinc²(β/2)</div>
-            <div class="formula-sub">β = 2πa·sinθ/λ — intensità per ogni punto</div>
-          </div>
         </div>
         <div id="formulas-two" style="display:none">
           <div class="formula-box">
@@ -194,12 +190,8 @@
             <div class="formula-sub">interfrangia — distanza tra massimi di Young</div>
           </div>
           <div class="formula-box">
-            <div class="formula">I ∝ cos²(δ/2) · sinc²(β/2)</div>
-            <div class="formula-sub">interferenza × inviluppo di diffrazione</div>
-          </div>
-          <div class="formula-box">
             <div class="formula">a · sinθ = mλ</div>
-            <div class="formula-sub">minimi dell'inviluppo (frange mancanti)</div>
+            <div class="formula-sub">frange mancanti</div>
           </div>
         </div>
       </div>
@@ -515,8 +507,6 @@ function setMode(m) {
   } else {
     document.getElementById('exp-title').textContent = 'Interferenza + Diffrazione — Due Fenditure';
     document.getElementById('exp-p1').textContent = 'Con due fenditure si ottengono entrambi i fenomeni simultaneamente. Le frange di Young (interferenza) nascono dalla sovrapposizione delle onde delle due fenditure e hanno passo i = λL/d. Ma l\'intensità complessiva non è uniforme: è modulata dall\'inviluppo di diffrazione della singola fenditura.';
-    document.getElementById('exp-p2').textContent = 'Le linee rosse tratteggiate sullo schermo indicano i minimi dell\'inviluppo di diffrazione (a·sinθ = mλ): in quei punti la franga di interferenza è "cancellata". Si parla di frange mancanti. L\'intensità totale vale I ∝ cos²(δ/2) · sinc²(β/2): il prodotto dei due contributi.';
-    document.getElementById('hint').textContent = 'Due fenditure: frange di Young modulate dall\'inviluppo di diffrazione — linee rosse = frange mancanti';
   }
 
   updateResults();

@@ -126,18 +126,25 @@
     "text": "Dispersione cromatica\n\n\n\nL’indice di rifrazione \\(n\\) non è una costante assoluta, ma dipende dalla lunghezza d’onda \\(\\lambda\\) della luce che attraversa il mezzo (\\(n = n(\\lambda)\\))\nPoichè \\(v = \\frac{c}{n}\\), le diverse frequenze (colori) viaggiano a velocità differenti all’interno del prisma.\nPer la Legge di Snell (\\(n_1 \\sin\\theta_1 = n_2 \\sin\\theta_2\\)), angoli di rifrazione diversi portano alla scomposizione della luce bianca nello spettro visibile.\nIn genere, per i materiali trasparenti, l’indice \\(n\\) aumenta al diminuire di \\(\\lambda\\) (il violetto viene deviato più del rosso)"
   },
   {
+    "objectID": "index.html#principio-di-huygens",
+    "href": "index.html#principio-di-huygens",
+    "title": "Fisica - Ottica",
+    "section": "Principio di Huygens",
+    "text": "Principio di Huygens\n\n\nIl modello ondulatorio si basa sul principio di Huygens, applicabile alla luce e a tutti i tipi di onde:\n\nogni punto di fronte d’onda è sorgente di un’onda sferica secondaria che ha la stessa frequenza dell’onda originaria e, come fase iniziale, la fase del fronte d’onda;\ni fronti d’onda secondari si sovrappongono e formano un nuovo fronte d’onda, a essi tangente."
+  },
+  {
     "objectID": "index.html#diffrazione-slide",
     "href": "index.html#diffrazione-slide",
     "title": "Fisica - Ottica",
     "section": "Diffrazione",
-    "text": "Diffrazione\n\n\n\nPrincipio di Huygens: ogni punto di un fronte d’onda si comporta come una sorgente di onde sferiche secondarie\nIl fenomeno è rilevante quando la dimensione dell’apertura \\(a\\) è paragonabile alla lunghezza d’onda \\(\\lambda\\)\n(Fenditura singola): \\(a \\sin \\theta = m\\lambda \\quad (m = \\pm 1, \\pm 2, \\dots)\\)  (Dove \\(a\\) e \\(\\lambda\\) si misurano in metri; \\(m\\) è un intero adimensionale)\nLe ombre non sono mai perfettamente nette; la luce invade la zona d’ombra geometrica"
+    "text": "Diffrazione\n\n\n\nIl fenomeno è rilevante quando la dimensione dell’apertura \\(a\\) è paragonabile alla lunghezza d’onda \\(\\lambda\\)\n(Fenditura singola): \\(a \\sin \\theta = m\\lambda \\quad (m = \\pm 1, \\pm 2, \\dots)\\)  (Dove \\(a\\) e \\(\\lambda\\) si misurano in metri; \\(m\\) è un intero adimensionale)\nLe ombre non sono mai perfettamente nette; la luce invade la zona d’ombra geometrica"
   },
   {
     "objectID": "index.html#Interferenza",
     "href": "index.html#Interferenza",
     "title": "Fisica - Ottica",
     "section": "Interferenza — Esperimento di Young",
-    "text": "Interferenza — Esperimento di Young\n\n\n\n\nDue sorgenti coerenti separate da una distanza \\(d\\) producono frange luminose e scure sullo schermo\nDifferenza di cammino ottico: \\(\\Delta r = d \\sin \\theta\\).\nCondizioni matematiche:\n\nCostruttiva (Luce): \\(\\Delta r = m\\lambda\\)\nDistruttiva (Buio): \\(\\Delta r = (m + \\frac{1}{2})\\lambda\\)\n\nInterfrangia: La distanza tra due massimi consecutivi è \\(\\Delta y = \\frac{\\lambda L}{d}\\)\n\n (Tutte le grandezze spaziali \\(d, \\Delta r, \\lambda, L, \\Delta y\\) si misurano in metri; \\(m\\) è adimensionale)"
+    "text": "Interferenza — Esperimento di Young\n\n\n\n\nDue sorgenti coerenti separate da una distanza \\(d\\) producono frange luminose e scure sullo schermo\nDifferenza di cammino ottico: \\(\\Delta r = d \\sin \\theta\\).\nCondizioni matematiche:\n\nCostruttiva (Luce): \\(\\Delta r = m\\lambda\\)\nDistruttiva (Buio): \\(\\Delta r = (m + \\frac{1}{2})\\lambda\\)\n\nInterfrangia: La distanza tra due massimi consecutivi è \\(i = \\frac{\\lambda L}{d}\\)\n\n (Tutte le grandezze spaziali \\(d, \\Delta r, \\lambda, L, \\Delta y\\) si misurano in metri; \\(m\\) è adimensionale)"
   },
   {
     "objectID": "index.html#polarizzazione",
